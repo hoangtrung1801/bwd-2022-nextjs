@@ -93,6 +93,11 @@
 }
 
 @layer utilities {
+  
+  .min-h-main {
+    height: calc(100vh - 80px);
+  }
+
   .animated-underline {
     background-image: linear-gradient(#33333300, #33333300),
       linear-gradient(
