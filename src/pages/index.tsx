@@ -6,6 +6,7 @@ import ButtonLink from "@/components/links/ButtonLink";
 import UnderlineLink from "@/components/links/UnderlineLink";
 import UnstyledLink from "@/components/links/UnstyledLink";
 import Seo from "@/components/Seo";
+import Button from "@/components/buttons/Button";
 
 // !STARTERCONF -> Select !STARTERCONF and CMD + SHIFT + F
 // Before you begin editing, follow all comments with `STARTERCONF`,
@@ -55,6 +56,9 @@ export default function HomePage() {
                                 alt="Deploy with Vercel"
                             />
                         </UnstyledLink>
+                        <div>
+                            <Button variant="primary">Button</Button>
+                        </div>
 
                         <footer className="absolute bottom-2 text-gray-700">
                             © {new Date().getFullYear()} By{" "}

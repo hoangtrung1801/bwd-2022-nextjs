@@ -3,16 +3,20 @@ import React from "react";
 
 type MenuButtonProps = {
     opened?: boolean;
-} & React.ComponentPropsWithRef<"div">;
+    className?: string;
+};
 
-const MenuButton: React.FC<MenuButtonProps> = ({ opened = false }, ...rest) => {
+const MenuButton: React.FC<MenuButtonProps> = (
+    { opened = false, className },
+    ...rest
+) => {
     return (
         <div
             className={clsxm(
                 "tham-e-squeeze tham tham-w-8",
-                opened && "tham-active"
+                opened && "tham-active",
+                className
             )}
-            {...rest}
         >
             <div className="tham-box">
                 <div className="tham-inner"></div>

@@ -137,7 +137,7 @@ export default function Header() {
                             leaveTo="transform opacity-0 scale-95"
                         >
                             <Popover.Panel className="absolute inset-0 top-[80px] z-10 px-4 py-4">
-                                <ul className="flex flex-col rounded-lg border border-gray-100 bg-green-100 p-4 dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:text-sm md:font-medium md:dark:bg-gray-900">
+                                <ul className="flex flex-col rounded-lg border border-gray-100 bg-green-100 p-4 shadow-lg dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:text-sm md:font-medium md:dark:bg-gray-900">
                                     {links.map((link) => (
                                         <li key={link.label}>
                                             <UnstyledLink
