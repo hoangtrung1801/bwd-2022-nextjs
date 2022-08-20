@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <Header />
-            <main className="layout">{children}</main>
+            <main className="layout py-8">{children}</main>
             <Footer />
         </>
     );

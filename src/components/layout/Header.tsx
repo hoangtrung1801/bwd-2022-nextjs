@@ -74,7 +74,7 @@ export default function Header() {
 
     return (
         <header className="sticky top-0 z-50 bg-white shadow-sm">
-            <div className="layout flex h-[80px] items-center justify-between px-4">
+            <div className="layout flex h-[80px] items-center justify-between">
                 <UnstyledLink
                     href="/"
                     className="flex-1 font-bold hover:text-gray-600"
@@ -88,6 +88,7 @@ export default function Header() {
                         objectFit="cover"
                     />
                 </UnstyledLink>
+
                 <div className="md:hidden">
                     <Popover>
                         <Popover.Button className="md:hidden">
@@ -125,13 +126,14 @@ export default function Header() {
                         </Transition>
                     </Popover>
                 </div>
+
                 <nav className="hidden md:block">
                     <ul className="flex items-center justify-between space-x-8">
                         {links.map(({ href, label }) => (
                             <li key={`${href}${label}`}>
                                 <UnstyledLink
                                     href={href}
-                                    className="duration-400 text-lg font-bold text-gray-900 transition-colors hover:text-green-500"
+                                    className="duration-400 text-lg font-medium text-gray-900 transition-colors hover:text-green-500"
                                 >
                                     <span
                                         className={`border-green-500 py-1 ${clsxm(
@@ -146,6 +148,7 @@ export default function Header() {
                         ))}
                     </ul>
                 </nav>
+
                 <div className="hidden flex-1 items-center justify-end space-x-6 md:flex">
                     <UnstyledLink href="/" className="relative">
                         <FaShoppingCart
@@ -159,12 +162,6 @@ export default function Header() {
                         </div>
                     </UnstyledLink>
                     <ButtonLink href="/login">Đăng nhập</ButtonLink>
-                    {/* <UnstyledLink href="/">
-                        <BiLogIn
-                            size="1.5rem"
-                            className="transition-colors hover:text-primary-500"
-                        />
-                    </UnstyledLink> */}
                 </div>
             </div>
         </header>

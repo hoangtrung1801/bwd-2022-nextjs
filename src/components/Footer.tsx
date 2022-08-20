@@ -38,7 +38,7 @@ const Footer = () => {
     return (
         <footer className="border-t border-gray-200">
             <div className="layout space-y-6 pt-4 pb-12 text-sm text-gray-600">
-                <div className="grid grid-cols-4 justify-items-center space-x-4">
+                <div className="hidden grid-cols-4 justify-items-center space-x-4 md:grid">
                     {members.map((member) => (
                         <div
                             key={member.name}
@@ -63,7 +63,7 @@ const Footer = () => {
                         </div>
                     ))}
                 </div>
-                <div className="mx-auto w-3/5">
+                <div className="mx-auto w-full md:w-3/5">
                     <NextImage
                         alt="VKU Logo"
                         src={"/images/vku.png"}
