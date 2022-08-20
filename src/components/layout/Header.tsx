@@ -1,14 +1,13 @@
 import ButtonLink from "@/components/links/ButtonLink";
 import UnstyledLink from "@/components/links/UnstyledLink";
 import MenuButton from "@/components/MenuButton";
+import NavCart from "@/components/NavCart";
 import clsxm from "@/lib/clsxm";
 import { Route } from "@/lib/types";
-import { Menu, Popover, Transition } from "@headlessui/react";
-import clsx from "clsx";
+import { Dialog, Popover, Transition } from "@headlessui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
-import { BiLogIn } from "react-icons/bi/index";
 import { FaShoppingCart } from "react-icons/fa/index";
 
 // const links = [
@@ -71,6 +70,7 @@ const links: Route[] = [
 
 export default function Header() {
     const router = useRouter();
+    const [navCartIsOpen, setNavCartIsOpen] = useState(false);
 
     return (
         <header className="sticky top-0 z-50 bg-white shadow-sm">
@@ -150,7 +150,10 @@ export default function Header() {
                 </nav>
 
                 <div className="hidden flex-1 items-center justify-end space-x-6 md:flex">
-                    <UnstyledLink href="/" className="relative">
+                    <div
+                        className="relative cursor-pointer"
+                        onClick={() => setNavCartIsOpen(true)}
+                    >
                         <FaShoppingCart
                             size="1.5rem"
                             className="transition-colors hover:text-primary-500"
@@ -160,10 +163,19 @@ export default function Header() {
                                 0
                             </span>
                         </div>
-                    </UnstyledLink>
+                    </div>
                     <ButtonLink href="/login">Đăng nhập</ButtonLink>
                 </div>
             </div>
+
+            {/* <Drawer isOpen={navCartIsOpen} setIsOpen={setnavCartIsOpen}>
+                <h1>This is a drawer</h1>
+            </Drawer> */}
+            <NavCart
+                listProducts={[]}
+                open={navCartIsOpen}
+                setIsOpen={setNavCartIsOpen}
+            />
         </header>
     );
 }
