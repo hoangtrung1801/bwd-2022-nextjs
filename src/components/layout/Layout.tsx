@@ -1,12 +1,17 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/layout/Header";
+import clsxm from "@/lib/clsxm";
 import * as React from "react";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+type LayoutProps = {
+    className?: string;
+} & React.ComponentProps<"div">;
+
+export default function Layout({ children, className }: LayoutProps) {
     return (
         <>
             <Header />
-            <main className="layout py-8">{children}</main>
+            <main className={clsxm("layout py-8", className)}>{children}</main>
             <Footer />
         </>
     );

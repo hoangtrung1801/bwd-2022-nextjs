@@ -7,7 +7,7 @@ import NextImage from "@/components/NextImage";
 
 const LoginPage = () => {
     return (
-        <Layout>
+        <Layout className="py-0">
             <section className="min-h-main">
                 <div className="grid h-full grid-cols-1 md:grid-cols-2">
                     <div className="">

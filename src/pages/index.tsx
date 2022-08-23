@@ -1,23 +1,13 @@
-import * as React from "react";
-
+import Button from "@/components/buttons/Button";
 import Layout from "@/components/layout/Layout";
 import ArrowLink from "@/components/links/ArrowLink";
 import ButtonLink from "@/components/links/ButtonLink";
 import UnderlineLink from "@/components/links/UnderlineLink";
 import UnstyledLink from "@/components/links/UnstyledLink";
-import Seo from "@/components/Seo";
-import Button from "@/components/buttons/Button";
-
-// !STARTERCONF -> Select !STARTERCONF and CMD + SHIFT + F
-// Before you begin editing, follow all comments with `STARTERCONF`,
-// to customize the default configuration.
 
 export default function HomePage() {
     return (
         <Layout>
-            {/* <Seo templateTitle='Home' /> */}
-            <Seo />
-
             <main>
                 <section className="bg-white">
                     <div className="layout flex min-h-screen flex-col items-center justify-center text-center">

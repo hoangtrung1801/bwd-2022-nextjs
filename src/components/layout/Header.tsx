@@ -10,11 +10,6 @@ import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa/index";
 
-// const links = [
-//     { href: "/", label: "Route 1" },
-//     { href: "/", label: "Route 2" },
-// ];
-
 const links: Route[] = [
     {
         label: "Trang chủ",
