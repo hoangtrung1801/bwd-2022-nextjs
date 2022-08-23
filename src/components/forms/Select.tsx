@@ -38,7 +38,7 @@ const Select: React.FC<SelectProps> = ({
                         <span
                             className={clsxm(
                                 "block truncate",
-                                !selected && "text-gray-400"
+                                !selected && "text-gray-300"
                             )}
                         >
                             {selected ? selected?.value : placeholder}

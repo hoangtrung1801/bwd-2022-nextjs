@@ -254,7 +254,7 @@ const CheckoutUserInfo = () => {
                                 </label>
 
                                 <InputField
-                                    className="rounded-b-lg rounded-t-none border-gray-200 placeholder-gray-400"
+                                    className="rounded-b-lg rounded-t-none border-gray-200"
                                     variant="outline"
                                     type="text"
                                     name="adddresss"
@@ -275,10 +275,33 @@ const CheckoutUserInfo = () => {
                         </label>
 
                         <textarea
-                            className="w-full resize-y rounded-lg border-gray-200 p-2.5 text-sm placeholder-gray-400 shadow-sm focus:border-transparent"
+                            className="w-full resize-y rounded-lg border-gray-200 p-2.5 text-sm placeholder-gray-300 shadow-sm focus:border-transparent"
                             placeholder="Lời nhắn bạn muốn gửi đén..."
                         />
                         {/* <InputField type="email" id="email" variant="outline" /> */}
+                    </div>
+
+                    <div className="col-span-6">
+                        <label
+                            className="mb-1 block text-sm text-gray-600"
+                            htmlFor="email"
+                        >
+                            Quyên góp
+                            <span className="ml-1 text-xs italic text-gray-400">
+                                (không bắt buộc)
+                            </span>
+                        </label>
+                        <InputField
+                            type="number"
+                            id="donate_amount"
+                            name="donate_amount"
+                            variant="outline"
+                            placeholder="100.000"
+                        />
+                        <p className="mt-1 text-xs text-gray-400">
+                            Số tiền bạn quyên góp sẽ chuyển trực tiếp tới quỹ từ
+                            thiện bảo bệ môi trường.
+                        </p>
                     </div>
 
                     <hr className="col-span-6 my-4 w-full" />

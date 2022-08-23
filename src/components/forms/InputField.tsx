@@ -24,7 +24,7 @@ const InputField: React.FC<InputFieldProps> = ({
                         "block w-full transform rounded-lg border border-transparent bg-gray-50 px-5 py-3 text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out focus:border-transparent focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-300",
                     ],
                     variant === "outline" && [
-                        "w-full rounded-lg border-gray-200 p-2.5 text-sm shadow-sm focus:border-transparent",
+                        "w-full rounded-lg border-gray-200 p-2.5 text-sm placeholder-gray-300 shadow-sm focus:border-transparent",
                     ],
                 ],
                 className
