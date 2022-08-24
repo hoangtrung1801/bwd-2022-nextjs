@@ -72,7 +72,7 @@ const NavCart: React.FC<NavCartProps> = ({
 
     return (
         <Drawer isOpen={isOpen} setIsOpen={setIsOpen} title={<NavCartTitle />}>
-            <div className="relative mt-6 flex flex-1 flex-col justify-between px-4 sm:px-6">
+            <div className="relative mt-6 flex h-full flex-col justify-between px-4 pb-4 sm:px-6">
                 <div className="mt-4 grid grid-cols-1 divide-y">
                     {products.map((product) => (
                         <div
@@ -104,7 +104,6 @@ const NavCart: React.FC<NavCartProps> = ({
                         </div>
                     ))}
                 </div>
-
                 <div className="">
                     <Button variant="light" onClick={() => setIsOpen(false)}>
                         Thanh toán

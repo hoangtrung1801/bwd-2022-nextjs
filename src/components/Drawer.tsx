@@ -74,7 +74,7 @@ const Drawer: React.FC<DrawerProps> = ({
                                                 {title}
                                             </Dialog.Title>
                                         </div>
-                                        <div>{children}</div>
+                                        <div className="flex-1">{children}</div>
                                     </div>
                                 </Dialog.Panel>
                             </Transition.Child>
