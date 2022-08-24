@@ -2,66 +2,13 @@ import ButtonLink from "@/components/links/ButtonLink";
 import UnstyledLink from "@/components/links/UnstyledLink";
 import MenuButton from "@/components/MenuButton";
 import NavCart from "@/components/NavCart";
+import links from "@/constant/links";
 import clsxm from "@/lib/clsxm";
-import { Route } from "@/lib/types";
-import { Dialog, Popover, Transition } from "@headlessui/react";
+import { Popover, Transition } from "@headlessui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa/index";
-
-const links: Route[] = [
-    {
-        label: "Trang chủ",
-        href: "/",
-    },
-    {
-        label: "Danh mục",
-        href: "/category",
-        subcategories: [
-            {
-                label: "Vải",
-                href: "/category?type=canvas",
-            },
-            {
-                label: "Tre",
-                href: "/category?type=bamboo",
-            },
-            {
-                label: "Túi phân hủy",
-                href: "/category?type=disposable-nilon",
-            },
-            {
-                label: "Bàn chải",
-                href: "/category?type=toothbrush",
-            },
-            {
-                label: "Ống hút",
-                href: "/category?type=straw",
-            },
-            {
-                label: "Chai",
-                href: "/category?type=bottle",
-            },
-            {
-                label: "Ly",
-                href: "/category?type=cup",
-            },
-            {
-                label: "Khác",
-                href: "/category?type=others",
-            },
-        ],
-    },
-    {
-        label: "Quyên góp",
-        href: "/donate",
-    },
-    {
-        label: "Về chúng tôi",
-        href: "/about-me",
-    },
-];
 
 export default function Header() {
     const router = useRouter();

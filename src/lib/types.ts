@@ -12,7 +12,7 @@ export interface Product {
     stock: number;
     categories: string[];
     size?: string[];
-    images: string[];
+    images: string[] | string;
     reviews?: {
         userId: string;
         reviewText: string;

@@ -3,53 +3,32 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "phosphor-react";
 import React from "react";
 import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-type CarouselBannerProps = {} & React.ComponentProps<"div">;
+type CarouselBannerProps = {
+    products: any[];
+} & React.ComponentProps<"div">;
 
-const dataHome = [
-    {
-        id: 1,
-        title: "Thay đổi thế giới",
-        BannerPicture:
-            "https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80",
-        description:
-            "Chúng ta cần bắt đầu thay đổi thế giới ngay hôm nay, không phải ngày mai. Chúng ta cần phải hành động và ngừng phàn nàn về những điều tồi tệ hiện tại để chúng ta có cơ hội làm cho chúng tốt hơn. Hãy cùng chung tay với chúng tôi?",
-    },
-    {
-        id: 2,
-        title: "Tái sử dụng, vì tiềm năng của rác là vô hạn",
-        BannerPicture:
-            "https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80",
-        description:
-            "Bạn đang cố gắng trở nên xanh và thân thiện với môi trường, nhưng không biết làm thế nào bạn có thể tiết kiệm tài nguyên của môi trường? Hãy tái sử dụng rác thải có thể tái chế.",
-    },
-];
-
-const CarouselBanner: React.FC<CarouselBannerProps> = () => {
+const CarouselBanner: React.FC<CarouselBannerProps> = ({ products }) => {
     const settings = {
         dots: false,
         infinite: true,
         speed: 1500,
-        // autoplay: true,
-        // autoplaySpeed: 5000,
-        slidesToShow: 2,
-        // slidesToScroll: 1,
-        // nextArrow: <SamplePrevArrow />,
-        // prevArrow: <SampleNextArrow />,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        nextArrow: <SamplePrevArrow />,
+        prevArrow: <SampleNextArrow />,
     };
 
     return (
         <div>
             <Slider {...settings}>
-                <div className="">
-                    <div className="h-60 w-full bg-green-50"></div>
-                </div>
-                <div className="h-60 w-full bg-black/50"></div>
-                {/* <div className="h-60 w-full bg-black/50"></div>
-                <div className="h-60 w-full bg-black/50"></div> */}
-                {/* {dataHome.map((item) => (
+                {products.map((item) => (
                     <BannerItem key={item.id} data={item} />
-                ))} */}
+                ))}
             </Slider>
         </div>
     );
@@ -107,7 +86,7 @@ export function BannerItem({ data }) {
                         alt=""
                         src={BannerPicture}
                         width={100}
-                        height={100}
+                        height={50}
                     />
                 </div>
             </div>
