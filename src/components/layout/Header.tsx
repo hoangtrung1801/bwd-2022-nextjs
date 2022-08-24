@@ -1,3 +1,4 @@
+import Drawer from "@/components/Drawer";
 import ButtonLink from "@/components/links/ButtonLink";
 import UnstyledLink from "@/components/links/UnstyledLink";
 import MenuButton from "@/components/MenuButton";
@@ -7,6 +8,7 @@ import clsxm from "@/lib/clsxm";
 import { Popover, Transition } from "@headlessui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { ShoppingBagOpen } from "phosphor-react";
 import { Fragment, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa/index";
 
@@ -110,12 +112,12 @@ export default function Header() {
                 </div>
             </div>
 
-            {/* <Drawer isOpen={navCartIsOpen} setIsOpen={setnavCartIsOpen}>
+            {/* <Drawer isOpen={navCartIsOpen} setIsOpen={setNavCartIsOpen}>
                 <h1>This is a drawer</h1>
             </Drawer> */}
             <NavCart
                 listProducts={[]}
-                open={navCartIsOpen}
+                isOpen={navCartIsOpen}
                 setIsOpen={setNavCartIsOpen}
             />
         </header>
