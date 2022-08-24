@@ -1,17 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
 import Button from "@/components/buttons/Button";
 import NextImage from "@/components/NextImage";
+import clsxm from "@/lib/clsxm";
 import { Product } from "@/lib/types";
 import { Heart, ShoppingCart, ShoppingCartSimple, Star } from "phosphor-react";
 import React from "react";
 
 type ProductCardProps = {
     product: Product;
+    className?: string;
 };
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
     return (
-        <div className="max-w-sm overflow-auto rounded-md bg-white shadow-md dark:border-gray-700 dark:bg-gray-800">
+        <div
+            className={clsxm(
+                "max-w-sm overflow-auto rounded-md bg-white shadow-md dark:border-gray-700 dark:bg-gray-800",
+                className
+            )}
+        >
             <div className="mb-4">
                 <NextImage
                     alt="image"
