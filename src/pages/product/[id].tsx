@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import ProductReviews from "@/components/ProductReviews";
 import CounterContext from "@/lib/context/CounterContext";
 import ProductView from "@/components/ProductView";
+import useCartStore from "@/lib/stores/useCartStore";
+import { Product } from "@/lib/types";
 
 type ProductPageProps = {
     // product: Product;
@@ -14,21 +16,16 @@ type ProductPageProps = {
 
 const ProductPage: NextPage<ProductPageProps> = () => {
     const router = useRouter();
-    const [amountItems, setAmountItems] = React.useState(0);
+
+    const [quantityItem, setQuantityItems] = React.useState(1);
     const { product, isLoading, error } = useProduct(router.query.id);
 
     const incrementAmountItems = () => {
-        setAmountItems(amountItems + 1);
+        setQuantityItems(quantityItem + 1);
     };
     const decreaseAmountItems = () => {
-        setAmountItems(amountItems != 0 ? amountItems - 1 : 0);
+        setQuantityItems(quantityItem != 1 ? quantityItem - 1 : 1);
     };
-
-    // React.useEffect(() => {
-    //     console.log(product);
-    //     console.log("loading: " + isLoading);
-    //     console.log("error: " + error);
-    // }, [error, isLoading, product]);
 
     return (
         <Layout>
@@ -37,7 +34,7 @@ const ProductPage: NextPage<ProductPageProps> = () => {
                     <div className="">
                         <CounterContext.Provider
                             value={{
-                                count: amountItems,
+                                count: quantityItem,
                                 increase: incrementAmountItems,
                                 decrease: decreaseAmountItems,
                             }}

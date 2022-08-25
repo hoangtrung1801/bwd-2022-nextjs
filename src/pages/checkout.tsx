@@ -5,6 +5,7 @@ import Layout from "@/components/layout/Layout";
 import InputField from "@/components/forms/InputField";
 import Select from "@/components/forms/Select";
 import Button from "@/components/buttons/Button";
+import useCartStore from "@/lib/stores/useCartStore";
 
 const CheckoutPage = () => {
     return (
@@ -21,6 +22,8 @@ const CheckoutPage = () => {
 };
 
 const CheckoutItemInfo = () => {
+    const cart = useCartStore((state) => state.cart);
+
     return (
         <div className="my-8 rounded-xl bg-green-600 py-12 md:rounded-none">
             <div className="mx-auto max-w-lg space-y-2 px-4 text-white lg:px-8">
@@ -32,31 +35,28 @@ const CheckoutItemInfo = () => {
                 <div className="">
                     <div className="flow-root">
                         <div className="divide-y divide-white/25 text-base font-medium">
-                            {Array(4)
-                                .fill(0)
-                                .map((_, id) => (
-                                    <div className="flex py-6" key={id}>
-                                        <img
-                                            className="h-24 w-24 flex-shrink-0 rounded-lg object-cover"
-                                            src="https://images.unsplash.com/photo-1588099768531-a72d4a198538?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Y2xvdGhpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
-                                            alt=""
-                                        />
+                            {cart.map(({ product, quantity }, id) => (
+                                <div className="flex py-6" key={id}>
+                                    <img
+                                        className="h-24 w-24 flex-shrink-0 rounded-lg object-cover"
+                                        // src="https://images.unsplash.com/photo-1588099768531-a72d4a198538?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Y2xvdGhpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+                                        src={product.images[0]}
+                                        alt=""
+                                    />
 
-                                        <div className="ml-4 flex flex-1">
-                                            <div className="flex flex-1 flex-col">
-                                                <p className="">
-                                                    Vibrant Trainers
-                                                </p>
-                                                <p className="text-green-300">
-                                                    SL: 15
-                                                </p>
-                                            </div>
-                                            <div>
-                                                <p>$210.00</p>
-                                            </div>
+                                    <div className="ml-4 flex flex-1">
+                                        <div className="flex flex-1 flex-col">
+                                            <p className="">{product.name}</p>
+                                            <p className="text-green-300">
+                                                SL: {quantity}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p>${product.price}</p>
                                         </div>
                                     </div>
-                                ))}
+                                </div>
+                            ))}
                             <div className="space-y-4 py-6 text-green-300">
                                 <div className="flex justify-between">
                                     <p>Tổng đơn hàng</p>

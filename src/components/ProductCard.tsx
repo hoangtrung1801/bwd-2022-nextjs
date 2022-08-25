@@ -2,6 +2,7 @@
 import Button from "@/components/buttons/Button";
 import NextImage from "@/components/NextImage";
 import clsxm from "@/lib/clsxm";
+import useCartStore from "@/lib/stores/useCartStore";
 import { Product } from "@/lib/types";
 import { Heart, ShoppingCart, ShoppingCartSimple, Star } from "phosphor-react";
 import React from "react";
@@ -12,6 +13,12 @@ type ProductCardProps = {
 };
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
+    const addItem = useCartStore((state) => state.addItem);
+
+    const addItemIntoCart = () => {
+        addItem(product);
+    };
+
     return (
         <div
             className={clsxm(
@@ -63,7 +70,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
                         <Button variant="outline" className="px-3">
                             <Heart className="" weight="bold" />
                         </Button>
-                        <Button variant="outline" className="px-3">
+                        <Button
+                            variant="outline"
+                            className="px-3"
+                            onClick={addItemIntoCart}
+                        >
                             <ShoppingCartSimple className="" weight="bold" />
                         </Button>
                     </div>

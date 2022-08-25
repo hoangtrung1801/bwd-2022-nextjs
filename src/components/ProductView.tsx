@@ -5,6 +5,7 @@ import RatingStar from "@/components/RatingStar";
 import CounterContext, {
     CounterContextType,
 } from "@/lib/context/CounterContext";
+import useCartStore from "@/lib/stores/useCartStore";
 import { Product } from "@/lib/types";
 import { Heart, ShoppingCart, Star } from "phosphor-react";
 import React, { useContext } from "react";
@@ -63,6 +64,12 @@ const ProductDetail: React.FC<
 > = ({ product }) => {
     const amountItems = useContext<CounterContextType>(CounterContext);
 
+    const addItem = useCartStore((state) => state.addItem);
+
+    const addItemIntoCart = () => {
+        addItem(product, amountItems.count);
+    };
+
     return (
         <div className="flex flex-col space-y-7">
             <div className="space-y-2">
@@ -82,7 +89,10 @@ const ProductDetail: React.FC<
                 />
             </div>
             <div className="w-ful flex items-center space-x-8 md:w-4/5">
-                <Button className="flex-1 space-x-2 rounded-md py-4 text-lg">
+                <Button
+                    className="flex-1 space-x-2 rounded-md py-4 text-lg"
+                    onClick={addItemIntoCart}
+                >
                     <span>
                         <ShoppingCart size={24} weight="fill" />
                     </span>

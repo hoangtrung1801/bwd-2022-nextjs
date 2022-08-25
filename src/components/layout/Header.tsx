@@ -1,14 +1,13 @@
-import Drawer from "@/components/Drawer";
 import ButtonLink from "@/components/links/ButtonLink";
 import UnstyledLink from "@/components/links/UnstyledLink";
 import MenuButton from "@/components/MenuButton";
 import NavCart from "@/components/NavCart";
+import NavCartIcon from "@/components/NavCartIcon";
 import links from "@/constant/links";
 import clsxm from "@/lib/clsxm";
 import { Popover, Transition } from "@headlessui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { ShoppingBagOpen } from "phosphor-react";
 import { Fragment, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa/index";
 
@@ -94,7 +93,7 @@ export default function Header() {
                 </nav>
 
                 <div className="hidden flex-1 items-center justify-end space-x-6 md:flex">
-                    <div
+                    {/* <div
                         className="relative cursor-pointer"
                         onClick={() => setNavCartIsOpen(true)}
                     >
@@ -107,7 +106,8 @@ export default function Header() {
                                 0
                             </span>
                         </div>
-                    </div>
+                    </div> */}
+                    <NavCartIcon setNavCartIsOpen={setNavCartIsOpen} />
                     <ButtonLink href="/login">Đăng nhập</ButtonLink>
                 </div>
             </div>
@@ -115,11 +115,7 @@ export default function Header() {
             {/* <Drawer isOpen={navCartIsOpen} setIsOpen={setNavCartIsOpen}>
                 <h1>This is a drawer</h1>
             </Drawer> */}
-            <NavCart
-                listProducts={[]}
-                isOpen={navCartIsOpen}
-                setIsOpen={setNavCartIsOpen}
-            />
+            <NavCart isOpen={navCartIsOpen} setIsOpen={setNavCartIsOpen} />
         </header>
     );
 }

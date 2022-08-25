@@ -34,3 +34,8 @@ export interface User {
     username: string;
     address?: string;
 }
+
+export interface CartItem {
+    product: Product;
+    quantity: number;
+}
