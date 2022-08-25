@@ -10,9 +10,9 @@ export interface Product {
     description: string;
     price: number;
     stock: number;
-    categories: string[];
+    category: string;
     size?: string[];
-    images: string[] | string;
+    images: string[];
     reviews?: {
         userId: string;
         reviewText: string;

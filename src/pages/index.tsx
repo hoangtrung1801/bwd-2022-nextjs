@@ -4,10 +4,11 @@ import CommonProducts from "@/components/CommonProducts";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import Layout from "@/components/layout/Layout";
 import ButtonLink from "@/components/links/ButtonLink";
-import { Product } from "@/lib/types";
+import useProducts from "@/lib/hooks/useProducts";
 import { motion } from "framer-motion";
+import React from "react";
 
-export default function HomePage() {
+const HomePage = () => {
     const dataBanner = [
         {
             id: 1,
@@ -43,48 +44,7 @@ export default function HomePage() {
         },
     ];
 
-    const products: Product[] = [
-        {
-            id: "1",
-            name: "Limited Edition Sports Trainer",
-            description:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero numquam optio cumque tenetur, accusantium officia distinctio consequuntur impedit nulla exercitationem velit.",
-            categories: ["shoes"],
-            images: "https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80",
-            price: 100,
-            stock: 10,
-        },
-        {
-            id: "2",
-            name: "Limited Edition Sports Trainer",
-            description:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero numquam optio cumque tenetur, accusantium officia distinctio consequuntur impedit nulla exercitationem velit.",
-            categories: ["shoes"],
-            images: "https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80",
-            price: 100,
-            stock: 10,
-        },
-        {
-            id: "3",
-            name: "Limited Edition Sports Trainer",
-            description:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero numquam optio cumque tenetur, accusantium officia distinctio consequuntur impedit nulla exercitationem velit.",
-            categories: ["shoes"],
-            images: "https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80",
-            price: 100,
-            stock: 10,
-        },
-        {
-            id: "4",
-            name: "Limited Edition Sports Trainer",
-            description:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero numquam optio cumque tenetur, accusantium officia distinctio consequuntur impedit nulla exercitationem velit.",
-            categories: ["shoes"],
-            images: "https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80",
-            price: 100,
-            stock: 10,
-        },
-    ];
+    const { products } = useProducts();
 
     return (
         <Layout className="py-0">
@@ -164,4 +124,18 @@ export default function HomePage() {
             </main>
         </Layout>
     );
-}
+};
+
+// export const getServerSideProps: GetServerSideProps = async () => {
+//     const API = "/api/products";
+//     const repoInfo = await fetcher(API);
+
+//     return {
+//         props: {},
+//         fallback: {
+//             ["/api/products"]: repoInfo,
+//         },
+//     };
+// };
+
+export default HomePage;

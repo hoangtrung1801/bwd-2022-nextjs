@@ -22,8 +22,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
             <div className="mb-4">
                 <NextImage
                     alt="image"
-                    src="https://images.unsplash.com/photo-1491553895911-0055eca6402d"
-                    // src={product.images[0]}
+                    // src="https://images.unsplash.com/photo-1491553895911-0055eca6402d"
+                    src={product.images[0]}
                     width="100%"
                     height={100}
                 />

@@ -16,6 +16,7 @@ import clsxm from "@/lib/clsxm";
 import ProductCard from "@/components/ProductCard";
 import { Product } from "@/lib/types";
 import Drawer from "@/components/Drawer";
+import useProducts from "@/lib/hooks/useProducts";
 
 const sortOptions = [
     { name: "Most Popular", href: "#", current: true },
@@ -80,51 +81,10 @@ const filters = [
     // },
 ];
 
-const products: Product[] = [
-    {
-        id: "1",
-        name: "Limited Edition Sports Trainer",
-        description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero numquam optio cumque tenetur, accusantium officia distinctio consequuntur impedit nulla exercitationem velit.",
-        categories: ["shoes"],
-        images: "https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80",
-        price: 100,
-        stock: 10,
-    },
-    {
-        id: "2",
-        name: "Limited Edition Sports Trainer",
-        description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero numquam optio cumque tenetur, accusantium officia distinctio consequuntur impedit nulla exercitationem velit.",
-        categories: ["shoes"],
-        images: "https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80",
-        price: 100,
-        stock: 10,
-    },
-    {
-        id: "3",
-        name: "Limited Edition Sports Trainer",
-        description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero numquam optio cumque tenetur, accusantium officia distinctio consequuntur impedit nulla exercitationem velit.",
-        categories: ["shoes"],
-        images: "https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80",
-        price: 100,
-        stock: 10,
-    },
-    {
-        id: "4",
-        name: "Limited Edition Sports Trainer",
-        description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero numquam optio cumque tenetur, accusantium officia distinctio consequuntur impedit nulla exercitationem velit.",
-        categories: ["shoes"],
-        images: "https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80",
-        price: 100,
-        stock: 10,
-    },
-];
-
 const CategoryPage = () => {
     const [mobileFiltersOpen, setMobileFiltersOpen] = React.useState(false);
+
+    const { products } = useProducts();
 
     return (
         <Layout>

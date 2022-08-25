@@ -34,9 +34,9 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({ product }) => {
             <div className="py-8">
                 <h3 className="font-medium tracking-wide">Đánh giá</h3>
             </div>
-            {reviews.map((review) => (
+            {reviews.map((review, id) => (
                 <div
-                    key={review.username}
+                    key={review.username + id}
                     className="space-y-4 py-8 md:grid md:grid-cols-2"
                 >
                     <div className="flex flex-col space-y-4 md:flex-row">

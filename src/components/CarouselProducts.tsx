@@ -7,7 +7,6 @@ type CarouselProductsProps = {
 } & React.ComponentProps<"div">;
 
 const CarouselProducts: React.FC<CarouselProductsProps> = ({ products }) => {
-    console.log(products);
     return (
         <div>
             <section>
