@@ -1,6 +1,6 @@
 import NextImage from "@/components/NextImage";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "phosphor-react";
+import { CaretLeft, CaretRight } from "phosphor-react";
 import React from "react";
 import Slider from "react-slick";
 import Button from "@/components/buttons/Button";
@@ -51,7 +51,7 @@ function SampleNextArrow(props) {
             }}
             onClick={onClick}
         >
-            <ArrowLeft />
+            <CaretLeft />
         </div>
     );
 }
@@ -69,7 +69,7 @@ function SamplePrevArrow(props) {
             }}
             onClick={onClick}
         >
-            <ArrowRight />
+            <CaretRight />
         </div>
     );
 }
@@ -114,6 +114,7 @@ export function BannerItem({ data }) {
                             backgroundImage:
                                 "linear-gradient(to right, #232526 0%, #414345 51%, #232526 100%)",
                             transition: "0.5s",
+                            backgroundSize: "200% auto",
                         }}
                         className="transition[0.5s] h-auto w-[200px] min-w-[200px] bg-black py-4 px-8 text-white hover:bg-right md:mt-20"
                     >
