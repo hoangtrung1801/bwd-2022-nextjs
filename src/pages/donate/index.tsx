@@ -176,7 +176,7 @@ const DonateAction = () => {
                             >
                                 QUYÊN GÓP NGAY
                             </Button> */}
-                            <Button variant="outline">QUYÊN GÓP NGAY</Button>
+                            <Button variant="light">QUYÊN GÓP NGAY</Button>
                         </motion.div>
                     </div>
                 </div>
