@@ -11,7 +11,7 @@ import {
     donate_card_1,
     donate_card_2,
     donate_card_3,
-} from "../../public/svg/index";
+} from "../../../public/svg/index";
 import Link from "next/link";
 import ButtonLink from "@/components/links/ButtonLink";
 
