@@ -45,11 +45,11 @@ const HomePage = () => {
     ];
 
     const { products } = useProducts();
+    console.log(products);
 
     return (
         <Layout className="py-0">
             <main className="space-y-2">
-                {/* <section className="bg-white"></section> */}
                 <div>
                     <CarouselBanner products={dataBanner} />
                 </div>

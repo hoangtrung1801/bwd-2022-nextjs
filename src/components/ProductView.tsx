@@ -104,7 +104,7 @@ const ProductDetail: React.FC<
             </div>
             <div>
                 <p className="text-sm font-medium">Mô tả</p>
-                <p className="mt-3 text-sm leading-6">{product.description}</p>
+                <p className="mt-3 text-sm leading-6">{product.desc}</p>
             </div>
         </div>
     );
