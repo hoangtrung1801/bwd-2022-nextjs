@@ -1,6 +1,6 @@
 {
-  "name": "ts-nextjs-tailwind-starter",
-  "version": "0.1.0",
+  "name": "Best-web-design-2022",
+  "version": "1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
