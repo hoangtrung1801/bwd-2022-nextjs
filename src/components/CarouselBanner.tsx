@@ -1,8 +1,9 @@
 import NextImage from "@/components/NextImage";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "phosphor-react";
+import { CaretLeft, CaretRight } from "phosphor-react";
 import React from "react";
 import Slider from "react-slick";
+import Button from "@/components/buttons/Button";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -15,8 +16,8 @@ const CarouselBanner: React.FC<CarouselBannerProps> = ({ products }) => {
         dots: false,
         infinite: true,
         speed: 1500,
-        autoplay: true,
-        autoplaySpeed: 5000,
+        // autoplay: true,
+        // autoplaySpeed: 5000,
         slidesToShow: 1,
         slidesToScroll: 1,
         nextArrow: <SamplePrevArrow />,
@@ -50,7 +51,7 @@ function SampleNextArrow(props) {
             }}
             onClick={onClick}
         >
-            <ArrowLeft />
+            <CaretLeft />
         </div>
     );
 }
@@ -68,7 +69,7 @@ function SamplePrevArrow(props) {
             }}
             onClick={onClick}
         >
-            <ArrowRight />
+            <CaretRight />
         </div>
     );
 }
@@ -77,23 +78,26 @@ export function BannerItem({ data }) {
     const { BannerPicture, title, description } = data;
 
     return (
-        <div className="BannerHeight relative">
+        <div className="relative h-[calc(100vh-80px)]">
             <div className="h-full w-full ">
-                <div className="h-full w-full">
+                <div className="h-full w-full ">
                     {/* <BannerPicture className="h-full w-full object-cover" /> */}
+                    {/* <div className="h-full w-full object-cover"> */}
                     <NextImage
-                        className="h-full w-full object-cover"
                         alt=""
                         src={BannerPicture}
-                        width={100}
-                        height={50}
+                        height={"100"}
+                        width={"100"}
+                        layout="fill"
+                        objectFit="cover"
                     />
+                    {/* </div> */}
                 </div>
             </div>
             <div className=" absolute top-0 left-0 m-auto my-auto flex h-full w-full">
                 <motion.div
-                    style={{ background: "#33333380", minHeight: "400px" }}
-                    className=" m-auto  w-3/4 p-5 py-4 px-8 text-white"
+                    style={{ background: "#33333380" }}
+                    className=" m-auto  min-h-[400px] w-3/4 p-5 py-4 px-8 text-white"
                     initial={{ opacity: 0, y: 200, x: 0 }}
                     whileInView={{ opacity: 1, y: 0, x: 0 }}
                     transition={{ type: "spring", duration: 1.5, bounce: 0.3 }}
@@ -104,7 +108,18 @@ export function BannerItem({ data }) {
                     <p className="mt-2 break-words py-5 md:mt-4 md:whitespace-pre-wrap md:text-xl ">
                         {description}
                     </p>
-                    <button className="MoreBtn md:mt-20">TÌM HIỂU THÊM</button>
+                    {/* className="MoreBtn md:mt-20" */}
+                    <Button
+                        style={{
+                            backgroundImage:
+                                "linear-gradient(to right, #232526 0%, #414345 51%, #232526 100%)",
+                            transition: "0.5s",
+                            backgroundSize: "200% auto",
+                        }}
+                        className="transition[0.5s] h-auto w-[200px] min-w-[200px] bg-black py-4 px-8 text-white hover:bg-right md:mt-20"
+                    >
+                        TÌM HIỂU THÊM
+                    </Button>
                 </motion.div>
             </div>
         </div>
