@@ -4,6 +4,7 @@ import CommonProducts from "@/components/CommonProducts";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import Layout from "@/components/layout/Layout";
 import ButtonLink from "@/components/links/ButtonLink";
+import ProductList from "@/components/ProductsList";
 import useProducts from "@/lib/hooks/useProducts";
 import { motion } from "framer-motion";
 import React from "react";
@@ -54,13 +55,20 @@ const HomePage = () => {
                     <CarouselBanner products={dataBanner} />
                 </div>
                 <div>
-                    <CarouselProducts products={products} />
+                    {/* <CarouselProducts products={products} /> */}
+                    <ProductList products={products} title="Phổ biến" />
                 </div>
                 <div>
-                    <FeaturedProducts products={products} />
+                    <ProductList
+                        products={products}
+                        title="Nổi bật"
+                        className="bg-[url(https://bwd2022.vercel.app/assets/donate-1.jpg)] bg-cover bg-fixed bg-center bg-no-repeat text-green-400"
+                    />
+                    {/* <FeaturedProducts products={products} /> */}
                 </div>
                 <div>
-                    <CommonProducts products={products} />
+                    <ProductList products={products} title="Đặc biệt" />
+                    {/* <CommonProducts products={products} /> */}
                 </div>
                 <div>
                     <div className="h-80 w-full bg-[url(https://bwd2022.vercel.app/assets/bg6.jpg)] bg-cover bg-fixed bg-center bg-no-repeat text-white">
