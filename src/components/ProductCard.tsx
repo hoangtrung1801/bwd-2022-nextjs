@@ -2,6 +2,7 @@
 import Button from "@/components/buttons/Button";
 import NextImage from "@/components/NextImage";
 import clsxm from "@/lib/clsxm";
+import { currency, numberWithCommas } from "@/lib/helper";
 import useCartStore from "@/lib/stores/useCartStore";
 import { Product } from "@/lib/types";
 import Link from "next/link";
@@ -65,7 +66,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
                 </div>
                 <div className="flex items-center justify-between">
                     <span className="text-xl font-bold text-gray-900 dark:text-white">
-                        ${product.price}
+                        {numberWithCommas(product.price)}
+                        {currency.vn}
                     </span>
                     <div className="space-x-1">
                         <Button variant="outline" className="px-3">
