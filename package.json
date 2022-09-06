@@ -1,5 +1,5 @@
 {
-  "name": "Best-web-design-2022",
+  "name": "best-web-design-2022",
   "version": "1.0",
   "private": true,
   "scripts": {
@@ -17,12 +17,14 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.6.6",
+    "axios": "^0.27.2",
     "clsx": "^1.2.1",
     "framer-motion": "^7.2.0",
     "next": "^12.2.5",
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.34.2",
     "react-icons": "^4.4.0",
     "react-responsive": "^9.0.0-beta.10",
     "react-slick": "^0.29.0",
