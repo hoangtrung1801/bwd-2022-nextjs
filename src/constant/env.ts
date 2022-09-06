@@ -5,4 +5,4 @@ export const showLogger = isLocal
     ? true
     : process.env.NEXT_PUBLIC_SHOW_LOGGER === "true" ?? false;
 
-export const { DATABASE_URL } = process.env;
+export const { API_SERVER_URL } = process.env;

@@ -1,13 +1,9 @@
 import CarouselBanner from "@/components/CarouselBanner";
-import CarouselProducts from "@/components/CarouselProducts";
-import CommonProducts from "@/components/CommonProducts";
-import FeaturedProducts from "@/components/FeaturedProducts";
 import Layout from "@/components/layout/Layout";
 import ButtonLink from "@/components/links/ButtonLink";
 import ProductList from "@/components/ProductsList";
 import useProducts from "@/lib/hooks/useProducts";
 import { motion } from "framer-motion";
-import React from "react";
 
 const HomePage = () => {
     const dataBanner = [
@@ -46,7 +42,6 @@ const HomePage = () => {
     ];
 
     const { products } = useProducts();
-    console.log(products);
 
     return (
         <Layout className="py-0">

@@ -30,8 +30,9 @@ export interface Category {
 export interface User {
     id: string;
     email: string;
-    password: string;
-    username: string;
+    // password: string;
+    firstName: string;
+    lastName: string;
     address?: string;
 }
 

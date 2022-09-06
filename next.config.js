@@ -4,7 +4,7 @@ module.exports = {
         dirs: ["src"],
     },
     env: {
-        DATABASE_URL: process.env.DATABASE_URL,
+        API_SERVER_URL: process.env.API_SERVER_URL,
     },
     reactStrictMode: true,
 
