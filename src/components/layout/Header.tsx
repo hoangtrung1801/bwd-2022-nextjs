@@ -43,8 +43,8 @@ export default function Header() {
                     />
                 </UnstyledLink>
 
+                {/* Nav menu mobile */}
                 <div className="md:hidden">
-                    {/* Nav menu mobile */}
                     <Popover>
                         <Popover.Button className="md:hidden">
                             {({ open }) => <MenuButton opened={open} />}
@@ -129,7 +129,7 @@ export default function Header() {
                                 <h4 className="">{`${user.lastName} ${user.firstName}`}</h4>
                                 <CaretDown />
                             </div> */}
-                            <Popover>
+                            <Popover className="relative">
                                 <Popover.Button className="duration-400 flex cursor-pointer items-center space-x-1 font-primary text-lg font-medium text-gray-700 transition-colors hover:text-gray-900">
                                     {({ open }) => (
                                         <>
@@ -148,8 +148,8 @@ export default function Header() {
                                     leaveFrom="transform opacity-100 scale-100"
                                     leaveTo="transform opacity-0 scale-95"
                                 >
-                                    <Popover.Panel className="absolute top-[80px] right-[1.5rem] z-10">
-                                        <ul className="flex flex-col rounded-lg border border-gray-100 bg-green-100 p-4 shadow-lg dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:text-sm md:font-medium md:dark:bg-gray-900">
+                                    <Popover.Panel className="absolute top-[30px] z-10">
+                                        <ul className="flex min-w-[60px] flex-col border border-gray-100 bg-green-100 p-2 shadow-lg dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:text-sm md:font-medium md:dark:bg-gray-900">
                                             {/* {links.map((link) => (
                                                 <li key={link.label}>
                                                     <UnstyledLink

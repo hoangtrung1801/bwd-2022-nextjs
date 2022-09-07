@@ -12,7 +12,7 @@ export const BannerSkeleton = () => {
         />
     );
 };
-export const CarouselProductSkeleton = () => {
+export const ProductListSkeleton = () => {
     return (
         <div>
             <div className="mx-auto max-w-screen-xl px-4 py-8">
@@ -34,7 +34,7 @@ export const CarouselProductSkeleton = () => {
                         <div className="mb-4">
                             <Skeleton
                                 width="100%"
-                                height="300px"
+                                height="250px"
                                 containerClassName="avatar-skeleton"
                             />
                         </div>

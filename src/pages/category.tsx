@@ -1,27 +1,14 @@
-import * as React from "react";
-
 import Drawer from "@/components/Drawer";
 import Layout from "@/components/layout/Layout";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
-import { Fragment } from "react";
-import {
-    ArrowDown,
-    CaretDown,
-    Funnel,
-    GridFour,
-    Minus,
-    Plus,
-    X,
-} from "phosphor-react";
-import clsxm from "@/lib/clsxm";
 import ProductCard from "@/components/ProductCard";
 import clsxm from "@/lib/clsxm";
 import useProducts from "@/lib/hooks/useProducts";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { CaretDown, Funnel, Minus, Plus } from "phosphor-react";
+import React from "react";
 import { Fragment } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const sortOptions = [
     { name: "Most Popular", href: "#", current: true },
@@ -61,29 +48,6 @@ const filters = [
             { value: "purple", label: "Purple", checked: false },
         ],
     },
-    // {
-    //     id: "category",
-    //     name: "Category",
-    //     options: [
-    //         { value: "new-arrivals", label: "New Arrivals", checked: false },
-    //         { value: "sale", label: "Sale", checked: false },
-    //         { value: "travel", label: "Travel", checked: true },
-    //         { value: "organization", label: "Organization", checked: false },
-    //         { value: "accessories", label: "Accessories", checked: false },
-    //     ],
-    // },
-    // {
-    //     id: "size",
-    //     name: "Size",
-    //     options: [
-    //         { value: "2l", label: "2L", checked: false },
-    //         { value: "6l", label: "6L", checked: false },
-    //         { value: "12l", label: "12L", checked: false },
-    //         { value: "18l", label: "18L", checked: false },
-    //         { value: "20l", label: "20L", checked: false },
-    //         { value: "40l", label: "40L", checked: true },
-    //     ],
-    // },
 ];
 
 const fakeData = [1, 2, 3, 4, 5];

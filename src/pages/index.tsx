@@ -3,7 +3,7 @@ import CarouselBanner from "@/components/CarouselBanner";
 import Layout from "@/components/layout/Layout";
 import {
     BannerSkeleton,
-    CarouselProductSkeleton,
+    ProductListSkeleton,
     CommonProductSkeleton,
     FeaturedProductSkeleton,
 } from "@/components/SkeletonReact";
@@ -14,6 +14,7 @@ import ProductList from "@/components/ProductsList";
 import useProducts from "@/lib/hooks/useProducts";
 import { motion } from "framer-motion";
 import FeaturedProducts from "@/components/FeaturedProducts";
+import { Router, useRouter } from "next/router";
 
 const HomePage = () => {
     const dataBanner = [
@@ -51,14 +52,20 @@ const HomePage = () => {
         },
     ];
 
-    const { products } = useProducts();
-    const [isLoading, setIsLoading] = useState(true);
+    const router = useRouter();
+    const { products, isLoading, error } = useProducts();
+
+    // const [isLoading, setIsLoading] = useState(true);
+    // React.useEffect(() => {
+    //     const timeoutID = setTimeout(() => {
+    //         setIsLoading(false);
+    //     }, 5000);
+    //     return () => clearTimeout(timeoutID);
+    // }, []);
+
     React.useEffect(() => {
-        const timeoutID = setTimeout(() => {
-            setIsLoading(false);
-        }, 5000);
-        return () => clearTimeout(timeoutID);
-    }, []);
+        if (error) router.reload();
+    }, [error, router]);
 
     return (
         <Layout className="md:py-0">
@@ -73,7 +80,7 @@ const HomePage = () => {
 
                 <div>
                     {isLoading ? (
-                        <CarouselProductSkeleton />
+                        <ProductListSkeleton />
                     ) : (
                         <ProductList products={products} title="Phổ biến" />
                     )}

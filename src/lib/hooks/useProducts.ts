@@ -8,8 +8,8 @@ const useProducts = () => {
 
     return {
         products: data !== undefined ? data.data : [],
-        // isLoading: !error && !data,
-        isLoading: true,
+        isLoading: !error && !data,
+        // isLoading: true,
         error: error,
     };
 };
