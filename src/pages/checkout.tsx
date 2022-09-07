@@ -1,11 +1,26 @@
-/* eslint-disable @next/next/no-img-element */
-import * as React from "react";
-
-import Layout from "@/components/layout/Layout";
-import InputField from "@/components/forms/InputField";
-import Select from "@/components/forms/Select";
 import Button from "@/components/buttons/Button";
+import InputField from "@/components/forms/InputField";
+import Layout from "@/components/layout/Layout";
+import NextImage from "@/components/NextImage";
+import { currency, numberWithCommas } from "@/lib/helper";
+import useModal from "@/lib/hooks/useModal";
+import { createOrder } from "@/lib/service";
 import useCartStore from "@/lib/stores/useCartStore";
+import { useRouter } from "next/router";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+type CheckoutInputs = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    country: string;
+    addressLine: string;
+    note: string;
+    fundraisingAmount: number;
+};
+
+const SHIPPING_AMOUNT = 20000;
 
 const CheckoutPage = () => {
     return (
@@ -23,25 +38,38 @@ const CheckoutPage = () => {
 
 const CheckoutItemInfo = () => {
     const cart = useCartStore((state) => state.cart);
+    const getTotal = useCartStore((state) => state.getTotal);
+    const getItemsTotal = useCartStore((state) => state.getItemsAmount);
 
     return (
         <div className="my-8 rounded-xl bg-green-600 py-12 md:rounded-none">
             <div className="mx-auto max-w-lg space-y-2 px-4 text-white lg:px-8">
                 <div className="">
                     <h5 className="font-semibold text-green-300">Thanh toán</h5>
-                    <p className="text-3xl font-bold tracking-tight">$300.00</p>
+                    <p className="text-3xl font-bold tracking-tight">
+                        {numberWithCommas(getTotal(SHIPPING_AMOUNT))}
+                        {currency.vn}
+                    </p>
                 </div>
-
                 <div className="">
                     <div className="flow-root">
                         <div className="divide-y divide-white/25 text-base font-medium">
                             {cart.map(({ product, quantity }, id) => (
                                 <div className="flex py-6" key={id}>
-                                    <img
+                                    {/* <img
                                         className="h-24 w-24 flex-shrink-0 rounded-lg object-cover"
                                         // src="https://images.unsplash.com/photo-1588099768531-a72d4a198538?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Y2xvdGhpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
                                         src={product.images[0]}
                                         alt=""
+                                    /> */}
+                                    <NextImage
+                                        alt={product.name}
+                                        // src="h-24 w-24 flex-shrink-0 rounded-lg object-cover"
+                                        src={product.images[0]}
+                                        width={100}
+                                        height={100}
+                                        className="h-24 w-24 overflow-hidden rounded-lg"
+                                        objectFit="cover"
                                     />
 
                                     <div className="ml-4 flex flex-1">
@@ -60,20 +88,31 @@ const CheckoutItemInfo = () => {
                             <div className="space-y-4 py-6 text-green-300">
                                 <div className="flex justify-between">
                                     <p>Tổng đơn hàng</p>
-                                    <p>$100.00</p>
+                                    <p>
+                                        {numberWithCommas(getItemsTotal())}
+                                        {currency.vn}
+                                    </p>
                                 </div>
                                 <div className="flex justify-between">
                                     <p>Phí giao hàng</p>
-                                    <p>$100.00</p>
+                                    <p>
+                                        {SHIPPING_AMOUNT}
+                                        {currency.vn}
+                                    </p>
                                 </div>
                                 <div className="flex justify-between">
                                     <p>Thuế</p>
-                                    <p>$100.00</p>
+                                    <p>0{currency.vn}</p>
                                 </div>
                             </div>
                             <div className="flex justify-between py-6 text-lg">
                                 <p>Tổng</p>
-                                <p>$300.00</p>
+                                <p>
+                                    {numberWithCommas(
+                                        getTotal(SHIPPING_AMOUNT)
+                                    )}
+                                    {currency.vn}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -84,13 +123,49 @@ const CheckoutItemInfo = () => {
 };
 
 const CheckoutUserInfo = () => {
+    const { register, handleSubmit } = useForm<CheckoutInputs>();
+
+    const cart = useCartStore((state) => state.cart);
+    const getItemsTotal = useCartStore((state) => state.getTotal);
+    const cleartCart = useCartStore((state) => state.clearCart);
+
+    const { showModal } = useModal();
+
+    const router = useRouter();
+
+    const onSubmit: SubmitHandler<CheckoutInputs> = (data) => {
+        createOrder({
+            total: getItemsTotal(SHIPPING_AMOUNT),
+            items: [
+                ...cart.map((item) => ({
+                    productID: item.product.id,
+                    quantity: item.quantity,
+                })),
+            ],
+        })
+            .then((data) => {
+                showModal(
+                    "Thanh toán thành công",
+                    "Đơn hàng của bạn sẽ được chuẩn bị và giao hàng tới. Cảm ơn bạn đã mua hàng!"
+                );
+                cleartCart();
+                router.push("/");
+            })
+            .catch((error) => {
+                showModal("Thanh toán không thành công", error.message);
+            });
+    };
+
     return (
         <div className="bg-white md:order-first md:py-12">
             <div className="mx-auto max-w-lg md:px-4 lg:px-8">
                 <div>
                     <h4 className="font-semibold">Thông tin liên hệ</h4>
                 </div>
-                <form className="my-6 grid grid-cols-6 gap-4">
+                <form
+                    className="my-6 grid grid-cols-6 gap-4"
+                    onSubmit={handleSubmit(onSubmit)}
+                >
                     <div className="col-span-3">
                         <label
                             className="mb-1 block text-sm text-gray-600"
@@ -108,6 +183,7 @@ const CheckoutUserInfo = () => {
                             type="text"
                             id="first_name"
                             variant="outline"
+                            {...register("firstName")}
                         />
                     </div>
 
@@ -123,6 +199,7 @@ const CheckoutUserInfo = () => {
                             type="text"
                             id="last_name"
                             variant="outline"
+                            {...register("lastName")}
                         />
                     </div>
 
@@ -134,7 +211,12 @@ const CheckoutUserInfo = () => {
                             Email
                         </label>
 
-                        <InputField type="email" id="email" variant="outline" />
+                        <InputField
+                            type="email"
+                            id="email"
+                            variant="outline"
+                            {...register("email")}
+                        />
                     </div>
 
                     <div className="col-span-6">
@@ -145,7 +227,12 @@ const CheckoutUserInfo = () => {
                             Số điện thoại
                         </label>
 
-                        <InputField type="email" id="email" variant="outline" />
+                        <InputField
+                            type="text"
+                            id="phone"
+                            variant="outline"
+                            {...register("phone")}
+                        />
                     </div>
 
                     {/* <fieldset className="col-span-6">
@@ -234,7 +321,15 @@ const CheckoutUserInfo = () => {
                                     <option>Belgium</option>
                                     <option>Japan</option>
                                 </select> */}
-                                <Select
+                                <InputField
+                                    type="text"
+                                    id="country"
+                                    variant="outline"
+                                    className="rounded-t-lg rounded-b-none border-gray-200"
+                                    placeholder="Thành phố"
+                                    {...register("country")}
+                                />
+                                {/* <Select
                                     className="rounded-t-lg rounded-b-none border border-gray-200 "
                                     data={[
                                         { value: "string" },
@@ -242,7 +337,7 @@ const CheckoutUserInfo = () => {
                                     ]}
                                     placeholder="Thành phố"
                                     name="city"
-                                />
+                                /> */}
                             </div>
 
                             <div>
@@ -261,6 +356,7 @@ const CheckoutUserInfo = () => {
                                     id="adddresss"
                                     autoComplete="adddresss"
                                     placeholder="Số nhà"
+                                    {...register("addressLine")}
                                 />
                             </div>
                         </div>
@@ -277,6 +373,7 @@ const CheckoutUserInfo = () => {
                         <textarea
                             className="w-full resize-y rounded-lg border-gray-200 p-2.5 text-sm placeholder-gray-300 shadow-sm focus:border-transparent"
                             placeholder="Lời nhắn bạn muốn gửi đén..."
+                            {...register("note")}
                         />
                         {/* <InputField type="email" id="email" variant="outline" /> */}
                     </div>
@@ -297,6 +394,7 @@ const CheckoutUserInfo = () => {
                             name="donate_amount"
                             variant="outline"
                             placeholder="100.000"
+                            {...register("fundraisingAmount")}
                         />
                         <p className="mt-1 text-xs text-gray-400">
                             Số tiền bạn quyên góp sẽ chuyển trực tiếp tới quỹ từ
@@ -307,7 +405,11 @@ const CheckoutUserInfo = () => {
                     <hr className="col-span-6 my-4 w-full" />
 
                     <div className="col-span-6 flex flex-row-reverse">
-                        <Button variant="primary" className="text-md px-6">
+                        <Button
+                            variant="primary"
+                            className="text-md px-6"
+                            type="submit"
+                        >
                             Thanh toán
                         </Button>
                         {/* <button

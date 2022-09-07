@@ -5,7 +5,6 @@ const API_URL = `${API_SERVER_URL}/api/products`;
 
 const useProduct = (id) => {
     const { data, error } = useSwr(`${API_URL}/${id}`);
-    console.log(API_URL);
 
     return {
         product: data !== undefined ? data.data : {},
