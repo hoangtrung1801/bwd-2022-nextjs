@@ -1,6 +1,8 @@
 import * as React from "react";
 
 import Layout from "@/components/layout/Layout";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import {
@@ -81,8 +83,16 @@ const filters = [
     // },
 ];
 
+const fakeData = [1, 2, 3, 4, 5, 6];
 const CategoryPage = () => {
     const [mobileFiltersOpen, setMobileFiltersOpen] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(true);
+    React.useEffect(() => {
+        const timeoutID = setTimeout(() => {
+            setIsLoading(false);
+        }, 3000);
+        return () => clearTimeout(timeoutID);
+    }, []);
 
     const { products } = useProducts();
 
@@ -145,13 +155,57 @@ const CategoryPage = () => {
                                 {/* Product grid */}
                                 <div className="lg:col-span-3">
                                     <div className="grid w-full grid-cols-1 gap-x-4 gap-y-6 md:grid-cols-3 xl:grid-cols-3">
-                                        {products.map((product) => (
-                                            <ProductCard
-                                                className="border border-gray-200 shadow-none"
-                                                product={product}
-                                                key={product.id}
-                                            />
-                                        ))}
+                                        {isLoading ? (
+                                            fakeData.map((data, index) => (
+                                                <div
+                                                    key={index}
+                                                    className={clsxm(
+                                                        "max-w-sm overflow-auto rounded-md bg-white shadow-md dark:border-gray-700 dark:bg-gray-800"
+                                                    )}
+                                                >
+                                                    <div className="mb-4">
+                                                        <Skeleton
+                                                            width="100%"
+                                                            height="300px"
+                                                            containerClassName="avatar-skeleton"
+                                                        />
+                                                    </div>
+                                                    <div className="px-5 pb-5">
+                                                        <a href="#">
+                                                            <Skeleton
+                                                                count={3}
+                                                            />
+                                                        </a>
+                                                        <Skeleton
+                                                            count={1}
+                                                            inline
+                                                            width={120}
+                                                        />
+                                                        <div className="flex items-center justify-between">
+                                                            <Skeleton
+                                                                inline
+                                                                width={90}
+                                                            />
+
+                                                            <Skeleton
+                                                                inline
+                                                                width={90}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <React.Fragment>
+                                                {products.map((product) => (
+                                                    <ProductCard
+                                                        className="border border-gray-200 shadow-none"
+                                                        product={product}
+                                                        key={product.id}
+                                                    />
+                                                ))}
+                                            </React.Fragment>
+                                        )}
                                     </div>
                                 </div>
                             </div>

@@ -1,5 +1,4 @@
 import { AppProps } from "next/app";
-
 import "@/styles/globals.css";
 import { SWRConfig } from "swr";
 import fetcher from "@/lib/fetcher";

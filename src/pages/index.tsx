@@ -4,12 +4,16 @@ import CarouselProducts from "@/components/CarouselProducts";
 import CommonProducts from "@/components/CommonProducts";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import Layout from "@/components/layout/Layout";
-import ButtonLink from "@/components/links/ButtonLink";
 import useProducts from "@/lib/hooks/useProducts";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import React from "react";
-
+import React, { useState } from "react";
+import {
+    BannerSkeleton,
+    CarouselProductSkeleton,
+    FeaturedProductSkeleton,
+    CommonProductSkeleton,
+} from "@/components/SkeletonReact";
 const HomePage = () => {
     const dataBanner = [
         {
@@ -47,70 +51,59 @@ const HomePage = () => {
     ];
 
     const { products } = useProducts();
+    const [isLoading, setIsLoading] = useState(true);
+    React.useEffect(() => {
+        const timeoutID = setTimeout(() => {
+            setIsLoading(false);
+        }, 5000);
+        return () => clearTimeout(timeoutID);
+    }, []);
 
     return (
         <Layout className="py-0">
             <main className="space-y-2">
                 {/* <section className="bg-white"></section> */}
                 <div>
-                    <CarouselBanner products={dataBanner} />
+                    {isLoading ? (
+                        <BannerSkeleton />
+                    ) : (
+                        <CarouselBanner products={dataBanner} />
+                    )}
+                </div>
+
+                <div>
+                    {isLoading ? (
+                        <CarouselProductSkeleton />
+                    ) : (
+                        <CarouselProducts products={products} />
+                    )}
+                </div>
+
+                <div>
+                    {isLoading ? (
+                        <FeaturedProductSkeleton />
+                    ) : (
+                        <FeaturedProducts products={products} />
+                    )}
                 </div>
                 <div>
-                    <CarouselProducts products={products} />
+                    {isLoading ? (
+                        <CommonProductSkeleton />
+                    ) : (
+                        <CommonProducts products={products} />
+                    )}
                 </div>
-                <div>
-                    <FeaturedProducts products={products} />
-                </div>
-                <div>
-                    <CommonProducts products={products} />
-                </div>
-                <div
-                    className="h-full w-full bg-cover bg-fixed bg-center bg-no-repeat text-white"
-                    style={{
-                        backgroundImage: `url(https://bwd2022.vercel.app/assets/bg6.jpg)`,
-                        height: "500px",
-                    }}
-                >
-                    <div className="flex h-full w-full flex-row items-center justify-center">
-                        <motion.div
-                            initial={{ opacity: 0, y: 200, x: 0 }}
-                            whileInView={{ opacity: 1, y: 0, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{
-                                type: "spring",
-                                duration: 1.5,
-                                bounce: 0.3,
-                            }}
-                            className="text-center"
-                        >
-                            <motion.p
-                                initial={{ opacity: 0, y: 200, x: 0 }}
-                                whileInView={{ opacity: 1, y: 0, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{
-                                    type: "spring",
-                                    duration: 1.5,
-                                    bounce: 0.3,
-                                }}
-                                className="mb-10 text-5xl font-bold"
-                            >
-                                Cùng chung tay quyên góp bảo vệ môi trường
-                            </motion.p>
-                            <motion.p
-                                initial={{ opacity: 0, y: 200, x: 0 }}
-                                whileInView={{ opacity: 1, y: 0, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{
-                                    type: "spring",
-                                    duration: 1.5,
-                                    bounce: 0.3,
-                                }}
-                                className="mx-auto w-3/4 text-lg"
-                            >
-                                Giúp đỡ lẫn nhau thực hiện các nhu cầu cơ bản
-                                của sự sống còn của con người, đấu tranh bảo tồn
-                                các nguồn tài nguyên thiên nhiên và chung tay.
-                            </motion.p>
+                {isLoading ? (
+                    <BannerSkeleton />
+                ) : (
+                    <div
+                        className="h-full w-full bg-cover bg-fixed bg-center bg-no-repeat text-white"
+                        style={{
+                            backgroundImage: `url(https://bwd2022.vercel.app/assets/bg6.jpg)`,
+                            height: "500px",
+                        }}
+                    >
+                        <div className="flex h-full w-full flex-row items-center justify-center">
                             <motion.div
                                 initial={{ opacity: 0, y: 200, x: 0 }}
                                 whileInView={{ opacity: 1, y: 0, x: 0 }}
@@ -120,39 +113,68 @@ const HomePage = () => {
                                     duration: 1.5,
                                     bounce: 0.3,
                                 }}
+                                className="text-center"
                             >
-                                <Link href="/donate">
-                                    <Button
-                                        style={{
-                                            backgroundImage:
-                                                "linear-gradient(to right, #232526 0%, #414345 51%, #232526 100%)",
-                                            transition: "0.5s",
-                                            backgroundSize: "200% auto",
-                                        }}
-                                        className="transition[0.5s] h-auto w-[200px] min-w-[200px] bg-black py-4 px-8 text-white hover:bg-right md:mt-10"
-                                    >
-                                        QUYÊN GÓP
-                                    </Button>
-                                </Link>
+                                <motion.p
+                                    initial={{ opacity: 0, y: 200, x: 0 }}
+                                    whileInView={{ opacity: 1, y: 0, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{
+                                        type: "spring",
+                                        duration: 1.5,
+                                        bounce: 0.3,
+                                    }}
+                                    className="mb-10 text-5xl font-bold"
+                                >
+                                    Cùng chung tay quyên góp bảo vệ môi trường
+                                </motion.p>
+                                <motion.p
+                                    initial={{ opacity: 0, y: 200, x: 0 }}
+                                    whileInView={{ opacity: 1, y: 0, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{
+                                        type: "spring",
+                                        duration: 1.5,
+                                        bounce: 0.3,
+                                    }}
+                                    className="mx-auto w-3/4 text-lg"
+                                >
+                                    Giúp đỡ lẫn nhau thực hiện các nhu cầu cơ
+                                    bản của sự sống còn của con người, đấu tranh
+                                    bảo tồn các nguồn tài nguyên thiên nhiên và
+                                    chung tay.
+                                </motion.p>
+                                <motion.div
+                                    initial={{ opacity: 0, y: 200, x: 0 }}
+                                    whileInView={{ opacity: 1, y: 0, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{
+                                        type: "spring",
+                                        duration: 1.5,
+                                        bounce: 0.3,
+                                    }}
+                                >
+                                    <Link href="/donate">
+                                        <Button
+                                            style={{
+                                                backgroundImage:
+                                                    "linear-gradient(to right, #232526 0%, #414345 51%, #232526 100%)",
+                                                transition: "0.5s",
+                                                backgroundSize: "200% auto",
+                                            }}
+                                            className="transition[0.5s] h-auto w-[200px] min-w-[200px] bg-black py-4 px-8 text-white hover:bg-right md:mt-10"
+                                        >
+                                            QUYÊN GÓP
+                                        </Button>
+                                    </Link>
+                                </motion.div>
                             </motion.div>
-                        </motion.div>
+                        </div>
                     </div>
-                </div>
+                )}
             </main>
         </Layout>
     );
 };
-
-// export const getServerSideProps: GetServerSideProps = async () => {
-//     const API = "/api/products";
-//     const repoInfo = await fetcher(API);
-
-//     return {
-//         props: {},
-//         fallback: {
-//             ["/api/products"]: repoInfo,
-//         },
-//     };
-// };
 
 export default HomePage;

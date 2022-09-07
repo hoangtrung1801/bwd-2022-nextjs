@@ -3,6 +3,7 @@ import Button from "@/components/buttons/Button";
 import NextImage from "@/components/NextImage";
 import clsxm from "@/lib/clsxm";
 import useCartStore from "@/lib/stores/useCartStore";
+import "react-loading-skeleton/dist/skeleton.css";
 import { Product } from "@/lib/types";
 import { Heart, ShoppingCart, ShoppingCartSimple, Star } from "phosphor-react";
 import React from "react";
@@ -29,24 +30,32 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
             <div className="mb-4">
                 <NextImage
                     alt="image"
-                    // src="https://images.unsplash.com/photo-1491553895911-0055eca6402d"
                     src={product.images[0]}
                     width="100%"
                     height={100}
                 />
-                {/* <img
-                    className="rounded-t-lg p-8"
-                    src="https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
-                    alt="product image"
-                /> */}
+                {/* {isloading ? (
+                        <Skeleton
+                        width='100%'
+                            height="300px"
+                            containerClassName="avatar-skeleton"
+                        />
+                    ) : (
+                    
+                    )} */}
             </div>
+
             <div className="px-5 pb-5">
                 <a href="#">
                     <h3 className="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
                         {product.name}
-                        {/* Apple Watch Series 7 GPS, Aluminium Case, Starlight
-                        Sport */}
                     </h3>
+                    {/* {isloading? (
+                                <Skeleton count={3} />
+                            ) :
+                             (
+                            
+                            )} */}
                 </a>
                 <div className="mt-2.5 mb-5 flex items-center">
                     {Array(5)
@@ -62,10 +71,32 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
                         5.0
                     </span>
                 </div>
+                {/* {isloading ? (
+                             <Skeleton
+                             count={1}
+                             inline
+                             width={120}
+                         />
+                                ) : (
+                                    
+                                )}
+
+
+                         */}
+
                 <div className="flex items-center justify-between">
+                    {/* <span className="text-xl font-bold text-gray-900 dark:text-white">
+                                     ${product.price}
+                                    </span> */}
                     <span className="text-xl font-bold text-gray-900 dark:text-white">
                         ${product.price}
                     </span>
+                    {/* {isloading ? (
+                                    <Skeleton  inline
+                                    width={90} />
+                                ) : (
+                                     
+                                )} */}
                     <div className="space-x-1">
                         <Button variant="outline" className="px-3">
                             <Heart className="" weight="bold" />
@@ -78,6 +109,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
                             <ShoppingCartSimple className="" weight="bold" />
                         </Button>
                     </div>
+                    {/* {isloading ? (
+                                <Skeleton  inline
+                                width={90} />
+                            ) :(
+                                
+                            ) } */}
                 </div>
             </div>
         </div>
