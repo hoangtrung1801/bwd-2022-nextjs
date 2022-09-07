@@ -1,5 +1,5 @@
 import clsxm from "@/lib/clsxm";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const fakeData = [1, 2, 3, 4];

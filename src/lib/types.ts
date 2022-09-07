@@ -14,10 +14,10 @@ export interface Product {
     size?: string[];
     images: string[];
     reviews?: {
-        userId: string;
+        userID: string;
         reviewText: string;
         rating: number;
-        createdAt: string;
+        createdAt: Date;
     }[];
 }
 

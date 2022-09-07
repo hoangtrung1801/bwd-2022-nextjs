@@ -1,22 +1,19 @@
 import Button from "@/components/buttons/Button";
 import CarouselBanner from "@/components/CarouselBanner";
 import Layout from "@/components/layout/Layout";
-import useProducts from "@/lib/hooks/useProducts";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import React, { useState } from "react";
 import {
     BannerSkeleton,
     CarouselProductSkeleton,
-    FeaturedProductSkeleton,
     CommonProductSkeleton,
+    FeaturedProductSkeleton,
 } from "@/components/SkeletonReact";
+import Link from "next/link";
+import React, { useState } from "react";
 
-import ButtonLink from "@/components/links/ButtonLink";
 import ProductList from "@/components/ProductsList";
 import useProducts from "@/lib/hooks/useProducts";
 import { motion } from "framer-motion";
-
+import FeaturedProducts from "@/components/FeaturedProducts";
 
 const HomePage = () => {
     const dataBanner = [
@@ -64,7 +61,7 @@ const HomePage = () => {
     }, []);
 
     return (
-        <Layout className="py-0">
+        <Layout className="md:py-0">
             <main className="space-y-2">
                 <div>
                     {isLoading ? (
@@ -84,22 +81,24 @@ const HomePage = () => {
 
                 <div>
                     {isLoading ? (
-                        <FeaturedProductSkeleton />
+                        <CommonProductSkeleton />
                     ) : (
-                        <FeaturedProducts products={products} />
+                        <ProductList
+                            products={products}
+                            title="Nổi bật"
+                            className="bg-[url(https://bwd2022.vercel.app/assets/donate-1.jpg)] bg-cover bg-fixed bg-center bg-no-repeat text-green-400"
+                        />
                     )}
                 </div>
+
                 <div>
                     {isLoading ? (
                         <CommonProductSkeleton />
                     ) : (
-                                            <ProductList
-                        products={products}
-                        title="Nổi bật"
-                        className="bg-[url(https://bwd2022.vercel.app/assets/donate-1.jpg)] bg-cover bg-fixed bg-center bg-no-repeat text-green-400"
-                    />
+                        <ProductList products={products} title="Đặc biệt" />
                     )}
                 </div>
+
                 {isLoading ? (
                     <BannerSkeleton />
                 ) : (

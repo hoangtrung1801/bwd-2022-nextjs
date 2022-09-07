@@ -1,12 +1,11 @@
-import { AppProps } from "next/app";
-import "@/styles/globals.css";
-import { SWRConfig } from "swr";
-import fetcher from "@/lib/fetcher";
-import React, { useEffect } from "react";
-import Router from "next/router";
-import useUserStore from "@/lib/stores/useUserStore";
 import Modal from "@/components/Modal";
+import fetcher from "@/lib/fetcher";
 import useModalStore from "@/lib/stores/useModalStore";
+import useUserStore from "@/lib/stores/useUserStore";
+import "@/styles/globals.css";
+import { AppProps } from "next/app";
+import { useEffect } from "react";
+import { SWRConfig } from "swr";
 
 function MyApp({ Component, pageProps }: AppProps) {
     const modalIsOpen = useModalStore((state) => state.isOpen);

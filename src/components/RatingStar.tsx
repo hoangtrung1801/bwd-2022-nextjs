@@ -36,7 +36,9 @@ const RatingStar: React.FC<RatingStarProps> = ({
                         />
                     ))}
             </div>
-            {showNumber && <span>{rating}</span>}
+            {showNumber && (
+                <span className="font-semibold">{rating.toPrecision(2)}</span>
+            )}
         </div>
     );
 };
