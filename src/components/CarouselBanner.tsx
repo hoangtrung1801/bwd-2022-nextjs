@@ -81,8 +81,6 @@ export function BannerItem({ data }) {
         <div className=" relative h-[400px] max-h-[800px] lg:h-[calc(100vh-80px)]">
             <div className="h-full w-full ">
                 <div className="h-full w-full ">
-                    {/* <BannerPicture className="h-full w-full object-cover" /> */}
-                    {/* <div className="h-full w-full object-cover"> */}
                     <NextImage
                         alt=""
                         src={BannerPicture}

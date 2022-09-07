@@ -1,9 +1,22 @@
+import Button from "@/components/buttons/Button";
 import CarouselBanner from "@/components/CarouselBanner";
 import Layout from "@/components/layout/Layout";
+import useProducts from "@/lib/hooks/useProducts";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import React, { useState } from "react";
+import {
+    BannerSkeleton,
+    CarouselProductSkeleton,
+    FeaturedProductSkeleton,
+    CommonProductSkeleton,
+} from "@/components/SkeletonReact";
+
 import ButtonLink from "@/components/links/ButtonLink";
 import ProductList from "@/components/ProductsList";
 import useProducts from "@/lib/hooks/useProducts";
 import { motion } from "framer-motion";
+
 
 const HomePage = () => {
     const dataBanner = [
@@ -42,31 +55,61 @@ const HomePage = () => {
     ];
 
     const { products } = useProducts();
+    const [isLoading, setIsLoading] = useState(true);
+    React.useEffect(() => {
+        const timeoutID = setTimeout(() => {
+            setIsLoading(false);
+        }, 5000);
+        return () => clearTimeout(timeoutID);
+    }, []);
 
     return (
         <Layout className="py-0">
             <main className="space-y-2">
                 <div>
-                    <CarouselBanner products={dataBanner} />
+                    {isLoading ? (
+                        <BannerSkeleton />
+                    ) : (
+                        <CarouselBanner products={dataBanner} />
+                    )}
+                </div>
+
+                <div>
+                    {isLoading ? (
+                        <CarouselProductSkeleton />
+                    ) : (
+                        <ProductList products={products} title="Phổ biến" />
+                    )}
+                </div>
+
+                <div>
+                    {isLoading ? (
+                        <FeaturedProductSkeleton />
+                    ) : (
+                        <FeaturedProducts products={products} />
+                    )}
                 </div>
                 <div>
-                    {/* <CarouselProducts products={products} /> */}
-                    <ProductList products={products} title="Phổ biến" />
-                </div>
-                <div>
-                    <ProductList
+                    {isLoading ? (
+                        <CommonProductSkeleton />
+                    ) : (
+                                            <ProductList
                         products={products}
                         title="Nổi bật"
                         className="bg-[url(https://bwd2022.vercel.app/assets/donate-1.jpg)] bg-cover bg-fixed bg-center bg-no-repeat text-green-400"
                     />
-                    {/* <FeaturedProducts products={products} /> */}
+                    )}
                 </div>
-                <div>
-                    <ProductList products={products} title="Đặc biệt" />
-                    {/* <CommonProducts products={products} /> */}
-                </div>
-                <div>
-                    <div className="h-80 w-full bg-[url(https://bwd2022.vercel.app/assets/bg6.jpg)] bg-cover bg-fixed bg-center bg-no-repeat text-white">
+                {isLoading ? (
+                    <BannerSkeleton />
+                ) : (
+                    <div
+                        className="h-full w-full bg-cover bg-fixed bg-center bg-no-repeat text-white"
+                        style={{
+                            backgroundImage: `url(https://bwd2022.vercel.app/assets/bg6.jpg)`,
+                            height: "500px",
+                        }}
+                    >
                         <div className="flex h-full w-full flex-row items-center justify-center">
                             <motion.div
                                 initial={{ opacity: 0, y: 200, x: 0 }}
@@ -118,27 +161,27 @@ const HomePage = () => {
                                         bounce: 0.3,
                                     }}
                                 >
-                                    <ButtonLink href="#">Quyên góp</ButtonLink>
+                                    <Link href="/donate">
+                                        <Button
+                                            style={{
+                                                backgroundImage:
+                                                    "linear-gradient(to right, #232526 0%, #414345 51%, #232526 100%)",
+                                                transition: "0.5s",
+                                                backgroundSize: "200% auto",
+                                            }}
+                                            className="transition[0.5s] h-auto w-[200px] min-w-[200px] bg-black py-4 px-8 text-white hover:bg-right md:mt-10"
+                                        >
+                                            QUYÊN GÓP
+                                        </Button>
+                                    </Link>
                                 </motion.div>
                             </motion.div>
                         </div>
                     </div>
-                </div>
+                )}
             </main>
         </Layout>
     );
 };
-
-// export const getServerSideProps: GetServerSideProps = async () => {
-//     const API = "/api/products";
-//     const repoInfo = await fetcher(API);
-
-//     return {
-//         props: {},
-//         fallback: {
-//             ["/api/products"]: repoInfo,
-//         },
-//     };
-// };
 
 export default HomePage;
