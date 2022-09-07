@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import Drawer from "@/components/Drawer";
 import Layout from "@/components/layout/Layout";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -16,9 +17,11 @@ import {
 } from "phosphor-react";
 import clsxm from "@/lib/clsxm";
 import ProductCard from "@/components/ProductCard";
-import { Product } from "@/lib/types";
-import Drawer from "@/components/Drawer";
+import clsxm from "@/lib/clsxm";
 import useProducts from "@/lib/hooks/useProducts";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { CaretDown, Funnel, Minus, Plus } from "phosphor-react";
+import { Fragment } from "react";
 
 const sortOptions = [
     { name: "Most Popular", href: "#", current: true },
@@ -324,7 +327,7 @@ const Filter = () => {
                                                         defaultChecked={
                                                             option.checked
                                                         }
-                                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                        className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
                                                     />
                                                     <label
                                                         htmlFor={`filter-${section.id}-${optionIdx}`}

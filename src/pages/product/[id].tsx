@@ -1,14 +1,12 @@
 import * as React from "react";
 
 import Layout from "@/components/layout/Layout";
+import ProductReviews from "@/components/ProductReviews";
+import ProductView from "@/components/ProductView";
+import CounterContext from "@/lib/context/CounterContext";
 import useProduct from "@/lib/hooks/useProduct";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import ProductReviews from "@/components/ProductReviews";
-import CounterContext from "@/lib/context/CounterContext";
-import ProductView from "@/components/ProductView";
-import useCartStore from "@/lib/stores/useCartStore";
-import { Product } from "@/lib/types";
 
 type ProductPageProps = {
     // product: Product;

@@ -7,9 +7,9 @@ export interface Route {
 export interface Product {
     id: string;
     name: string;
-    description: string;
+    desc: string;
     price: number;
-    stock: number;
+    stock?: number;
     category: string;
     size?: string[];
     images: string[];
@@ -30,8 +30,9 @@ export interface Category {
 export interface User {
     id: string;
     email: string;
-    password: string;
-    username: string;
+    // password: string;
+    firstName: string;
+    lastName: string;
     address?: string;
 }
 

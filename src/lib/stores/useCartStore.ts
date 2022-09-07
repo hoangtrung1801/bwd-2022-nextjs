@@ -5,6 +5,9 @@ export interface CartStoreState {
     cart: CartItem[];
     addItem: (product: Product, quantity?: number) => void;
     removeItem: (product: Product, quantity?: number) => void;
+    getItemsAmount: () => number;
+    getTotal: (shippingAmount: number) => number;
+    clearCart: () => void;
 }
 
 const useCartStore = create<CartStoreState>((set, get) => ({
@@ -67,6 +70,23 @@ const useCartStore = create<CartStoreState>((set, get) => ({
                 }));
             }
         }
+    },
+    getItemsAmount: () => {
+        const cart = get().cart;
+        let amount = 0;
+        cart.forEach(({ product, quantity }) => {
+            amount += product.price * quantity;
+        });
+        return amount;
+    },
+    getTotal: (shippingAmount) => {
+        const itemsAmount = get().getItemsAmount();
+        return itemsAmount + shippingAmount;
+    },
+    clearCart: () => {
+        set({
+            cart: [],
+        });
     },
 }));
 

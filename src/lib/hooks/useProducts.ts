@@ -1,13 +1,15 @@
+import { API_SERVER_URL } from "@/constant/env";
 import useSwr, { SWRResponse } from "swr";
 
-const API_URL = "/api/products";
+const API_URL = `${API_SERVER_URL}/api/products`;
 
 const useProducts = () => {
-    const { data, error } = useSwr(API_URL);
+    const { data, error }: SWRResponse = useSwr(API_URL);
 
     return {
-        products: data !== undefined ? data.data.products : [],
-        isLoading: !error && !data,
+        products: data !== undefined ? data.data : [],
+        // isLoading: !error && !data,
+        isLoading: true,
         error: error,
     };
 };

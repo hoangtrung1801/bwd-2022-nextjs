@@ -1,8 +1,5 @@
 import Button from "@/components/buttons/Button";
 import CarouselBanner from "@/components/CarouselBanner";
-import CarouselProducts from "@/components/CarouselProducts";
-import CommonProducts from "@/components/CommonProducts";
-import FeaturedProducts from "@/components/FeaturedProducts";
 import Layout from "@/components/layout/Layout";
 import useProducts from "@/lib/hooks/useProducts";
 import { motion } from "framer-motion";
@@ -14,6 +11,13 @@ import {
     FeaturedProductSkeleton,
     CommonProductSkeleton,
 } from "@/components/SkeletonReact";
+
+import ButtonLink from "@/components/links/ButtonLink";
+import ProductList from "@/components/ProductsList";
+import useProducts from "@/lib/hooks/useProducts";
+import { motion } from "framer-motion";
+
+
 const HomePage = () => {
     const dataBanner = [
         {
@@ -62,7 +66,6 @@ const HomePage = () => {
     return (
         <Layout className="py-0">
             <main className="space-y-2">
-                {/* <section className="bg-white"></section> */}
                 <div>
                     {isLoading ? (
                         <BannerSkeleton />
@@ -75,7 +78,7 @@ const HomePage = () => {
                     {isLoading ? (
                         <CarouselProductSkeleton />
                     ) : (
-                        <CarouselProducts products={products} />
+                        <ProductList products={products} title="Phổ biến" />
                     )}
                 </div>
 
@@ -90,7 +93,11 @@ const HomePage = () => {
                     {isLoading ? (
                         <CommonProductSkeleton />
                     ) : (
-                        <CommonProducts products={products} />
+                                            <ProductList
+                        products={products}
+                        title="Nổi bật"
+                        className="bg-[url(https://bwd2022.vercel.app/assets/donate-1.jpg)] bg-cover bg-fixed bg-center bg-no-repeat text-green-400"
+                    />
                     )}
                 </div>
                 {isLoading ? (
