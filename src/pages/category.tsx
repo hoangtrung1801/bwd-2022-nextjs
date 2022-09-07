@@ -83,7 +83,7 @@ const filters = [
     // },
 ];
 
-const fakeData = [1, 2, 3, 4, 5, 6];
+const fakeData = [1, 2, 3, 4, 5];
 const CategoryPage = () => {
     const [mobileFiltersOpen, setMobileFiltersOpen] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(true);
