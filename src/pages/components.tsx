@@ -12,12 +12,14 @@ import UnstyledLink from "@/components/links/UnstyledLink";
 import NextImage from "@/components/NextImage";
 import Seo from "@/components/Seo";
 import Skeleton from "@/components/Skeleton";
+import Modal from "@/components/Modal";
 
 type Color = typeof colorList[number];
 
 export default function ComponentsPage() {
     const [mode, setMode] = React.useState<"dark" | "light">("light");
     const [color, setColor] = React.useState<Color>("sky");
+    const [modalIsOpen, setModalIsOpen] = React.useState(false);
     function toggleMode() {
         return mode === "dark" ? setMode("light") : setMode("dark");
     }
@@ -369,6 +371,15 @@ export default function ComponentsPage() {
                                     Skeleton with shimmer effect
                                 </p>
                                 <Skeleton className="h-72 w-72" />
+                            </li>
+                            <li className="space-y-2">
+                                {/* <Modal
+                                    isOpen={modalIsOpen}
+                                    setIsOpen={setModalIsOpen}
+                                    title="Thêm thành công"
+                                >
+                                    Sản phẩm đã được thêm vào giỏ hàng
+                                </Modal> */}
                             </li>
                         </ol>
                     </div>

@@ -3,7 +3,9 @@ import Button from "@/components/buttons/Button";
 import NextImage from "@/components/NextImage";
 import clsxm from "@/lib/clsxm";
 import { currency, numberWithCommas } from "@/lib/helper";
+import useModal from "@/lib/hooks/useModal";
 import useCartStore from "@/lib/stores/useCartStore";
+import useModalStore from "@/lib/stores/useModalStore";
 import { Product } from "@/lib/types";
 import Link from "next/link";
 import { Heart, ShoppingCartSimple, Star } from "phosphor-react";
@@ -16,9 +18,13 @@ type ProductCardProps = {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
     const addItem = useCartStore((state) => state.addItem);
+    const setModalIsOpen = useModalStore((state) => state.setIsOpen);
+    const setModalContent = useModalStore((state) => state.setContent);
+    const { showModal: show } = useModal();
 
     const addItemIntoCart = () => {
         addItem(product);
+        show("Thêm vào giỏ", "Bạn đã thêm sản phẩm vào giỏ hàng thành công!");
     };
 
     return (
