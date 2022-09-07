@@ -3,6 +3,7 @@ import Checkbox from "@/components/forms/Checkbox";
 import InputField from "@/components/forms/InputField";
 import Layout from "@/components/layout/Layout";
 import PrimaryLink from "@/components/links/PrimaryLink";
+import UnderlineLink from "@/components/links/UnderlineLink";
 import NextImage from "@/components/NextImage";
 import { loginUser } from "@/lib/authorization";
 import useUserStore from "@/lib/stores/useUserStore";
@@ -117,6 +118,14 @@ const LoginPage = () => {
                                                         Quên mật khẩu?
                                                     </PrimaryLink>
                                                 </div>
+                                            </div>
+                                            <div className="mt-[6px!important]">
+                                                <UnderlineLink
+                                                    href="/signup"
+                                                    className="text-sm text-gray-600 "
+                                                >
+                                                    Chưa có tài khoản?
+                                                </UnderlineLink>
                                             </div>
 
                                             <div>
