@@ -3,7 +3,6 @@ import Button from "@/components/buttons/Button";
 import NextImage from "@/components/NextImage";
 import clsxm from "@/lib/clsxm";
 import useCartStore from "@/lib/stores/useCartStore";
-import "react-loading-skeleton/dist/skeleton.css";
 import { Product } from "@/lib/types";
 import { Heart, ShoppingCart, ShoppingCartSimple, Star } from "phosphor-react";
 import React from "react";
@@ -34,15 +33,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
                     width="100%"
                     height={100}
                 />
-                {/* {isloading ? (
-                        <Skeleton
-                        width='100%'
-                            height="300px"
-                            containerClassName="avatar-skeleton"
-                        />
-                    ) : (
-                    
-                    )} */}
             </div>
 
             <div className="px-5 pb-5">
@@ -50,12 +40,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
                     <h3 className="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
                         {product.name}
                     </h3>
-                    {/* {isloading? (
-                                <Skeleton count={3} />
-                            ) :
-                             (
-                            
-                            )} */}
                 </a>
                 <div className="mt-2.5 mb-5 flex items-center">
                     {Array(5)
@@ -71,32 +55,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
                         5.0
                     </span>
                 </div>
-                {/* {isloading ? (
-                             <Skeleton
-                             count={1}
-                             inline
-                             width={120}
-                         />
-                                ) : (
-                                    
-                                )}
-
-
-                         */}
 
                 <div className="flex items-center justify-between">
-                    {/* <span className="text-xl font-bold text-gray-900 dark:text-white">
-                                     ${product.price}
-                                    </span> */}
                     <span className="text-xl font-bold text-gray-900 dark:text-white">
                         ${product.price}
                     </span>
-                    {/* {isloading ? (
-                                    <Skeleton  inline
-                                    width={90} />
-                                ) : (
-                                     
-                                )} */}
+
                     <div className="space-x-1">
                         <Button variant="outline" className="px-3">
                             <Heart className="" weight="bold" />
@@ -109,12 +73,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
                             <ShoppingCartSimple className="" weight="bold" />
                         </Button>
                     </div>
-                    {/* {isloading ? (
-                                <Skeleton  inline
-                                width={90} />
-                            ) :(
-                                
-                            ) } */}
                 </div>
             </div>
         </div>

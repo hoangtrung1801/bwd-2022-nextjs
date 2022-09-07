@@ -30,32 +30,6 @@ const CarouselProducts: React.FC<CarouselProductsProps> = ({ products }) => {
                         {products.map((product, id) => (
                             <ProductCard key={id} product={product} />
                         ))}
-                        {/* <a href="" className="block">
-                            <div className="flex justify-center">
-                                <strong className="relative h-6 bg-black px-4 text-xs uppercase leading-6 text-white">
-                                    {" "}
-                                    New{" "}
-                                </strong>
-                            </div>
-
-                            <img
-                                alt="Trainer Product"
-                                src="https://images.unsplash.com/photo-1491553895911-0055eca6402d"
-                                className="-mt-3 h-96 w-full object-cover"
-                            />
-
-                            <h5 className="mt-4 text-sm text-black/90">
-                                Limited Edition Sports Trainer
-                            </h5>
-
-                            <div className="mt-4 flex items-center justify-between font-bold">
-                                <p className="text-lg">$189.99</p>
-
-                                <p className="text-xs uppercase tracking-wide">
-                                    6 Colors
-                                </p>
-                            </div>
-                        </a> */}
                     </div>
                 </div>
             </section>
