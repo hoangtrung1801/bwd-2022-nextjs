@@ -11,7 +11,9 @@ export default function Layout({ children, className }: LayoutProps) {
     return (
         <>
             <Header />
-            <main className={clsxm("layout py-8", className)}>{children}</main>
+            <main className={clsxm("layout md:py-8", className)}>
+                {children}
+            </main>
             <Footer />
         </>
     );

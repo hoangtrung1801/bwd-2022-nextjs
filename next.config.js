@@ -3,6 +3,9 @@ module.exports = {
     eslint: {
         dirs: ["src"],
     },
+    env: {
+        API_SERVER_URL: process.env.API_SERVER_URL,
+    },
     reactStrictMode: true,
 
     // Uncoment to add domain whitelist

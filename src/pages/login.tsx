@@ -3,9 +3,38 @@ import Checkbox from "@/components/forms/Checkbox";
 import InputField from "@/components/forms/InputField";
 import Layout from "@/components/layout/Layout";
 import PrimaryLink from "@/components/links/PrimaryLink";
+import UnderlineLink from "@/components/links/UnderlineLink";
 import NextImage from "@/components/NextImage";
+import { loginUser } from "@/lib/authorization";
+import useUserStore from "@/lib/stores/useUserStore";
+import { useRouter } from "next/router";
+import React from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+type LoginInputs = {
+    email: string;
+    password: string;
+};
 
 const LoginPage = () => {
+    const { register, handleSubmit } = useForm<LoginInputs>();
+    const router = useRouter();
+    const user = useUserStore((state) => state.user);
+    const fetchUser = useUserStore((state) => state.fetch);
+
+    const handleLogin: SubmitHandler<LoginInputs> = (data) => {
+        loginUser(data.email, data.password).then((success) => {
+            if (success) {
+                router.push("/");
+                fetchUser();
+            }
+        });
+    };
+
+    React.useEffect(() => {
+        if (user !== null) router.push("/");
+    }, [router, user]);
+
     return (
         <Layout className="py-0">
             <section className="min-h-main">
@@ -23,8 +52,7 @@ const LoginPage = () => {
                                 <div className="mt-8">
                                     <div className="mt-6">
                                         <form
-                                            action="#"
-                                            method="POST"
+                                            onSubmit={handleSubmit(handleLogin)}
                                             className="space-y-6"
                                         >
                                             <div>
@@ -40,6 +68,7 @@ const LoginPage = () => {
                                                         name="email"
                                                         placeholder="Địa chỉ email của bạn"
                                                         type="email"
+                                                        {...register("email")}
                                                     />
                                                 </div>
                                             </div>
@@ -58,6 +87,9 @@ const LoginPage = () => {
                                                         type="password"
                                                         placeholder="Mật khẩu"
                                                         autoComplete="password"
+                                                        {...register(
+                                                            "password"
+                                                        )}
                                                     />
                                                 </div>
                                             </div>
@@ -86,6 +118,14 @@ const LoginPage = () => {
                                                         Quên mật khẩu?
                                                     </PrimaryLink>
                                                 </div>
+                                            </div>
+                                            <div className="mt-[6px!important]">
+                                                <UnderlineLink
+                                                    href="/signup"
+                                                    className="text-sm text-gray-600 "
+                                                >
+                                                    Chưa có tài khoản?
+                                                </UnderlineLink>
                                             </div>
 
                                             <div>

@@ -2,9 +2,12 @@ import Button from "@/components/buttons/Button";
 import NextImage from "@/components/NextImage";
 import NumberCounter from "@/components/NumberCounter";
 import RatingStar from "@/components/RatingStar";
+import clsxm from "@/lib/clsxm";
 import CounterContext, {
     CounterContextType,
 } from "@/lib/context/CounterContext";
+import { currency, numberWithCommas } from "@/lib/helper";
+import useModal from "@/lib/hooks/useModal";
 import useCartStore from "@/lib/stores/useCartStore";
 import { Product } from "@/lib/types";
 import { Heart, ShoppingCart, Star } from "phosphor-react";
@@ -30,20 +33,21 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
 const ProductImages: React.FC<
     { product: Product } & React.ComponentProps<"div">
 > = ({ product }) => {
+    const [selectedImage, setSelectedImage] = React.useState(0);
     return (
         <div className="space-y-4">
-            <div className="-ml-6 w-screen md:ml-0 md:w-full">
+            <div className="-ml-2 w-screen md:ml-0 md:w-full">
                 <NextImage
-                    alt={product.images[0]}
-                    src={product.images[0]}
+                    alt={"Product image"}
+                    src={product.images[selectedImage]}
                     width="100%"
                     height={80}
-                    objectFit="cover"
+                    // objectFit="cover"
                     className="md:overflow-hidden md:rounded-md"
                 />
             </div>
             <div className="hidden grid-cols-4 gap-x-3 md:grid">
-                {product.images.map((image) => (
+                {product.images.map((image, id) => (
                     <NextImage
                         key={image}
                         alt={image}
@@ -51,7 +55,11 @@ const ProductImages: React.FC<
                         width="100%"
                         height={100}
                         objectFit="cover"
-                        className="overflow-hidden rounded-lg"
+                        className={clsxm(
+                            "overflow-hidden rounded-lg",
+                            selectedImage === id && "outline outline-gray-200"
+                        )}
+                        onMouseEnter={() => setSelectedImage(id)}
                     />
                 ))}
             </div>
@@ -66,15 +74,24 @@ const ProductDetail: React.FC<
 
     const addItem = useCartStore((state) => state.addItem);
 
+    const { showModal } = useModal();
+
     const addItemIntoCart = () => {
         addItem(product, amountItems.count);
+        showModal(
+            "Thêm vào giỏ",
+            "Bạn đã thêm sản phẩm vào giỏ hàng thành công!"
+        );
     };
 
     return (
         <div className="flex flex-col space-y-7">
             <div className="space-y-2">
                 <h1>{product.name}</h1>
-                <h2 className="font-medium">${product.price}</h2>
+                <h2 className="font-medium">
+                    {numberWithCommas(product.price)}
+                    {currency.vn}
+                </h2>
                 <div className="flex items-center space-x-3">
                     <RatingStar rating={4} />
                 </div>
@@ -104,7 +121,7 @@ const ProductDetail: React.FC<
             </div>
             <div>
                 <p className="text-sm font-medium">Mô tả</p>
-                <p className="mt-3 text-sm leading-6">{product.description}</p>
+                <p className="mt-3 text-sm leading-6">{product.desc}</p>
             </div>
         </div>
     );

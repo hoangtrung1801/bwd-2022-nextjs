@@ -1,22 +1,14 @@
-import * as React from "react";
-
-import Layout from "@/components/layout/Layout";
-import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
-import { Fragment } from "react";
-import {
-    ArrowDown,
-    CaretDown,
-    Funnel,
-    GridFour,
-    Minus,
-    Plus,
-    X,
-} from "phosphor-react";
-import clsxm from "@/lib/clsxm";
-import ProductCard from "@/components/ProductCard";
-import { Product } from "@/lib/types";
 import Drawer from "@/components/Drawer";
+import Layout from "@/components/layout/Layout";
+import ProductCard from "@/components/ProductCard";
+import clsxm from "@/lib/clsxm";
 import useProducts from "@/lib/hooks/useProducts";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { CaretDown, Funnel, Minus, Plus } from "phosphor-react";
+import React from "react";
+import { Fragment } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const sortOptions = [
     { name: "Most Popular", href: "#", current: true },
@@ -56,33 +48,18 @@ const filters = [
             { value: "purple", label: "Purple", checked: false },
         ],
     },
-    // {
-    //     id: "category",
-    //     name: "Category",
-    //     options: [
-    //         { value: "new-arrivals", label: "New Arrivals", checked: false },
-    //         { value: "sale", label: "Sale", checked: false },
-    //         { value: "travel", label: "Travel", checked: true },
-    //         { value: "organization", label: "Organization", checked: false },
-    //         { value: "accessories", label: "Accessories", checked: false },
-    //     ],
-    // },
-    // {
-    //     id: "size",
-    //     name: "Size",
-    //     options: [
-    //         { value: "2l", label: "2L", checked: false },
-    //         { value: "6l", label: "6L", checked: false },
-    //         { value: "12l", label: "12L", checked: false },
-    //         { value: "18l", label: "18L", checked: false },
-    //         { value: "20l", label: "20L", checked: false },
-    //         { value: "40l", label: "40L", checked: true },
-    //     ],
-    // },
 ];
 
+const fakeData = [1, 2, 3, 4, 5];
 const CategoryPage = () => {
     const [mobileFiltersOpen, setMobileFiltersOpen] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(true);
+    React.useEffect(() => {
+        const timeoutID = setTimeout(() => {
+            setIsLoading(false);
+        }, 3000);
+        return () => clearTimeout(timeoutID);
+    }, []);
 
     const { products } = useProducts();
 
@@ -145,13 +122,57 @@ const CategoryPage = () => {
                                 {/* Product grid */}
                                 <div className="lg:col-span-3">
                                     <div className="grid w-full grid-cols-1 gap-x-4 gap-y-6 md:grid-cols-3 xl:grid-cols-3">
-                                        {products.map((product) => (
-                                            <ProductCard
-                                                className="border border-gray-200 shadow-none"
-                                                product={product}
-                                                key={product.id}
-                                            />
-                                        ))}
+                                        {isLoading ? (
+                                            fakeData.map((data, index) => (
+                                                <div
+                                                    key={index}
+                                                    className={clsxm(
+                                                        "max-w-sm overflow-auto rounded-md bg-white shadow-md dark:border-gray-700 dark:bg-gray-800"
+                                                    )}
+                                                >
+                                                    <div className="mb-4">
+                                                        <Skeleton
+                                                            width="100%"
+                                                            height="300px"
+                                                            containerClassName="avatar-skeleton"
+                                                        />
+                                                    </div>
+                                                    <div className="px-5 pb-5">
+                                                        <a href="#">
+                                                            <Skeleton
+                                                                count={3}
+                                                            />
+                                                        </a>
+                                                        <Skeleton
+                                                            count={1}
+                                                            inline
+                                                            width={120}
+                                                        />
+                                                        <div className="flex items-center justify-between">
+                                                            <Skeleton
+                                                                inline
+                                                                width={90}
+                                                            />
+
+                                                            <Skeleton
+                                                                inline
+                                                                width={90}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <React.Fragment>
+                                                {products.map((product) => (
+                                                    <ProductCard
+                                                        className="border border-gray-200 shadow-none"
+                                                        product={product}
+                                                        key={product.id}
+                                                    />
+                                                ))}
+                                            </React.Fragment>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -270,7 +291,7 @@ const Filter = () => {
                                                         defaultChecked={
                                                             option.checked
                                                         }
-                                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                        className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
                                                     />
                                                     <label
                                                         htmlFor={`filter-${section.id}-${optionIdx}`}

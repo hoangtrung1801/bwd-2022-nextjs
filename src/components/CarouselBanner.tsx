@@ -42,7 +42,7 @@ function SampleNextArrow(props) {
     // }
     return (
         <div
-            className={`absolute top-1/2 left-4 z-30 block cursor-pointer text-7xl text-white opacity-50 hover:opacity-100`}
+            className={`absolute top-1/2 -left-2 z-30 block cursor-pointer text-7xl text-white opacity-50 hover:opacity-100 md:left-4`}
             style={{
                 ...style,
                 borderRadius: "50%",
@@ -60,7 +60,7 @@ function SamplePrevArrow(props) {
     const { style, onClick } = props;
     return (
         <div
-            className={`absolute top-1/2 right-4 z-30 block cursor-pointer text-7xl text-white opacity-50 hover:opacity-100`}
+            className={`absolute top-1/2 -right-2 z-30 block cursor-pointer text-7xl text-white opacity-50 hover:opacity-100 md:right-4`}
             style={{
                 ...style,
                 borderRadius: "50%",
@@ -78,11 +78,9 @@ export function BannerItem({ data }) {
     const { BannerPicture, title, description } = data;
 
     return (
-        <div className="relative h-[calc(100vh-80px)]">
+        <div className=" relative h-[400px] max-h-[800px] lg:h-[calc(100vh-80px)]">
             <div className="h-full w-full ">
                 <div className="h-full w-full ">
-                    {/* <BannerPicture className="h-full w-full object-cover" /> */}
-                    {/* <div className="h-full w-full object-cover"> */}
                     <NextImage
                         alt=""
                         src={BannerPicture}
@@ -90,6 +88,8 @@ export function BannerItem({ data }) {
                         width={"100"}
                         layout="fill"
                         objectFit="cover"
+                        placeholder="blur"
+                        blurDataURL={BannerPicture}
                     />
                     {/* </div> */}
                 </div>

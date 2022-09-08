@@ -7,17 +7,17 @@ export interface Route {
 export interface Product {
     id: string;
     name: string;
-    description: string;
+    desc: string;
     price: number;
-    stock: number;
+    stock?: number;
     category: string;
     size?: string[];
     images: string[];
     reviews?: {
-        userId: string;
+        userID: string;
         reviewText: string;
         rating: number;
-        createdAt: string;
+        createdAt: Date;
     }[];
 }
 
@@ -30,12 +30,26 @@ export interface Category {
 export interface User {
     id: string;
     email: string;
-    password: string;
-    username: string;
+    // password: string;
+    firstName: string;
+    lastName: string;
     address?: string;
 }
 
 export interface CartItem {
     product: Product;
     quantity: number;
+}
+
+export interface Donation {
+    name: string;
+    desc: string;
+    target: number;
+    expiryDate: Date;
+    image: string;
+    donator: {
+        userID: string;
+        amount: number;
+        createdAt: Date;
+    }[];
 }
