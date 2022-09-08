@@ -88,6 +88,8 @@ export function BannerItem({ data }) {
                         width={"100"}
                         layout="fill"
                         objectFit="cover"
+                        placeholder="blur"
+                        blurDataURL={BannerPicture}
                     />
                     {/* </div> */}
                 </div>

@@ -1,19 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import * as React from "react";
-
-import Layout from "@/components/layout/Layout";
-import Seo from "@/components/Seo";
-import CarouselBanner from "@/components/CarouselBanner";
-import { motion } from "framer-motion";
 import Button from "@/components/buttons/Button";
-// SVG ICONS
+import CarouselBanner from "@/components/CarouselBanner";
+import Layout from "@/components/layout/Layout";
+import { motion } from "framer-motion";
+import DonationList from "@/components/DonationList";
+import DonationModal from "@/components/DonationModal";
+import { Donation } from "@/lib/types";
 import {
     donate_card_1,
     donate_card_2,
     donate_card_3,
 } from "../../../public/svg/index";
-import Link from "next/link";
-import ButtonLink from "@/components/links/ButtonLink";
 
 const DonatePage = () => {
     const dataBanner = [
@@ -34,7 +32,7 @@ const DonatePage = () => {
     ];
 
     return (
-        <Layout className="max-w-screen-2xl p-0">
+        <Layout className="max-w-screen-2xl p-0 md:p-0">
             <main>
                 <div>
                     <CarouselBanner products={dataBanner} />
@@ -102,9 +100,9 @@ const MissionSection = () => {
                         {/* style={{transition : 'all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1)'}} */}
                         <div
                             className="before:content[''] before:border-l-[rgb(219, 237,
-                         219)] 
-                         before:transition[all 0.5s cubic-bezier(0.215, 0.61, 
-                         0.355, 1)] relative left-0 right-0 flex w-full flex-col items-center rounded bg-white p-12 transition-all duration-500 before:absolute before:left-[10px] before:bottom-[10px] before:h-0 before:w-0 before:border-t-[24px] before:border-r-0 before:border-b-0 
+                         219)]
+                         before:transition[all 0.5s cubic-bezier(0.215, 0.61,
+                         0.355, 1)] relative left-0 right-0 flex w-full flex-col items-center rounded bg-white p-12 transition-all duration-500 before:absolute before:left-[10px] before:bottom-[10px] before:h-0 before:w-0 before:border-t-[24px] before:border-r-0 before:border-b-0
                          before:border-l-[25px] before:border-solid before:border-t-transparent before:border-r-transparent before:border-b-transparent hover:translate-y-[-1rem] hover:before:border-t-transparent hover:before:border-r-transparent hover:before:border-b-transparent hover:before:border-l-[#40bf57]"
                         >
                             {/* <div className="mb-2">
@@ -160,7 +158,7 @@ const DonateAction = () => {
                                 bottom: "-7%",
                                 right: "-7%",
                             }}
-                            className="static flex w-full flex-col bg-[#40c057] py-8  px-10 text-white 
+                            className="static flex w-full flex-col bg-[#40c057] py-8  px-10 text-white
                             lg:absolute lg:bottom-[-7%] lg:right-[-7%] lg:w-1/2 lg:py-16 lg:px-20"
                         >
                             <p className="mb-6 text-4xl font-bold">Quyên góp</p>
@@ -186,24 +184,66 @@ const DonateAction = () => {
 };
 
 const DonateSection = () => {
-    const [donationMountID, setDonationMountID] = React.useState(-1);
+    const donations: Donation[] = [
+        {
+            name: "Donation name 1",
+            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, iusto esse minus, vitae eos distinctio animi ullam aperiam consequuntur illo nobis eaque blanditiis asperiores totam. Fugit quod explicabo mollitia adipisci.",
+            target: 1000,
+            expiryDate: new Date(Date.now() + 36000),
+            donator: [],
+            image: "/images/default-avatar.jpg",
+        },
+        {
+            name: "Donation name 2",
+            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, iusto esse minus, vitae eos distinctio animi ullam aperiam consequuntur illo nobis eaque blanditiis asperiores totam. Fugit quod explicabo mollitia adipisci.",
+            target: 1000,
+            expiryDate: new Date(Date.now() + 36000),
+            donator: [],
+            image: "/images/default-avatar.jpg",
+        },
+        {
+            name: "Donation name 3",
+            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, iusto esse minus, vitae eos distinctio animi ullam aperiam consequuntur illo nobis eaque blanditiis asperiores totam. Fugit quod explicabo mollitia adipisci.",
+            target: 1000,
+            expiryDate: new Date(Date.now() + 36000),
+            donator: [],
+            image: "/images/default-avatar.jpg",
+        },
+        {
+            name: "Donation name 4",
+            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, iusto esse minus, vitae eos distinctio animi ullam aperiam consequuntur illo nobis eaque blanditiis asperiores totam. Fugit quod explicabo mollitia adipisci.",
+            target: 1000,
+            expiryDate: new Date(Date.now() + 36000),
+            donator: [],
+            image: "/images/default-avatar.jpg",
+        },
+    ];
+
+    const [selectedDonation, setSelectedDonation] = React.useState<Donation>(
+        donations[0]
+    );
     const [isOpenDonationModal, setIsOpenDonationModal] = React.useState(false);
-    const handleChooseMount = (index) => {
-        setDonationMountID(index);
+
+    const onOpenDonationModal = (donation: Donation) => {
+        setSelectedDonation(donation);
+        setIsOpenDonationModal(true);
     };
-    const handleOpenDonationModal = () => {
-        setIsOpenDonationModal(!isOpenDonationModal);
-    };
-    const dataMount = [50, 100, 200, 500, 1000];
+
+    // const [donationMountID, setDonationMountID] = React.useState(-1);
+    // const [isOpenDonationModal, setIsOpenDonationModal] = React.useState(false);
+    // const handleChooseMount = (index) => {
+    //     setDonationMountID(index);
+    // };
+    // const handleOpenDonationModal = () => {
+    //     setIsOpenDonationModal(!isOpenDonationModal);
+    // };
+    // const dataMount = [50, 100, 200, 500, 1000];
+
     return (
         <div>
-            <div
-                className="before:content[''] before-left-0 relative z-0 h-full w-full bg-[url(https://bwd2022.vercel.app/assets/bg7.jpg)] bg-cover bg-fixed bg-center bg-no-repeat
-                             py-12 text-white before:absolute before:top-0 before:z-[-1] before:h-full before:w-full before:bg-[#0000001a]
-                            "
-            >
-                <div className="h-full w-full">
-                    <div className="mx-auto flex h-full min-h-[75vh] w-3/4 flex-row items-center justify-center">
+            <div className="before:content[''] before-left-0 relative z-0 h-full w-full bg-[url(https://bwd2022.vercel.app/assets/bg7.jpg)] bg-cover bg-fixed bg-center bg-no-repeat text-white before:absolute before:top-0 before:z-[-1] before:h-full before:w-full before:bg-[#0000001a]">
+                <div className="h-full w-full px-4 py-12">
+                    <div className="mx-auto flex h-full min-h-[75vh] max-w-7xl flex-row items-center justify-center">
                         <motion.div
                             initial={{ opacity: 0, y: 200, x: 0 }}
                             whileInView={{ opacity: 1, y: 0, x: 0 }}
@@ -223,8 +263,8 @@ const DonateSection = () => {
                                     WebkitTextFillColor: "transparent",
                                 }}
                                 className="before:content[''] after:content[''] relative mb-3
-                                            text-xl font-bold before:absolute before:top-1/2 before:left-[calc(50%-6.5rem)] before:h-[3px] before:w-[2rem] before:translate-y-[-50%] before:bg-gradient-to-r before:from-[#a6f77b] 
-                                            before:to-[#2dbd6e] after:absolute after:top-1/2 after:right-[calc(50%-6.5rem)] after:h-[3px] after:w-[2rem] after:translate-y-[-50%] after:bg-gradient-to-r after:from-[#a6f77b] after:to-[#2dbd6e] 
+                                            text-xl font-bold before:absolute before:top-1/2 before:left-[calc(50%-6.5rem)] before:h-[3px] before:w-[2rem] before:translate-y-[-50%] before:bg-gradient-to-r before:from-[#a6f77b]
+                                            before:to-[#2dbd6e] after:absolute after:top-1/2 after:right-[calc(50%-6.5rem)] after:h-[3px] after:w-[2rem] after:translate-y-[-50%] after:bg-gradient-to-r after:from-[#a6f77b] after:to-[#2dbd6e]
                                             "
                                 initial={{ opacity: 0, y: 200, x: 0 }}
                                 whileInView={{ opacity: 1, y: 0, x: 0 }}
@@ -265,7 +305,8 @@ const DonateSection = () => {
                                 của bạn đều mang lại sự thay đổi tích cực cho
                                 môi trường.
                             </motion.p>
-                            <motion.div
+
+                            {/* <motion.div
                                 className="mb-7 flex md:flex-row"
                                 initial={{ opacity: 0, y: 200, x: 0 }}
                                 whileInView={{ opacity: 1, y: 0, x: 0 }}
@@ -301,6 +342,7 @@ const DonateSection = () => {
                                     })}
                                 </div>
                             </motion.div>
+
                             <motion.div
                                 initial={{ opacity: 0, y: 200, x: 0 }}
                                 whileInView={{ opacity: 1, y: 0, x: 0 }}
@@ -324,6 +366,7 @@ const DonateSection = () => {
                                     QUYÊN GÓP NGAY
                                 </button>
                             </motion.div>
+
                             <motion.div
                                 initial={{ opacity: 0, y: 200, x: 0 }}
                                 whileInView={{ opacity: 1, y: 0, x: 0 }}
@@ -340,146 +383,21 @@ const DonateSection = () => {
                                         Xem danh sách
                                     </a>
                                 </Link>
-                            </motion.div>
+                            </motion.div> */}
+
+                            <DonationList
+                                donations={donations}
+                                onDonate={onOpenDonationModal}
+                            />
                         </motion.div>
                     </div>
                 </div>
             </div>
-            {isOpenDonationModal && (
-                <motion.div
-                    // variants={donateFormVariant}
-                    initial="close"
-                    animate={isOpenDonationModal ? "open" : "close"}
-                    className="before:content[''] fixed top-0 bottom-0 left-0 right-0 z-50 flex h-screen w-screen items-center justify-center
-                                opacity-100 before:absolute before:top-0 before:left-0 before:h-full before:w-full before:bg-[#ffffff80]
-                                "
-                >
-                    {/* title */}
-                    <div className="relative w-screen bg-white p-12 text-center md:w-auto">
-                        <div className="mb-6">
-                            <p className="text-xl font-semibold">
-                                Thông tin của bạn
-                            </p>
-                        </div>
-
-                        {/* form */}
-                        <form>
-                            {/* row1 */}
-                            <div className="mb-0 flex flex-col md:mb-3 md:flex-row">
-                                <div className="my-3 ml-0 w-full md:my-0 md:mr-3 md:w-1/2">
-                                    <input
-                                        style={{
-                                            transition: "all .2s ease-in-out",
-                                            outline: "none",
-                                        }}
-                                        type={"text"}
-                                        className="w-full rounded-none border-[3px] border-[#e1eaf0] px-3 py-2  text-xl font-medium focus:border-green-400"
-                                        placeholder="Họ"
-                                        name="lastName"
-                                    ></input>
-                                </div>
-                                <div className="w-full md:w-1/2">
-                                    <input
-                                        style={{
-                                            transition: "all .2s ease-in-out",
-                                            outline: "none",
-                                        }}
-                                        type={"text"}
-                                        className="w-full rounded-none border-[3px] border-[#e1eaf0] px-3 py-2  text-xl font-medium focus:border-green-400"
-                                        placeholder="Tên"
-                                        name="firstName"
-                                    ></input>
-                                </div>
-                            </div>
-                            <div>
-                                <div className="my-3">
-                                    <input
-                                        style={{
-                                            transition: "all .2s ease-in-out",
-                                            outline: "none",
-                                        }}
-                                        type={"text"}
-                                        className="w-full rounded-none border-[3px] border-[#e1eaf0] px-3 py-2  text-xl font-medium focus:border-green-400"
-                                        placeholder="Email"
-                                        name="email"
-                                    ></input>
-                                </div>
-                            </div>
-                            <div>
-                                <div className=" my-3">
-                                    <input
-                                        style={{
-                                            transition: "all .2s ease-in-out",
-                                            outline: "none",
-                                        }}
-                                        type={"text"}
-                                        className="w-full rounded-none border-[3px] border-[#e1eaf0] px-3 py-2  text-xl font-medium focus:border-green-400"
-                                        placeholder="Trường bạn đang học"
-                                        name="school"
-                                    ></input>
-                                </div>
-                            </div>
-                            {/*  */}
-                        </form>
-                        {/*  */}
-                        <div>
-                            <p className="text-xl font-medium">
-                                Số tiền bạn muốn quyên góp :
-                            </p>
-                            <span className="text-2xl font-semibold text-[#ed6a5a] underline ">
-                                {dataMount[donationMountID]}K
-                            </span>
-                        </div>
-                        <div className="mt-4">
-                            <Button
-                                variant="primary"
-                                className="w-2/3 p-4 md:w-1/2"
-                            >
-                                QUYÊN GÓP NGAY
-                            </Button>
-                        </div>
-                        {/* X close */}
-                        <div
-                            onClick={handleOpenDonationModal}
-                            className="absolute top-4 right-4 cursor-pointer "
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="32"
-                                height="32"
-                                fill="currentColor"
-                                viewBox="0 0 256 256"
-                            >
-                                <rect
-                                    width="256"
-                                    height="256"
-                                    fill="none"
-                                ></rect>
-                                <line
-                                    x1="200"
-                                    y1="56"
-                                    x2="56"
-                                    y2="200"
-                                    stroke="currentColor"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="16"
-                                ></line>
-                                <line
-                                    x1="200"
-                                    y1="200"
-                                    x2="56"
-                                    y2="56"
-                                    stroke="currentColor"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="16"
-                                ></line>
-                            </svg>
-                        </div>
-                    </div>
-                </motion.div>
-            )}
+            <DonationModal
+                donation={selectedDonation}
+                isOpen={isOpenDonationModal}
+                setIsOpen={setIsOpenDonationModal}
+            />
         </div>
     );
 };

@@ -40,3 +40,16 @@ export interface CartItem {
     product: Product;
     quantity: number;
 }
+
+export interface Donation {
+    name: string;
+    desc: string;
+    target: number;
+    expiryDate: Date;
+    image: string;
+    donator: {
+        userID: string;
+        amount: number;
+        createdAt: Date;
+    }[];
+}
