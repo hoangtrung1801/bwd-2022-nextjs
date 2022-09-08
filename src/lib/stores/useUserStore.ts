@@ -1,6 +1,5 @@
 import { API_SERVER_URL } from "@/constant/env";
 import fetcher from "@/lib/fetcher";
-import separateCookie from "@/lib/seperateCookie";
 import { User } from "@/lib/types";
 import create from "zustand";
 

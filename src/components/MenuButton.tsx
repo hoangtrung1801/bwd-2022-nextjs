@@ -4,12 +4,13 @@ import React from "react";
 type MenuButtonProps = {
     opened?: boolean;
     className?: string;
-};
+} & React.ComponentProps<"div">;
 
-const MenuButton: React.FC<MenuButtonProps> = (
-    { opened = false, className },
+const MenuButton: React.FC<MenuButtonProps> = ({
+    opened = false,
+    className,
     ...rest
-) => {
+}) => {
     return (
         <div
             className={clsxm(
@@ -17,6 +18,7 @@ const MenuButton: React.FC<MenuButtonProps> = (
                 opened && "tham-active",
                 className
             )}
+            {...rest}
         >
             <div className="tham-box">
                 <div className="tham-inner"></div>
