@@ -12,6 +12,8 @@ import {
     donate_card_2,
     donate_card_3,
 } from "../../../public/svg/index";
+import useDonations from "@/lib/hooks/useDonations";
+import { ProductListSkeleton } from "@/components/SkeletonReact";
 
 const DonatePage = () => {
     const dataBanner = [
@@ -184,43 +186,10 @@ const DonateAction = () => {
 };
 
 const DonateSection = () => {
-    const donations: Donation[] = [
-        {
-            name: "Donation name 1",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, iusto esse minus, vitae eos distinctio animi ullam aperiam consequuntur illo nobis eaque blanditiis asperiores totam. Fugit quod explicabo mollitia adipisci.",
-            target: 1000,
-            expiryDate: new Date(Date.now() + 36000),
-            donator: [],
-            image: "/images/default-avatar.jpg",
-        },
-        {
-            name: "Donation name 2",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, iusto esse minus, vitae eos distinctio animi ullam aperiam consequuntur illo nobis eaque blanditiis asperiores totam. Fugit quod explicabo mollitia adipisci.",
-            target: 1000,
-            expiryDate: new Date(Date.now() + 36000),
-            donator: [],
-            image: "/images/default-avatar.jpg",
-        },
-        {
-            name: "Donation name 3",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, iusto esse minus, vitae eos distinctio animi ullam aperiam consequuntur illo nobis eaque blanditiis asperiores totam. Fugit quod explicabo mollitia adipisci.",
-            target: 1000,
-            expiryDate: new Date(Date.now() + 36000),
-            donator: [],
-            image: "/images/default-avatar.jpg",
-        },
-        {
-            name: "Donation name 4",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, iusto esse minus, vitae eos distinctio animi ullam aperiam consequuntur illo nobis eaque blanditiis asperiores totam. Fugit quod explicabo mollitia adipisci.",
-            target: 1000,
-            expiryDate: new Date(Date.now() + 36000),
-            donator: [],
-            image: "/images/default-avatar.jpg",
-        },
-    ];
+    const { donations, isLoading, error } = useDonations();
 
     const [selectedDonation, setSelectedDonation] = React.useState<Donation>(
-        donations[0]
+        donations[0] || null
     );
     const [isOpenDonationModal, setIsOpenDonationModal] = React.useState(false);
 
@@ -228,16 +197,6 @@ const DonateSection = () => {
         setSelectedDonation(donation);
         setIsOpenDonationModal(true);
     };
-
-    // const [donationMountID, setDonationMountID] = React.useState(-1);
-    // const [isOpenDonationModal, setIsOpenDonationModal] = React.useState(false);
-    // const handleChooseMount = (index) => {
-    //     setDonationMountID(index);
-    // };
-    // const handleOpenDonationModal = () => {
-    //     setIsOpenDonationModal(!isOpenDonationModal);
-    // };
-    // const dataMount = [50, 100, 200, 500, 1000];
 
     return (
         <div>
@@ -306,89 +265,14 @@ const DonateSection = () => {
                                 môi trường.
                             </motion.p>
 
-                            {/* <motion.div
-                                className="mb-7 flex md:flex-row"
-                                initial={{ opacity: 0, y: 200, x: 0 }}
-                                whileInView={{ opacity: 1, y: 0, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{
-                                    type: "spring",
-                                    duration: 1.5,
-                                    bounce: 0.3,
-                                }}
-                            >
-                                <div className="mx-auto flex w-full flex-wrap justify-center p-5 md:w-3/4 md:flex-row">
-                                    {dataMount.map((item, index) => {
-                                        return (
-                                            <div
-                                                className="w-1/2 p-2 lg:w-1/6"
-                                                key={index}
-                                                onClick={() =>
-                                                    handleChooseMount(index)
-                                                }
-                                            >
-                                                <div
-                                                    className={`cursor-pointer bg-white p-3 text-lg font-semibold text-black hover:bg-green-500 hover:text-white ${
-                                                        donationMountID ===
-                                                        index
-                                                            ? "isChoosed"
-                                                            : ""
-                                                    }`}
-                                                >
-                                                    {item}K
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ opacity: 0, y: 200, x: 0 }}
-                                whileInView={{ opacity: 1, y: 0, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{
-                                    type: "spring",
-                                    duration: 1.5,
-                                    bounce: 0.3,
-                                }}
-                            >
-                                <button
-                                    style={{
-                                        background:
-                                            "-webkit-linear-gradient(right, #a6f77b, #2dbd6e)",
-                                        transition: "all 0.4s ease",
-                                        boxShadow: "0 1px 8px #69db7c",
-                                    }}
-                                    onClick={handleOpenDonationModal}
-                                    className="mx-auto w-3/4 border-none p-4 text-base font-bold md:w-[34%] md:p-5"
-                                >
-                                    QUYÊN GÓP NGAY
-                                </button>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ opacity: 0, y: 200, x: 0 }}
-                                whileInView={{ opacity: 1, y: 0, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{
-                                    type: "spring",
-                                    duration: 1.5,
-                                    bounce: 0.3,
-                                }}
-                                className="mt-3"
-                            >
-                                <Link href={"donate/ranking"}>
-                                    <a className="text-base italic text-green-500 hover:underline">
-                                        Xem danh sách
-                                    </a>
-                                </Link>
-                            </motion.div> */}
-
-                            <DonationList
-                                donations={donations}
-                                onDonate={onOpenDonationModal}
-                            />
+                            {donations ? (
+                                <DonationList
+                                    donations={donations}
+                                    onDonate={onOpenDonationModal}
+                                />
+                            ) : (
+                                <ProductListSkeleton />
+                            )}
                         </motion.div>
                     </div>
                 </div>

@@ -1,3 +1,5 @@
+import { Donation } from "@/lib/types";
+
 type OpenGraphType = {
     siteName: string;
     description: string;
@@ -34,4 +36,21 @@ export const currency = {
 export function numberWithCommas(x: number | undefined) {
     if (!x) return "0";
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+export function calculateProgressDonation(donation: Donation) {
+    let current = 0;
+    donation.donator.forEach((e) => (current += e.amount));
+
+    return ((current / donation.target) * 100).toFixed(0);
+}
+
+export function dayLeftUntil(expiryDate: Date | string) {
+    if (typeof expiryDate === "string") expiryDate = new Date(expiryDate);
+
+    const oneDay = 1000 * 60 * 60 * 24;
+
+    return Math.ceil(
+        (expiryDate.getTime() - new Date(Date.now()).getTime()) / oneDay
+    );
 }

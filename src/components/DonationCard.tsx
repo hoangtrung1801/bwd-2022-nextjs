@@ -1,6 +1,11 @@
 import Button from "@/components/buttons/Button";
 import NextImage from "@/components/NextImage";
-import { currency, numberWithCommas } from "@/lib/helper";
+import {
+    calculateProgressDonation,
+    currency,
+    dayLeftUntil,
+    numberWithCommas,
+} from "@/lib/helper";
 import { Donation } from "@/lib/types";
 import { Clock, Heart } from "phosphor-react";
 
@@ -27,7 +32,10 @@ const DonationCard: React.FC<DonationCardProps> = ({ donation, onDonate }) => {
                     Gây quỹ
                 </p>
                 <div>
-                    <h3 className="mb-1 cursor-pointer font-bold tracking-tight text-gray-900 dark:text-white">
+                    <h3
+                        className="mb-1 cursor-pointer font-bold tracking-tight text-gray-900 dark:text-white"
+                        onClick={onDonate}
+                    >
                         {donation.name}
                     </h3>
                     <p className="text-sm text-gray-500 line-clamp-2">
@@ -37,31 +45,39 @@ const DonationCard: React.FC<DonationCardProps> = ({ donation, onDonate }) => {
 
                 <div className="space-y-1">
                     <div className="flex justify-between tracking-wide">
-                        <span className="font-bold text-green-600">50%</span>
+                        <span className="font-bold text-green-600">
+                            {calculateProgressDonation(donation)}%
+                        </span>
                         <span className="font-bold">
                             {numberWithCommas(donation.target)}
                             {currency.vn}
                         </span>
                     </div>
                     <div>
-                        <div className="h-2.5 w-full rounded-full bg-gray-200 dark:bg-gray-700">
+                        <div className="h-2.5 w-full overflow-hidden rounded-full bg-gray-200  dark:bg-gray-700">
                             <div
                                 className="h-2.5 rounded-full bg-green-600"
-                                style={{ width: "45%" }}
+                                style={{
+                                    width: `${calculateProgressDonation(
+                                        donation
+                                    )}%`,
+                                }}
                             ></div>
                         </div>
                     </div>
                     <div className="flex justify-between">
                         <div className="flex items-center space-x-2 text-sm text-gray-500">
                             <Clock />
-                            <p>16 days left</p>
+                            <p>
+                                {dayLeftUntil(donation.expiryDate)} ngày còn lại
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div className="flex items-center space-x-2">
                     <Button
                         variant="light"
-                        className="group px-6 text-green-700"
+                        className="group px-4 text-green-700"
                         onClick={onDonate}
                     >
                         <Heart
@@ -71,7 +87,7 @@ const DonationCard: React.FC<DonationCardProps> = ({ donation, onDonate }) => {
                         Quyên góp
                     </Button>
                     <span className="text-sm font-semibold text-green-500 ">
-                        6 người đã ủng hộ
+                        {donation.donator.length} người đã ủng hộ
                     </span>
                 </div>
             </div>

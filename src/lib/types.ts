@@ -42,6 +42,7 @@ export interface CartItem {
 }
 
 export interface Donation {
+    id: string;
     name: string;
     desc: string;
     target: number;

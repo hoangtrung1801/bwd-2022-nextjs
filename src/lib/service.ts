@@ -57,3 +57,22 @@ export const addReview = async (
     if (response.status === "success") return response.data;
     throw new Error(response.message);
 };
+
+export const addDonator = async (donationID: string, amount: number) => {
+    const API_URL = `${API_SERVER_URL}/api/donations/${donationID}/donator`;
+
+    const body = {
+        amount,
+    };
+
+    const response = await fetcher(API_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+    });
+
+    if (response.status === "success") return response.data;
+    throw new Error(response.message);
+};

@@ -2,6 +2,9 @@ import Button from "@/components/buttons/Button";
 import NextImage from "@/components/NextImage";
 import clsxm from "@/lib/clsxm";
 import { currency, numberWithCommas } from "@/lib/helper";
+import useModal from "@/lib/hooks/useModal";
+import { addDonator } from "@/lib/service";
+import useUserStore from "@/lib/stores/useUserStore";
 import { Donation } from "@/lib/types";
 import { Dialog, Transition } from "@headlessui/react";
 import { Clock, CreditCard, Heart } from "phosphor-react";
@@ -20,21 +23,39 @@ const DonationModal: React.FC<DonationModalProps> = ({
     isOpen,
     setIsOpen,
 }) => {
-    function closeModal() {
-        setIsOpen(false);
-    }
-
-    function openModal() {
-        setIsOpen(true);
-    }
-
+    const user = useUserStore((state) => state.user);
+    const { showModal } = useModal();
     const onDonate = (amount) => {
-        console.log(`${donation.name} is donated ${amount}`);
+        if (!user) {
+            showModal(
+                "Yêu cầu đăng nhập",
+                "Vui lòng đăng nhập để có thể quyên góp!"
+            );
+            return;
+        }
+
+        if (amount <= 0) {
+            showModal("Yêu cầu tối thiểu 1,000đ", "");
+            return;
+        }
+
+        addDonator(donation.id, amount)
+            .then((data) => {
+                showModal(
+                    "Thành công",
+                    "Cảm ơn bạn đã quyên góp cho chiến dịch gây quỹ của chúng tôi!"
+                );
+            })
+            .catch((error) => showModal("Lỗi", error.message));
     };
 
     return (
         <Transition appear show={isOpen} as={Fragment}>
-            <Dialog as="div" className="relative z-50" onClose={closeModal}>
+            <Dialog
+                as="div"
+                className="relative z-50"
+                onClose={() => setIsOpen(false)}
+            >
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -58,7 +79,7 @@ const DonationModal: React.FC<DonationModalProps> = ({
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <Dialog.Panel className="w-full max-w-md transform rounded-2xl bg-white text-center align-middle shadow-xl transition-all md:max-w-2xl">
+                            <Dialog.Panel className="w-full max-w-md transform rounded-2xl bg-white text-center align-middle shadow-xl transition-all md:max-w-4xl">
                                 <div className="flex w-full flex-col md:flex-row">
                                     <DonationView donation={donation} />
                                     <DonationAmount
