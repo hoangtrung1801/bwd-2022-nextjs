@@ -10,6 +10,7 @@ const Checkbox: React.FC<CheckboxProps> = ({ className, ...rest }) => {
                 "h-4 w-4 rounded border-gray-200 text-green-600 focus:ring-primary-500",
                 className
             )}
+            type="checkbox"
             {...rest}
         />
     );

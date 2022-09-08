@@ -9,9 +9,10 @@ export interface Product {
     name: string;
     desc: string;
     price: number;
-    stock?: number;
-    category: string;
-    size?: string[];
+    // stock?: number;
+    categories?: Object[];
+    categoryIDs: string[];
+    // size?: string[];
     images: string[];
     reviews?: {
         userID: string;
@@ -24,7 +25,8 @@ export interface Product {
 export interface Category {
     id: string;
     name: string;
-    products: Product[];
+    label: string;
+    products?: Product[];
 }
 
 export interface User {
