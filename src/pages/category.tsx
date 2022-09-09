@@ -1,16 +1,15 @@
 import {
+    Filter,
     MobileFilter,
     SortFilter,
-    Filter,
 } from "@/components/CategoryComponents";
 import Layout from "@/components/layout/Layout";
 import ProductCard from "@/components/ProductCard";
 import clsxm from "@/lib/clsxm";
 import useProducts from "@/lib/hooks/useProducts";
-import { Category, Product } from "@/lib/types";
+import { Product } from "@/lib/types";
 import { Funnel } from "phosphor-react";
 import React from "react";
-import { useFormState } from "react-hook-form";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -22,6 +21,9 @@ const CategoryPage = () => {
     const [selectedCategories, setSelectedCategories] = React.useState<
         string[]
     >([]);
+    const [sortOption, setSortOption] = React.useState<
+        (products: Product[]) => Product[]
+    >((products) => products);
 
     const onCheckCategory = (categoryName: string) => {
         setSelectedCategories([...selectedCategories, categoryName]);
@@ -35,25 +37,34 @@ const CategoryPage = () => {
         ]);
     };
 
+    const sortWithOption = (sort: (product: Product[]) => Product[]) => {
+        console.log(sort);
+        // setSortOption(sort);
+        // console.log(sort(selectedProducts));
+        // setSelectedProducts(sort(selectedProducts));
+    };
+
     React.useEffect(() => {
         if (selectedCategories.length === 0) {
             setSelectedProducts(products);
         } else {
             setSelectedProducts(
-                products.filter((product: Product) => {
-                    let ok = false;
-                    const categoryNamesProduct = product.categories.map(
-                        (category) => category["name"]
-                    );
-                    selectedCategories.forEach((categoryName) => {
-                        if (categoryNamesProduct.includes(categoryName))
-                            ok = true;
-                    });
-                    return ok;
-                })
+                sortOption(
+                    products.filter((product: Product) => {
+                        let ok = false;
+                        const categoryNamesProduct = product.categories.map(
+                            (category) => category["name"]
+                        );
+                        selectedCategories.forEach((categoryName) => {
+                            if (categoryNamesProduct.includes(categoryName))
+                                ok = true;
+                        });
+                        return ok;
+                    })
+                )
             );
         }
-    }, [products, selectedCategories]);
+    }, [products, selectedCategories, sortOption]);
 
     return (
         <Layout>
@@ -71,7 +82,7 @@ const CategoryPage = () => {
                             </h1>
 
                             <div className="flex items-center">
-                                <SortFilter />
+                                <SortFilter sortWithOption={sortWithOption} />
 
                                 {/* <button
                                     type="button"

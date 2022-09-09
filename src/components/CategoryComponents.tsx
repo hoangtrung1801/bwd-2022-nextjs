@@ -2,19 +2,52 @@ import Drawer from "@/components/Drawer";
 import Checkbox from "@/components/forms/Checkbox";
 import useCategories from "@/lib/hooks/useCategories";
 import clsxm from "@/lib/clsxm";
-import { Category } from "@/lib/types";
+import { Category, Product } from "@/lib/types";
 import { Menu, Disclosure, Transition } from "@headlessui/react";
 import { CaretDown, Minus, Plus } from "phosphor-react";
 import { Fragment } from "react";
 import Skeleton from "react-loading-skeleton";
+import React from "react";
 
 const sortOptions = [
-    { name: "Phổ biến", href: "#", current: true },
-    { name: "Xếp hàng cao nhất", href: "#", current: false },
-    { name: "Mới nhất", href: "#", current: false },
-    { name: "Giá thấp đến cao", href: "#", current: false },
-    { name: "Giá cao đến thấp", href: "#", current: false },
+    {
+        name: "Phổ biến",
+        href: "#",
+        current: true,
+        sort: (products: Product[]): Product[] => products,
+    },
+    {
+        name: "Xếp hàng cao nhất",
+        href: "#",
+        current: false,
+        sort: (products: Product[]): Product[] => products,
+    },
+    {
+        name: "Mới nhất",
+        href: "#",
+        current: false,
+        sort: (products: Product[]): Product[] => products,
+    },
+    {
+        name: "Giá thấp đến cao",
+        href: "#",
+        current: false,
+        sort: (products: Product[]): Product[] =>
+            products.sort((productA, productB) =>
+                productA.price < productB.price ? -1 : 1
+            ),
+    },
+    {
+        name: "Giá cao đến thấp",
+        href: "#",
+        current: false,
+        sort: (products: Product[]): Product[] =>
+            products.sort((productA, productB) =>
+                productA.price < productB.price ? 1 : -1
+            ),
+    },
 ];
+
 const filters = [
     {
         id: "category",
@@ -41,8 +74,20 @@ const filters = [
     },
 ];
 
-type SortFilterProps = {};
-export const SortFilter: React.FC<SortFilterProps> = ({}) => {
+type SortFilterProps = {
+    sortWithOption: (sort: (products: Product[]) => Product[]) => void;
+};
+export const SortFilter: React.FC<SortFilterProps> = ({ sortWithOption }) => {
+    const [currentOption, setCurrentOption] = React.useState(
+        sortOptions[0].name
+    );
+
+    React.useEffect(() => {
+        sortWithOption(
+            sortOptions.find((option) => option.name === currentOption).sort
+        );
+    }, [currentOption, sortWithOption]);
+
     return (
         <Menu as="div" className="relative inline-block text-left">
             <div>
@@ -69,18 +114,21 @@ export const SortFilter: React.FC<SortFilterProps> = ({}) => {
                         {sortOptions.map((option) => (
                             <Menu.Item key={option.name}>
                                 {({ active }) => (
-                                    <a
-                                        href={option.href}
+                                    <span
                                         className={clsxm(
-                                            option.current
+                                            "cursor-pointer",
+                                            currentOption === option.name
                                                 ? "font-medium text-gray-900"
                                                 : "text-gray-500",
                                             active ? "bg-gray-100" : "",
                                             "block px-4 py-2 text-sm"
                                         )}
+                                        onClick={() =>
+                                            setCurrentOption(option.name)
+                                        }
                                     >
                                         {option.name}
-                                    </a>
+                                    </span>
                                 )}
                             </Menu.Item>
                         ))}
