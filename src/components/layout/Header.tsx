@@ -263,7 +263,7 @@ const HeaderAuthorization = () => {
                     <Popover.Button className="duration-400 flex cursor-pointer items-center space-x-1 font-primary text-lg font-medium text-gray-100 transition-colors hover:text-white">
                         {({ open }) => (
                             <>
-                                <User />
+                                {/* <User />     */}
                                 <h4 className="">{`${user.lastName} ${user.firstName}`}</h4>
                                 {open ? <CaretUp /> : <CaretDown />}
                             </>

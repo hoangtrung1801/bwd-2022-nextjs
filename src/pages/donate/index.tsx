@@ -14,7 +14,52 @@ import {
 } from "../../../public/svg/index";
 import useDonations from "@/lib/hooks/useDonations";
 import { ProductListSkeleton } from "@/components/Skeletons";
+import { useInView } from "react-intersection-observer";
+import UnderlineLink from "@/components/links/UnderlineLink";
 
+export const inViewFromLeftShow = {
+    hidden: {
+        x: -300,
+        opacity: 0,
+    },
+    visible: {
+        x: 0,
+        opacity: 1,
+        transition: {
+            type: "spring",
+            delay: 0.2,
+            duration: 0.75,
+        },
+    },
+};
+export const donateValueShow = {
+    hidden: {
+        y: 100,
+        opacity: 0,
+    },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            type: "tween",
+        },
+    },
+};
+export const inViewFromRightShow = {
+    hidden: {
+        x: 300,
+        opacity: 0,
+    },
+    visible: {
+        x: 0,
+        opacity: 1,
+        transition: {
+            type: "spring",
+            delay: 0.2,
+            duration: 0.75,
+        },
+    },
+};
 const DonatePage = () => {
     const dataBanner = [
         {
@@ -54,6 +99,9 @@ const DonatePage = () => {
 };
 
 const MissionSection = () => {
+    const { inView, ref } = useInView({
+        threshold: 0.2,
+    });
     const dataDonateCard = [
         {
             id: 1,
@@ -83,18 +131,19 @@ const MissionSection = () => {
 
     return (
         <motion.div
-            // variants={inViewFromLeftShow}
-            // initial="hidden"
-            // whileInView="visible"
-            // viewport={{ once: true }}
+            ref={ref}
+            variants={inViewFromLeftShow}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
             className="flex flex-col bg-green-50 p-6 lg:flex-row lg:justify-evenly lg:p-24"
         >
             {dataDonateCard.map((item) => {
                 return (
                     <motion.div
-                        // variants={donateValueShow}
-                        // initial={'hidden'}
-                        // animate={inView && 'visible'}
+                        variants={donateValueShow}
+                        initial={"hidden"}
+                        animate={inView && "visible"}
                         key={item.id}
                         className="flex p-3 "
                         // className="flex flex-col lg:w-30% w-full p-12 mb-5 items-center relative card-donate bg-white"
@@ -140,9 +189,10 @@ const DonateAction = () => {
                 <div className="mx-auto flex h-full w-3/4 ">
                     <div className="relative h-full w-full">
                         <motion.figure
-                            // initial="hidden"
-                            // whileInView="visible"
-                            // viewport={{ once: true }}
+                            variants={inViewFromLeftShow}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
                             className="max-h-[500px] overflow-hidden"
                         >
                             <img
@@ -152,9 +202,9 @@ const DonateAction = () => {
                             ></img>
                         </motion.figure>
                         <motion.div
-                            // variants={inViewFromRightShow}
-                            // initial="hidden"
-                            // whileInView="visible"
+                            variants={inViewFromRightShow}
+                            initial="hidden"
+                            whileInView="visible"
                             viewport={{ once: true }}
                             style={{
                                 bottom: "-7%",
@@ -200,7 +250,10 @@ const DonateSection = () => {
 
     return (
         <div>
-            <div className="before:content[''] before-left-0 relative z-0 h-full w-full bg-[url(https://bwd2022.vercel.app/assets/bg7.jpg)] bg-cover bg-fixed bg-center bg-no-repeat text-white before:absolute before:top-0 before:z-[-1] before:h-full before:w-full before:bg-[#0000001a]">
+            <div
+                id="donate"
+                className="before:content[''] before-left-0 relative z-0 h-full w-full bg-[url(https://bwd2022.vercel.app/assets/bg7.jpg)] bg-cover bg-fixed bg-center bg-no-repeat text-white before:absolute before:top-0 before:z-[-1] before:h-full before:w-full before:bg-[#0000001a]"
+            >
                 <div className="h-full w-full px-4 py-12">
                     <div className="mx-auto flex h-full min-h-[75vh] max-w-7xl flex-row items-center justify-center">
                         <motion.div
