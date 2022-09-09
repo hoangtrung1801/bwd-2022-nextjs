@@ -3,6 +3,7 @@ import InputField from "@/components/forms/InputField";
 import Layout from "@/components/layout/Layout";
 import NextImage from "@/components/NextImage";
 import { currency, numberWithCommas } from "@/lib/helper";
+import useCursorLoading from "@/lib/hooks/useCursorLoading";
 import useModal from "@/lib/hooks/useModal";
 import { createOrder } from "@/lib/service";
 import useCartStore from "@/lib/stores/useCartStore";
@@ -130,10 +131,12 @@ const CheckoutUserInfo = () => {
     const cleartCart = useCartStore((state) => state.clearCart);
 
     const { showModal } = useModal();
+    const { setCursorLoadingShow, setCursorLoadingOff } = useCursorLoading();
 
     const router = useRouter();
 
     const onSubmit: SubmitHandler<CheckoutInputs> = (data) => {
+        setCursorLoadingShow();
         createOrder({
             total: getItemsTotal(SHIPPING_AMOUNT),
             items: [
@@ -144,15 +147,19 @@ const CheckoutUserInfo = () => {
             ],
         })
             .then((data) => {
+                setCursorLoadingOff();
                 showModal(
-                    "Thanh toán thành công",
+                    "Thanh toán thành công 🎉",
                     "Đơn hàng của bạn sẽ được chuẩn bị và giao hàng tới. Cảm ơn bạn đã mua hàng!"
                 );
                 cleartCart();
-                router.push("/");
+                setTimeout(() => {
+                    router.push("/");
+                }, 1000);
             })
             .catch((error) => {
-                showModal("Thanh toán không thành công", error.message);
+                setCursorLoadingOff();
+                showModal("Thanh toán không thành công ⚠", error.message);
             });
     };
 

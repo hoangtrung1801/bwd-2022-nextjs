@@ -97,7 +97,7 @@ export function BannerItem({ data }) {
             <div className=" absolute top-0 left-0 m-auto my-auto flex h-full w-full">
                 <motion.div
                     style={{ background: "#33333380" }}
-                    className=" m-auto  min-h-[400px] w-3/4 p-5 py-4 px-8 text-white"
+                    className="m-auto flex min-h-[400px] w-3/4 flex-col justify-center p-5 py-4 px-8 text-white"
                     initial={{ opacity: 0, y: 200, x: 0 }}
                     whileInView={{ opacity: 1, y: 0, x: 0 }}
                     transition={{ type: "spring", duration: 1.5, bounce: 0.3 }}

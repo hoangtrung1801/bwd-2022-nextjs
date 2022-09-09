@@ -79,8 +79,15 @@ const ProductDetail: React.FC<
     const addItemIntoCart = () => {
         addItem(product, amountItems.count);
         showModal(
-            "Thêm vào giỏ",
+            "Thêm vào giỏ 🎉",
             "Bạn đã thêm sản phẩm vào giỏ hàng thành công!"
+        );
+    };
+
+    const addFavoriteItem = () => {
+        showModal(
+            "Thêm vào yêu thích ❤",
+            "Sản phẩm đã được thêm vào mục yêu thích của bạn."
         );
     };
 
@@ -116,7 +123,12 @@ const ProductDetail: React.FC<
                     <span>Thêm vào giỏ hàng</span>
                 </Button>
                 <span className="cursor-pointer">
-                    <Heart size={28} className="text-gray-400" weight="bold" />
+                    <Heart
+                        size={28}
+                        className="text-gray-400"
+                        weight="bold"
+                        onClick={addFavoriteItem}
+                    />
                 </span>
             </div>
             <div>

@@ -32,14 +32,14 @@ const DonationModal: React.FC<DonationModalProps> = ({
     const onDonate = (amount) => {
         if (!user) {
             showModal(
-                "Yêu cầu đăng nhập",
+                "Yêu cầu đăng nhập ⚠",
                 "Vui lòng đăng nhập để có thể quyên góp!"
             );
             return;
         }
 
         if (amount <= 0) {
-            showModal("Yêu cầu tối thiểu 1,000đ", "");
+            showModal("Yêu cầu tối thiểu 1,000đ ⚠", "");
             return;
         }
 
@@ -48,7 +48,7 @@ const DonationModal: React.FC<DonationModalProps> = ({
             .then((data) => {
                 setCursorLoadingOff();
                 showModal(
-                    "Thành công",
+                    "Thành công ✅",
                     "Cảm ơn bạn đã quyên góp cho chiến dịch gây quỹ của chúng tôi!"
                 );
             })

@@ -22,7 +22,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
 
     const addItemIntoCart = () => {
         addItem(product);
-        show("Thêm vào giỏ", "Bạn đã thêm sản phẩm vào giỏ hàng thành công!");
+        show(
+            "Thêm vào giỏ 🎉",
+            "Bạn đã thêm sản phẩm vào giỏ hàng thành công!"
+        );
+    };
+
+    const addFavoriteItem = () => {
+        show(
+            "Thêm vào yêu thích ❤",
+            "Sản phẩm đã được thêm vào mục yêu thích của bạn."
+        );
     };
 
     return (
@@ -72,7 +82,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
                     </span>
 
                     <div className="space-x-1">
-                        <Button variant="outline" className="px-3">
+                        <Button
+                            variant="outline"
+                            className="px-3"
+                            onClick={addFavoriteItem}
+                        >
                             <Heart className="" weight="bold" />
                         </Button>
                         <Button

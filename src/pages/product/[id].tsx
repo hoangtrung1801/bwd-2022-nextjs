@@ -62,7 +62,7 @@ const PageSkeleton = () => {
                             <div className="-ml-2 w-screen md:ml-0 md:w-full">
                                 <Skeleton width="100%" height="500px" />
                             </div>
-                            <div className="hidden grid-cols-4 gap-x-3 md:grid">
+                            <div className="grid-cols-4 gap-x-3 md:grid">
                                 {Array(4)
                                     .fill(0)
                                     .map((_, id) => (

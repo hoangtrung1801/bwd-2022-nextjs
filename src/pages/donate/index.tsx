@@ -217,11 +217,13 @@ const DonateAction = () => {
                                 bottom: "-7%",
                                 right: "-7%",
                             }}
-                            className="static flex w-full flex-col bg-[#40c057] py-8  px-10 text-white
+                            className="static flex w-full flex-col bg-[#40c057] py-8  px-10
                             lg:absolute lg:bottom-[-7%] lg:right-[-7%] lg:w-1/2 lg:py-16 lg:px-20"
                         >
-                            <p className="mb-6 text-4xl font-bold">Quyên góp</p>
-                            <p className="mb-6 text-lg">
+                            <p className="mb-6 text-4xl font-bold text-white">
+                                Quyên góp
+                            </p>
+                            <p className="mb-6 text-lg text-gray-100">
                                 Số tiền của bạn có thế cứu lấy thế giới. Hãy
                                 cùng chúng tôi tiếp tục chung tay góp phần bảo
                                 vệ môi trường.
@@ -259,9 +261,9 @@ const DonateSection = () => {
         <div>
             <div
                 id="donate"
-                className="before:content[''] before-left-0 relative z-0 h-full w-full bg-[url(https://bwd2022.vercel.app/assets/bg7.jpg)] bg-cover bg-fixed bg-center bg-no-repeat text-white before:absolute before:top-0 before:z-[-1] before:h-full before:w-full before:bg-[#0000001a]"
+                className="before:content[''] before-left-0 relative z-0 h-full w-full bg-[url(/images/donate-section-1.jpg)] bg-cover bg-fixed bg-center bg-no-repeat text-white before:absolute before:top-0 before:z-[-1] before:h-full before:w-full before:bg-[#0000001a]"
             >
-                <div className="h-full w-full px-4 py-12">
+                <div className="h-full w-full px-4 py-24">
                     <div className="mx-auto flex h-full min-h-[75vh] max-w-7xl flex-row items-center justify-center">
                         <motion.div
                             initial={{ opacity: 0, y: 200, x: 0 }}
@@ -282,8 +284,8 @@ const DonateSection = () => {
                                     WebkitTextFillColor: "transparent",
                                 }}
                                 className="before:content[''] after:content[''] relative mb-3
-                                            text-xl font-bold before:absolute before:top-1/2 before:left-[calc(50%-6.5rem)] before:h-[3px] before:w-[2rem] before:translate-y-[-50%] before:bg-gradient-to-r before:from-[#a6f77b]
-                                            before:to-[#2dbd6e] after:absolute after:top-1/2 after:right-[calc(50%-6.5rem)] after:h-[3px] after:w-[2rem] after:translate-y-[-50%] after:bg-gradient-to-r after:from-[#a6f77b] after:to-[#2dbd6e]
+                                            text-xl font-bold before:absolute before:top-1/2 before:left-[calc(50%-6.5rem)] before:h-[3px] before:w-[2rem] before:translate-y-[-50%] before:bg-gradient-to-r before:from-green-400
+                                            before:to-green-600 after:absolute after:top-1/2 after:right-[calc(50%-6.5rem)] after:h-[3px] after:w-[2rem] after:translate-y-[-50%] after:bg-gradient-to-r after:from-green-400 after:to-green-600
                                             "
                                 initial={{ opacity: 0, y: 200, x: 0 }}
                                 whileInView={{ opacity: 1, y: 0, x: 0 }}
@@ -305,7 +307,7 @@ const DonateSection = () => {
                                     duration: 1.5,
                                     bounce: 0.3,
                                 }}
-                                className="mb-10 text-5xl font-bold"
+                                className="mb-2 text-5xl font-bold text-gray-100"
                             >
                                 VÌ MỘT MÔI TRƯỜNG XANH SẠCH ĐẸP
                             </motion.p>
@@ -318,7 +320,7 @@ const DonateSection = () => {
                                     duration: 1.5,
                                     bounce: 0.3,
                                 }}
-                                className="mx-auto mb-4 w-full text-lg"
+                                className="mx-auto mb-10 w-full text-lg text-gray-100"
                             >
                                 Cùng nhau hành động ngay bây giờ, mọi đóng góp
                                 của bạn đều mang lại sự thay đổi tích cực cho

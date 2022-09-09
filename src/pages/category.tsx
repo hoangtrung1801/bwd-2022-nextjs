@@ -67,7 +67,7 @@ const CategoryPage = () => {
     }, [products, selectedCategories, sortOption]);
 
     return (
-        <Layout>
+        <Layout className="py-4">
             <div className="bg-white">
                 <div>
                     <MobileFilter

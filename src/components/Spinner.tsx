@@ -17,7 +17,7 @@ const Spinner: React.FC<SpinnerProps> = ({
         >
             <div
                 className={clsxm(
-                    "h-16 w-16 animate-spin rounded-full border-b-2",
+                    "h-16 w-16 animate-spin rounded-full border-b-2 border-green-500",
                     `border-${color}`
                 )}
             ></div>
