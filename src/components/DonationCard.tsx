@@ -17,7 +17,7 @@ type DonationCardProps = {
 
 const DonationCard: React.FC<DonationCardProps> = ({ donation, onDonate }) => {
     return (
-        <div className="w-full overflow-hidden rounded-2xl bg-white  text-left text-gray-900  shadow-lg">
+        <div className="h-full w-full overflow-hidden rounded-2xl bg-white  text-left text-gray-900  shadow-lg">
             <div className="w-full">
                 <NextImage
                     src={donation.image}
@@ -28,7 +28,7 @@ const DonationCard: React.FC<DonationCardProps> = ({ donation, onDonate }) => {
                     objectPosition="center center"
                 />
             </div>
-            <div className="space-y-4 p-4">
+            <div className="flex flex-col space-y-4 p-4">
                 <p className="text-sm font-bold uppercase text-green-600">
                     Gây quỹ
                 </p>
@@ -43,7 +43,6 @@ const DonationCard: React.FC<DonationCardProps> = ({ donation, onDonate }) => {
                         {donation.desc}
                     </p>
                 </div>
-
                 <div className="space-y-1">
                     <div className="flex justify-between tracking-wide">
                         <span className="font-bold text-green-600">
@@ -75,7 +74,7 @@ const DonationCard: React.FC<DonationCardProps> = ({ donation, onDonate }) => {
                         </div>
                     </div>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="mt-auto flex items-center space-x-2">
                     <Button
                         variant="light"
                         className="group px-4 text-green-700"

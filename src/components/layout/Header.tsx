@@ -1,39 +1,33 @@
-import ButtonLink from "@/components/links/ButtonLink";
+import ArrowLink from "@/components/links/ArrowLink";
 import UnstyledLink from "@/components/links/UnstyledLink";
 import MenuButton from "@/components/MenuButton";
 import NavCart from "@/components/NavCart";
 import NavCartIcon from "@/components/NavCartIcon";
-import { motion } from "framer-motion";
 import links from "@/constant/links";
 import { logoutUser } from "@/lib/authorization";
 import clsxm from "@/lib/clsxm";
+import useCursorLoading from "@/lib/hooks/useCursorLoading";
 import useUserStore from "@/lib/stores/useUserStore";
 import { Popover, Transition } from "@headlessui/react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
     CaretDown,
+    CaretUp,
     ClipboardText,
     CreditCard,
     House,
     Info,
-    List,
-    ShoppingCartSimple,
     SignOut,
-    X,
     User,
-    CaretUp,
 } from "phosphor-react";
 import React, { Fragment, SetStateAction, useRef, useState } from "react";
-import UnderlineLink from "@/components/links/UnderlineLink";
-import ArrowLink from "@/components/links/ArrowLink";
-import clsx from "clsx";
 
 export default function Header() {
     const router = useRouter();
     const [navCartIsOpen, setNavCartIsOpen] = useState(false);
-    const user = useUserStore((state) => state.user);
 
     return (
         <header className="sticky top-0 z-50 bg-white shadow-sm">
@@ -273,11 +267,18 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({ setNavCartIsOpen }) => {
 
 const HeaderAuthorization = () => {
     const router = useRouter();
+
     const user = useUserStore((state) => state.user);
+    const fetchUser = useUserStore((state) => state.fetch);
+    const { setCursorLoadingOff, setCursorLoadingShow } = useCursorLoading();
+
     const handleLogout = () => {
+        setCursorLoadingShow();
         logoutUser().then((success) => {
+            setCursorLoadingOff();
             if (success) {
-                router.reload();
+                fetchUser();
+                // router.reload();
             }
         });
     };

@@ -2,6 +2,7 @@ import Button from "@/components/buttons/Button";
 import NextImage from "@/components/NextImage";
 import clsxm from "@/lib/clsxm";
 import { currency, numberWithCommas } from "@/lib/helper";
+import useCursorLoading from "@/lib/hooks/useCursorLoading";
 import useModal from "@/lib/hooks/useModal";
 import { addDonator } from "@/lib/service";
 import useUserStore from "@/lib/stores/useUserStore";
@@ -24,6 +25,7 @@ const DonationModal: React.FC<DonationModalProps> = ({
 }) => {
     const user = useUserStore((state) => state.user);
     const { showModal } = useModal();
+    const { setCursorLoadingShow, setCursorLoadingOff } = useCursorLoading();
 
     const onDonate = (amount) => {
         if (!user) {
@@ -39,8 +41,10 @@ const DonationModal: React.FC<DonationModalProps> = ({
             return;
         }
 
+        setCursorLoadingShow();
         addDonator(donation.id, amount)
             .then((data) => {
+                setCursorLoadingOff();
                 showModal(
                     "Thành công",
                     "Cảm ơn bạn đã quyên góp cho chiến dịch gây quỹ của chúng tôi!"

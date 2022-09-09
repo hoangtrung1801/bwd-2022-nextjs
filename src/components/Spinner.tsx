@@ -1,9 +1,26 @@
-type SpinnerProps = {} & React.ComponentProps<"div">;
+import clsxm from "@/lib/clsxm";
 
-const Spinner: React.FC<SpinnerProps> = ({}) => {
+type SpinnerProps = {
+    color?: string;
+} & React.ComponentProps<"div">;
+
+const Spinner: React.FC<SpinnerProps> = ({
+    className,
+    color = "green-500",
+}) => {
     return (
-        <div className="flex items-center justify-center ">
-            <div className="h-16 w-16 animate-spin rounded-full border-b-2 border-green-500"></div>
+        <div
+            className={clsxm(
+                "flex h-full w-full items-center justify-center",
+                className
+            )}
+        >
+            <div
+                className={clsxm(
+                    "h-16 w-16 animate-spin rounded-full border-b-2",
+                    `border-${color}`
+                )}
+            ></div>
         </div>
     );
 };

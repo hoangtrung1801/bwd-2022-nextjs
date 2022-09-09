@@ -5,6 +5,7 @@ import Layout from "@/components/layout/Layout";
 import PrimaryLink from "@/components/links/PrimaryLink";
 import NextImage from "@/components/NextImage";
 import { signupUser } from "@/lib/authorization";
+import useCursorLoading from "@/lib/hooks/useCursorLoading";
 import useModal from "@/lib/hooks/useModal";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -22,7 +23,9 @@ type SignupInputs = {
 const SignupPage = () => {
     const { register, handleSubmit } = useForm();
     const { showModal } = useModal();
+
     const router = useRouter();
+    const { setCursorLoadingOff, setCursorLoadingShow } = useCursorLoading();
 
     const onSubmit: SubmitHandler<SignupInputs> = (data) => {
         const {
@@ -34,18 +37,21 @@ const SignupPage = () => {
             phone,
             password2,
         } = data;
-        console.log(data);
+
+        setCursorLoadingShow();
         signupUser(email, firstName, lastName, password)
             .then((data) => {
+                setCursorLoadingOff();
                 router.push("/");
             })
             .catch((error) => {
-                showModal("Đăng ký thất bại", "Vui lòng thử lại!");
+                setCursorLoadingOff();
+                showModal("Đăng ký thất bại", error.message);
             });
     };
 
     return (
-        <Layout className="py-0">
+        <Layout className="md:py-0">
             <section className="min-h-main">
                 <div className="grid h-full grid-cols-1 md:grid-cols-2">
                     <div className="">
@@ -196,12 +202,13 @@ const SignupPage = () => {
                         <div className="relative h-full w-full">
                             <NextImage
                                 alt="login image"
-                                src={
-                                    "https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
-                                }
+                                src="/images/sign-up.png"
+                                // src={
+                                //     "https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
+                                // }
                                 layout="fill"
                                 width={"100%"}
-                                objectFit="cover"
+                                objectFit="contain"
                             />
                         </div>
                     </div>

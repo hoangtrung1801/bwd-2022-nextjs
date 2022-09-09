@@ -23,8 +23,12 @@ const NavCart: React.FC<NavCartProps> = ({ isOpen, setIsOpen }) => {
         addItem(product);
     };
 
-    const removeIntoFromCart = (product: Product) => {
+    const removeItemFromCart = (product: Product) => {
         removeItem(product);
+    };
+
+    const removeAllThisItemFromCart = (product: Product, quantity) => {
+        removeItem(product, quantity);
     };
 
     const NavCartTitle = () => {
@@ -69,9 +73,20 @@ const NavCart: React.FC<NavCartProps> = ({ isOpen, setIsOpen }) => {
                                 <NumberCounter
                                     count={quantity}
                                     increase={() => addItemIntoCart(product)}
-                                    decrease={() => removeIntoFromCart(product)}
+                                    decrease={() => removeItemFromCart(product)}
                                 />
-                                <UnderlineLink href="#">Xóa</UnderlineLink>
+                                <UnderlineLink
+                                    href="#"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        removeAllThisItemFromCart(
+                                            product,
+                                            quantity
+                                        );
+                                    }}
+                                >
+                                    Xóa
+                                </UnderlineLink>
                             </div>
                             <div className="h-full">
                                 <p className="text-base font-semibold text-gray-500">

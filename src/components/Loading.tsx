@@ -1,8 +1,8 @@
 import NextImage from "@/components/NextImage";
 import Spinner from "@/components/Spinner";
-import useScrollBlock from "@/hooks/useScrollBlock";
 import clsxm from "@/lib/clsxm";
-import { AnimatePresence, motion, Variants } from "framer-motion";
+import useScrollBlock from "@/lib/hooks/useScrollBlock";
+import { motion, Variants } from "framer-motion";
 import { useRouter } from "next/router";
 import React from "react";
 
