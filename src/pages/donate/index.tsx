@@ -277,11 +277,13 @@ const DonateSection = () => {
                     </div>
                 </div>
             </div>
-            <DonationModal
-                donation={selectedDonation}
-                isOpen={isOpenDonationModal}
-                setIsOpen={setIsOpenDonationModal}
-            />
+            {selectedDonation && (
+                <DonationModal
+                    donation={selectedDonation}
+                    isOpen={isOpenDonationModal}
+                    setIsOpen={setIsOpenDonationModal}
+                />
+            )}
         </div>
     );
 };

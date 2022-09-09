@@ -37,7 +37,7 @@ const members = [
 const Footer = () => {
     return (
         <footer className="border-t border-gray-200">
-            <div className="layout space-y-6 pt-4 pb-12 text-sm text-gray-600">
+            <div className="layout space-y-6 pt-16 pb-12 text-sm text-gray-600">
                 <div className="hidden grid-cols-4 justify-items-center space-x-4 md:grid">
                     {members.map((member) => (
                         <div
@@ -72,7 +72,7 @@ const Footer = () => {
                         objectFit="cover"
                     />
                 </div>
-                <div className="text-center">
+                <div className="text-center text-base">
                     <p className="font-bold">2022 - LAVIE</p>
                 </div>
             </div>
