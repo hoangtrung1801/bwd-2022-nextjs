@@ -29,7 +29,6 @@ const data = [
 ];
 const PurchasePage = () => {
     const user = useUserStore((state) => state.user);
-    const { orders, isLoading } = useUserOrders(user.id);
 
     return (
         <Layout className="">
