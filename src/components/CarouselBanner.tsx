@@ -16,8 +16,8 @@ const CarouselBanner: React.FC<CarouselBannerProps> = ({ products }) => {
         dots: false,
         infinite: true,
         speed: 1500,
-        // autoplay: true,
-        // autoplaySpeed: 5000,
+        autoplay: true,
+        autoplaySpeed: 5000,
         slidesToShow: 1,
         slidesToScroll: 1,
         nextArrow: <SamplePrevArrow />,
@@ -101,6 +101,7 @@ export function BannerItem({ data }) {
                     initial={{ opacity: 0, y: 200, x: 0 }}
                     whileInView={{ opacity: 1, y: 0, x: 0 }}
                     transition={{ type: "spring", duration: 1.5, bounce: 0.3 }}
+                    viewport={{ once: true }}
                 >
                     <h1 className="text-3xl font-bold text-white md:py-5 md:text-5xl">
                         {title}
@@ -118,7 +119,9 @@ export function BannerItem({ data }) {
                         }}
                         className="transition[0.5s] h-auto w-[200px] min-w-[200px] bg-black py-4 px-8 text-white hover:bg-right md:mt-20"
                     >
-                        TÌM HIỂU THÊM
+                        <a className="h-full w-full" href="#donate">
+                            TÌM HIỂU THÊM
+                        </a>
                     </Button>
                 </motion.div>
             </div>

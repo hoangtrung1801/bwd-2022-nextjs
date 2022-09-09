@@ -174,3 +174,7 @@
   color: #000;
   border: none;
 }
+
+html {
+  scroll-behavior: smooth;
+}
