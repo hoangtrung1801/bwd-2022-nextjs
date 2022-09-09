@@ -15,6 +15,7 @@ import useProducts from "@/lib/hooks/useProducts";
 import { motion } from "framer-motion";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import { Router, useRouter } from "next/router";
+import { Category, Product } from "@/lib/types";
 
 const HomePage = () => {
     const dataBanner = [
@@ -67,6 +68,14 @@ const HomePage = () => {
         if (error) router.reload();
     }, [error, router]);
 
+    console.log(
+        products.filter((product) => {
+            return !!(product.categories as Category[]).find(
+                (category) => category.name === "canvas"
+            );
+        })
+    );
+
     return (
         <Layout className="md:py-0">
             <main className="space-y-2">
@@ -82,7 +91,16 @@ const HomePage = () => {
                     {isLoading ? (
                         <ProductListSkeleton />
                     ) : (
-                        <ProductList products={products} title="Phổ biến" />
+                        <ProductList
+                            products={products.filter((product) => {
+                                return !!(
+                                    product.categories as Category[]
+                                ).find(
+                                    (category) => category.name === "straw  "
+                                );
+                            })}
+                            title="Phổ biến"
+                        />
                     )}
                 </div>
 
@@ -91,7 +109,13 @@ const HomePage = () => {
                         <CommonProductSkeleton />
                     ) : (
                         <ProductList
-                            products={products}
+                            products={products.filter((product) => {
+                                return !!(
+                                    product.categories as Category[]
+                                ).find(
+                                    (category) => category.name === "canvas"
+                                );
+                            })}
                             title="Nổi bật"
                             className="bg-[url(https://bwd2022.vercel.app/assets/donate-1.jpg)] bg-cover bg-fixed bg-center bg-no-repeat text-green-400"
                         />
@@ -102,7 +126,16 @@ const HomePage = () => {
                     {isLoading ? (
                         <CommonProductSkeleton />
                     ) : (
-                        <ProductList products={products} title="Đặc biệt" />
+                        <ProductList
+                            products={products.filter((product) => {
+                                return !!(
+                                    product.categories as Category[]
+                                ).find(
+                                    (category) => category.name === "toothbrush"
+                                );
+                            })}
+                            title="Đặc biệt"
+                        />
                     )}
                 </div>
 

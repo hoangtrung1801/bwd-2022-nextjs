@@ -3,6 +3,7 @@ import NextImage from "@/components/NextImage";
 import RatingStar from "@/components/RatingStar";
 import { API_SERVER_URL } from "@/constant/env";
 import fetcher from "@/lib/fetcher";
+import useCursorLoading from "@/lib/hooks/useCursorLoading";
 import useModal from "@/lib/hooks/useModal";
 import { addReview } from "@/lib/service";
 import useUserStore from "@/lib/stores/useUserStore";
@@ -21,14 +22,18 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({ product }) => {
     const [reviewUsers, setReviewUsers] = React.useState([]);
     const [reviewText, setReviewText] = React.useState("");
     const { showModal } = useModal();
+    const { setCursorLoadingOff, setCursorLoadingShow } = useCursorLoading();
 
     const onSubmitReivew = () => {
-        console.log("submit review");
+        setCursorLoadingShow();
         addReview(product, user.id, reviewText, 5)
             .then((data) => {
+                setCursorLoadingOff();
                 showModal("Đánh giá thành công", "");
             })
-            .catch((error) => {});
+            .catch((error) => {
+                showModal("Lỗi", error.message);
+            });
     };
 
     React.useEffect(() => {

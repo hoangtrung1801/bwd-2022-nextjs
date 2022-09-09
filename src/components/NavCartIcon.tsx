@@ -18,12 +18,12 @@ const NavCartIcon: React.FC<NavCartIconProps> = ({
             onClick={() => setNavCartIsOpen(true)}
         >
             <ShoppingCartSimple
-                weight="fill"
+                weight="bold"
                 size="1.75rem"
-                className="transition-colors hover:text-primary-500"
+                className="transition-colors hover:text-white"
             />
-            <div className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-[50%] bg-primary-500">
-                <span className="text-sm font-semibold text-white">
+            <div className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-[50%] bg-gray-100">
+                <span className="text-sm font-semibold text-green-600">
                     {cart.length}
                 </span>
             </div>

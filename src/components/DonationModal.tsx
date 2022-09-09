@@ -5,6 +5,7 @@ import clsxm from "@/lib/clsxm";
 import { currency, numberWithCommas } from "@/lib/helper";
 import useCursorLoading from "@/lib/hooks/useCursorLoading";
 import useModal from "@/lib/hooks/useModal";
+import useUsers from "@/lib/hooks/useUsers";
 import { addDonator } from "@/lib/service";
 import useUserStore from "@/lib/stores/useUserStore";
 import { Donation } from "@/lib/types";
@@ -121,6 +122,7 @@ const DonationModal: React.FC<DonationModalProps> = ({
 
 const DonationView: React.FC<{ donation: Donation }> = ({ donation }) => {
     const [showDonator, setShowDonator] = React.useState(false);
+    const { users, isLoading, error } = useUsers();
 
     const onShowDonator = () => {
         setShowDonator(true);
@@ -209,23 +211,37 @@ const DonationView: React.FC<{ donation: Donation }> = ({ donation }) => {
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        {Array(100)
-                                                            .fill(0)
-                                                            .map((_) => (
+                                                        {donation.donator.map(
+                                                            (donator) => (
                                                                 <tr
-                                                                    key={_}
+                                                                    key={
+                                                                        donator.userID
+                                                                    }
                                                                     className="text-sm text-gray-500"
                                                                 >
                                                                     <td className="whitespace-nowrap px-6 py-4">
-                                                                        USER01
+                                                                        {users &&
+                                                                            users.find(
+                                                                                (
+                                                                                    user
+                                                                                ) =>
+                                                                                    user.id ===
+                                                                                    donator.userID
+                                                                            )
+                                                                                .firstName}
                                                                     </td>
                                                                     <td className="whitespace-nowrap px-6 py-4">
                                                                         <p className="">
-                                                                            10000VND
+                                                                            {`${numberWithCommas(
+                                                                                donator.amount
+                                                                            )}${
+                                                                                currency.vn
+                                                                            }`}
                                                                         </p>
                                                                     </td>
                                                                 </tr>
-                                                            ))}
+                                                            )
+                                                        )}
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -249,7 +265,7 @@ const DonationAmount: React.FC<{
 
     return (
         <div className="relative md:basis-5/12">
-            <div className="absolute left-0 right-0 md:-top-[50px]">
+            <div className="absolute left-0 right-0 md:-top-[20px]">
                 <div className="flex w-full flex-col rounded-b-2xl bg-gray-50 p-4 shadow-md md:min-h-[600px]  md:rounded-2xl">
                     <div className="flex flex-col items-center py-4 text-center">
                         <CreditCard size={48} />

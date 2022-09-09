@@ -20,8 +20,8 @@ const MenuButton: React.FC<MenuButtonProps> = ({
             )}
             {...rest}
         >
-            <div className="tham-box">
-                <div className="tham-inner"></div>
+            <div className="tham-box ">
+                <div className="tham-inner bg-gray-100 hover:bg-white"></div>
             </div>
         </div>
     );

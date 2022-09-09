@@ -49,19 +49,19 @@ const CategoryPage = () => {
             setSelectedProducts(products);
         } else {
             setSelectedProducts(
-                sortOption(
-                    products.filter((product: Product) => {
-                        let ok = false;
-                        const categoryNamesProduct = product.categories.map(
-                            (category) => category["name"]
-                        );
-                        selectedCategories.forEach((categoryName) => {
-                            if (categoryNamesProduct.includes(categoryName))
-                                ok = true;
-                        });
-                        return ok;
-                    })
-                )
+                // sortOption(
+                products.filter((product: Product) => {
+                    let ok = false;
+                    const categoryNamesProduct = product.categories.map(
+                        (category) => category["name"]
+                    );
+                    selectedCategories.forEach((categoryName) => {
+                        if (categoryNamesProduct.includes(categoryName))
+                            ok = true;
+                    });
+                    return ok;
+                })
+                // )
             );
         }
     }, [products, selectedCategories, sortOption]);

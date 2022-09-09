@@ -74,7 +74,7 @@ export default function Loading() {
                 <div className="flex h-full w-full items-center">
                     <div className="mx-auto max-w-sm">
                         <NextImage
-                            src="/images/logo.png"
+                            src="/images/LAVIE-loading.png"
                             alt="Logo"
                             width={200}
                             height={200}

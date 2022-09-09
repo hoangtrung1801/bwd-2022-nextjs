@@ -42,7 +42,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             >
                 {modalBody}
             </Modal>
-            <Component {...pageProps} />;
+            <Component {...pageProps} />
         </SWRConfig>
     );
 }

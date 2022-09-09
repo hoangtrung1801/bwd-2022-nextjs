@@ -9,6 +9,7 @@ import clsxm from "@/lib/clsxm";
 import useCursorLoading from "@/lib/hooks/useCursorLoading";
 import useUserStore from "@/lib/stores/useUserStore";
 import { Popover, Transition } from "@headlessui/react";
+import clsx from "clsx";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -30,7 +31,7 @@ export default function Header() {
     const [navCartIsOpen, setNavCartIsOpen] = useState(false);
 
     return (
-        <header className="sticky top-0 z-50 bg-white shadow-sm">
+        <header className="sticky top-0 z-50 bg-green-600 text-gray-100 shadow-sm">
             <div>
                 <HeaderMobile setNavCartIsOpen={setNavCartIsOpen} />
             </div>
@@ -42,68 +43,40 @@ export default function Header() {
                     className="flex-1 font-bold hover:text-gray-600"
                 >
                     <Image
-                        src="/images/logo.png"
+                        src="/images/LAVIE.png"
                         alt="logo"
                         layout="fixed"
-                        width={"160"}
+                        width={"120"}
                         height={80}
                         objectFit="cover"
+                        quality={100}
                     />
                 </UnstyledLink>
 
-                {/* Nav menu mobile */}
-                {/* <div className="md:hidden">
-                    <Popover>
-                        <Popover.Button className="md:hidden">
-                            {({ open }) => <MenuButton opened={open} />}
-                        </Popover.Button>
-                        <Transition
-                            as={Fragment}
-                            enter="transition ease-out duration-100"
-                            enterFrom="transform opacity-0 scale-95"
-                            enterTo="transform opacity-100 scale-100"
-                            leave="transition ease-in duration-75"
-                            leaveFrom="transform opacity-100 scale-100"
-                            leaveTo="transform opacity-0 scale-95"
-                        >
-                            <Popover.Panel className="absolute inset-0 top-[80px] z-10 px-4 py-4">
-                                <ul className="flex flex-col rounded-lg border border-gray-100 bg-green-100 p-4 shadow-lg dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:text-sm md:font-medium md:dark:bg-gray-900">
-                                    {links.map((link) => (
-                                        <li key={link.label}>
-                                            <UnstyledLink
-                                                href={link.href}
-                                                className={clsxm(
-                                                    "text-md block rounded py-2 pr-4 pl-3 font-semibold text-dark transition-colors hover:bg-green-300  dark:text-white md:bg-transparent",
-                                                    router.pathname ===
-                                                        link.href &&
-                                                        "bg-green-500 text-white hover:bg-green-500"
-                                                )}
-                                                aria-current="page"
-                                            >
-                                                {link.label}
-                                            </UnstyledLink>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </Popover.Panel>
-                        </Transition>
-                    </Popover>
-                </div> */}
-
                 {/* Nav menu */}
-                <nav className="hidden md:block">
-                    <ul className="flex items-center justify-between space-x-8">
+                <nav className="hidden h-full md:block">
+                    <ul className="flex h-full items-center justify-between space-x-8">
                         {links.map(({ href, label }) => (
-                            <li key={`${href}${label}`}>
+                            <li
+                                key={`${href}${label}`}
+                                className={clsxm(
+                                    "flex h-full items-center px-4 ",
+                                    "hover:text-white",
+                                    router.pathname === href && ""
+                                    // "bg-green-700/80"
+                                )}
+                            >
                                 <UnstyledLink
                                     href={href}
-                                    className="duration-400 text-lg font-medium text-gray-900 transition-colors hover:text-green-500"
+                                    className="duration-400 text-lg font-medium transition-colors"
                                 >
                                     <span
-                                        className={`border-green-500 py-1 ${clsxm(
+                                        className={clsxm(
+                                            "relative py-1",
+                                            "after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-[3px] after:w-0 after:rounded-sm after:bg-white after:transition-all after:duration-300 after:content-[''] hover:text-white hover:after:w-full",
                                             router.pathname === href &&
-                                                "border-b-2"
-                                        )}`}
+                                                "text-white after:w-full"
+                                        )}
                                     >
                                         {label}
                                     </span>
@@ -154,9 +127,9 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({ setNavCartIsOpen }) => {
 
     return (
         <div
-            className={`absolute inset-0 z-10 flex h-auto w-full flex-col bg-white dark:bg-gray-900 md:hidden`}
+            className={`absolute inset-0 z-10 flex h-auto w-full flex-col bg-green-600 dark:bg-gray-900 md:hidden`}
         >
-            <div className="flex h-[80px] items-center justify-between border-b border-gray-200 px-6 dark:border-gray-700">
+            <div className="flex h-[80px] items-center justify-between px-6">
                 {/* nav mobile menu */}
                 <MenuButton
                     opened={isOpenNavbar}
@@ -287,7 +260,7 @@ const HeaderAuthorization = () => {
         <>
             {user !== null ? (
                 <Popover className="relative">
-                    <Popover.Button className="duration-400 flex cursor-pointer items-center space-x-1 font-primary text-lg font-medium text-gray-700 transition-colors hover:text-gray-900">
+                    <Popover.Button className="duration-400 flex cursor-pointer items-center space-x-1 font-primary text-lg font-medium text-gray-100 transition-colors hover:text-white">
                         {({ open }) => (
                             <>
                                 <User />
@@ -323,7 +296,7 @@ const HeaderAuthorization = () => {
             ) : (
                 <div>
                     {/* <ButtonLink href="/login">Đăng nhập</ButtonLink> */}
-                    <ArrowLink className="text-gray-600" href="/login">
+                    <ArrowLink className="text-gray-100" href="/login">
                         Đăng nhập
                     </ArrowLink>
                 </div>
