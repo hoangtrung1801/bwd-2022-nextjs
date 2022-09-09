@@ -15,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
+    Cardholder,
     CaretDown,
     CaretUp,
     ClipboardText,
@@ -279,13 +280,26 @@ const HeaderAuthorization = () => {
                         leaveTo="transform opacity-0 scale-95"
                     >
                         <Popover.Panel className="absolute top-[30px] right-0 z-10">
-                            <ul className="flex min-w-[150px] flex-col rounded-lg border border-gray-100 bg-green-50 p-2 shadow-lg dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:text-sm md:font-medium md:dark:bg-gray-900">
-                                <li className="flex-1">
+                            <ul className="flex min-w-[200px] flex-col rounded-lg border border-gray-100 bg-green-50 p-2 shadow-lg dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:border-0 md:bg-white md:text-sm md:font-medium md:dark:bg-gray-900">
+                                <li className="w-full flex-1">
+                                    <UnstyledLink
+                                        href="/users/purchase"
+                                        className="text-md flex cursor-pointer items-center space-x-2 rounded py-2 px-4 font-primary font-semibold text-dark transition-colors hover:bg-green-300 dark:text-white md:bg-transparent "
+                                    >
+                                        <span className="flex-1">
+                                            Đơn hàng đã mua
+                                        </span>
+                                        <Cardholder />
+                                    </UnstyledLink>
+                                </li>
+                                <li className="w-full flex-1">
                                     <p
                                         className="text-md flex cursor-pointer items-center space-x-2 rounded py-2 px-4 font-primary font-semibold text-dark transition-colors hover:bg-green-300 dark:text-white md:bg-transparent "
                                         onClick={handleLogout}
                                     >
-                                        <span>Đăng xuất</span>
+                                        <span className="flex-1">
+                                            Đăng xuất
+                                        </span>
                                         <SignOut />
                                     </p>
                                 </li>

@@ -1,10 +1,11 @@
-import React from "react";
-import Image from "next/image";
-import { Envelope } from "phosphor-react";
 import Button from "@/components/buttons/Button";
 import Layout from "@/components/layout/Layout";
-import useCartStore from "@/lib/stores/useCartStore";
+import useOrder from "@/lib/hooks/useOrder";
+import useUserOrders from "@/lib/hooks/useUserOrders";
 import useUserStore from "@/lib/stores/useUserStore";
+import Image from "next/image";
+import { Envelope } from "phosphor-react";
+import React from "react";
 
 const data = [
     {
@@ -26,13 +27,9 @@ const data = [
         price: 72000,
     },
 ];
-const customData = {
-    name: "Văn Tuấn",
-    address: "Ngũ Hoành Sơn",
-    email: "tuanvanvo2003@gmail.com",
-};
 const PurchasePage = () => {
     const user = useUserStore((state) => state.user);
+    const { orders, isLoading } = useUserOrders(user.id);
 
     return (
         <Layout className="">
@@ -99,7 +96,6 @@ const PurchasePage = () => {
                                             </div>
                                         </div>
                                         <div className="flex w-full items-start justify-between space-x-8">
-                                            {/* <p className="text-base xl:text-lg font-semibold leading-6 text-gray-800">{item.quantity}</p> */}
                                             <p className="text-base font-semibold leading-6 text-green-600 xl:text-lg">
                                                 {item.price}VND
                                             </p>
@@ -122,17 +118,18 @@ const PurchasePage = () => {
                             <div className="flex flex-shrink-0 flex-col items-start justify-start">
                                 <div className="flex w-full items-center justify-center space-x-4 border-b border-green-700 py-8 md:justify-start">
                                     <Image
-                                        src="/images/HomeBanner02.png"
+                                        src="/images/default-avatar.jpg"
                                         width={80}
                                         height={80}
                                         alt="avatar"
                                     />
                                     <div className=" flex flex-col items-start justify-start space-y-2">
                                         <p className="text-left text-base font-semibold leading-4 text-gray-800">
-                                            {`${user.lastName} ${user.firstName}`}
+                                            {user &&
+                                                `${user.lastName} ${user.firstName}`}
                                         </p>
                                         <p className="text-sm leading-5 text-gray-600">
-                                            {`${user.address["phone"]}`}
+                                            {user && `${user.address["phone"]}`}
                                         </p>
                                     </div>
                                 </div>
@@ -140,7 +137,7 @@ const PurchasePage = () => {
                                 <div className="flex w-full  items-center justify-center space-x-4 border-b border-green-700 py-4 md:justify-start">
                                     <Envelope size={24} weight="bold" />
                                     <p className="cursor-pointer text-sm leading-5 text-gray-800">
-                                        {user.email}
+                                        {user && user.email}
                                     </p>
                                 </div>
                             </div>
@@ -149,6 +146,68 @@ const PurchasePage = () => {
                 </div>
             </div>
         </Layout>
+    );
+};
+
+type OrderBlockProps = {
+    orderID: string;
+};
+const OrderBlock: React.FC<OrderBlockProps> = ({ orderID }) => {
+    const { error, order, isLoading } = useOrder(orderID);
+
+    console.log(order);
+
+    return (
+        order && (
+            <div className="flex w-full flex-col items-start justify-start md:mt-6 md:flex-row md:items-center md:space-x-6 xl:space-x-8 ">
+                {/* <div className="w-full pb-4 md:w-40 md:pb-8">
+                    <div className="relative h-[150px] w-full md:h-[130px] md:w-[145px]">
+                        <Image
+                            className="hidden w-full md:block"
+                            layout="fill"
+                            objectFit="cover"
+                            src={item.image}
+                            alt="dress"
+                        />
+                    </div>
+                </div>
+                <div className="flex  w-full flex-col items-start justify-between space-y-4 border-b border-green-700 pb-8 md:flex-row md:space-y-0">
+                    <div className="flex w-full flex-col items-start justify-start space-y-8">
+                        <h3 className="text-xl font-semibold leading-6 text-gray-800 xl:text-2xl">
+                            {item.name}
+                        </h3>
+                        <div className="flex flex-col items-start justify-start space-y-2">
+                            <p className="text-sm leading-none text-gray-800">
+                                <span className="font-bold text-gray-700">
+                                    Loại:{" "}
+                                </span>{" "}
+                                {item.type}
+                            </p>
+                            <p className="text-sm leading-none text-gray-800">
+                                <span className="font-bold text-gray-700">
+                                    Số lượng:{" "}
+                                </span>{" "}
+                                {item.quantity}
+                            </p>
+                            <p className="text-sm leading-none text-gray-800">
+                                <span className="font-bold text-gray-700">
+                                    Tình trạng:{" "}
+                                </span>
+                                <span className="font-base uppercase text-gray-700">
+                                    {item.state}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div className="flex w-full items-start justify-between space-x-8">
+                        <p className="text-base font-semibold leading-6 text-green-600 xl:text-lg">
+                            {item.price}VND
+                        </p>
+                        <Button variant="primary">MUA LẠI</Button>
+                    </div>
+                </div> */}
+            </div>
+        )
     );
 };
 
