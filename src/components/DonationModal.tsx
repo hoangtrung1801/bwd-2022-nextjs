@@ -1,4 +1,5 @@
 import Button from "@/components/buttons/Button";
+import UnderlineLink from "@/components/links/UnderlineLink";
 import NextImage from "@/components/NextImage";
 import clsxm from "@/lib/clsxm";
 import { currency, numberWithCommas } from "@/lib/helper";
@@ -84,7 +85,7 @@ const DonationModal: React.FC<DonationModalProps> = ({
                             leaveTo="opacity-0 scale-95"
                         >
                             <Dialog.Panel className="w-full max-w-md transform rounded-2xl bg-white text-center align-middle shadow-xl transition-all md:max-w-4xl">
-                                <div className="flex max-h-[60vh] w-full flex-col md:flex-row">
+                                <div className="flex w-full flex-col md:flex-row">
                                     <DonationView donation={donation} />
                                     <DonationAmount
                                         donation={donation}
@@ -119,8 +120,14 @@ const DonationModal: React.FC<DonationModalProps> = ({
 };
 
 const DonationView: React.FC<{ donation: Donation }> = ({ donation }) => {
+    const [showDonator, setShowDonator] = React.useState(false);
+
+    const onShowDonator = () => {
+        setShowDonator(true);
+    };
+
     return (
-        <div className="overflow-y-auto rounded-t-2xl md:basis-7/12 md:rounded-l-2xl md:rounded-tr-none">
+        <div className="overflow-y-hidden rounded-t-2xl md:basis-7/12 md:rounded-l-2xl md:rounded-tr-none">
             <NextImage
                 src={donation?.image}
                 alt="donation image"
@@ -129,7 +136,7 @@ const DonationView: React.FC<{ donation: Donation }> = ({ donation }) => {
                 objectFit="cover"
                 objectPosition="center center"
             />
-            <div className="space-y-4 bg-gray-50 p-4">
+            <div className="max-h-[300px] space-y-4 overflow-y-auto bg-gray-50 p-4">
                 <div className="space-y-1">
                     <div className="flex justify-between tracking-wide">
                         <span className="font-bold text-green-600">50%</span>
@@ -161,67 +168,75 @@ const DonationView: React.FC<{ donation: Donation }> = ({ donation }) => {
                     </h3>
                     <p className="text-sm text-gray-500">{donation.desc}</p>
                 </div>
-                {/* <div className="relative mt-4 after:content-[''] after:absolute after:h-2 after:w-[60px] before-top-1/2 after:bg-green-500"> */}
-                <div className=" mt-6 flex flex-col items-center justify-center">
-                    <a className=" cursor-pointer text-xl font-bold text-green-600">
-                        Danh sách người đã ủng hộ
-                    </a>
-                    <div className="mt-2 h-[2px] w-[60%] bg-green-600"></div>
-                </div>
-                <div>
-                    <div className="flex items-center justify-evenly border-green-400 px-2">
-                        <div className="flex w-full flex-col">
-                            <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                                    <div className="overflow-hidden">
-                                        <table className="min-w-full text-center">
-                                            <thead className="border-b">
-                                                <tr>
-                                                    <th
-                                                        scope="col"
-                                                        className="px-6 py-4 text-base font-bold text-gray-600"
-                                                    >
-                                                        Tên
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        className="px-6 py-4 text-base font-bold text-gray-600"
-                                                    >
-                                                        Số tiền
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {Array(100)
-                                                    .fill(0)
-                                                    .map((_) => (
-                                                        <tr
-                                                            key={_}
-                                                            className=""
-                                                        >
-                                                            <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-500">
-                                                                USER01
-                                                            </td>
-                                                            <td className="whitespace-nowrap px-6 py-4 text-sm font-light text-gray-900">
-                                                                <p className="font-bold text-green-500">
-                                                                    10000VND
-                                                                </p>
-                                                            </td>
-                                                            {/* <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                        Cell
-                                    </td> */}
+                {!showDonator && (
+                    <div className="">
+                        <p
+                            className="cursor-pointer text-sm tracking-wide text-green-600 underline  underline-offset-2 hover:text-green-700"
+                            onClick={onShowDonator}
+                        >
+                            Xem danh sách ủng hộ
+                        </p>
+                    </div>
+                )}
+                {showDonator && (
+                    <div>
+                        <div className="mt-6">
+                            <p className="text-sm tracking-wide text-green-600 underline underline-offset-2">
+                                Danh sách người đã ủng hộ
+                            </p>
+                        </div>
+                        <div>
+                            <div className="flex items-center justify-evenly overflow-x-hidden">
+                                <div className="flex w-full flex-col">
+                                    <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                        <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                                            <div className="overflow-hidden">
+                                                <table className="min-w-full text-center">
+                                                    <thead className="border-b">
+                                                        <tr>
+                                                            <th
+                                                                scope="col"
+                                                                className="px-6 py-4 text-sm font-semibold text-gray-900"
+                                                            >
+                                                                Tên
+                                                            </th>
+                                                            <th
+                                                                scope="col"
+                                                                className="px-6 py-4 text-sm font-semibold text-gray-900"
+                                                            >
+                                                                Số tiền
+                                                            </th>
                                                         </tr>
-                                                    ))}
-                                            </tbody>
-                                        </table>
+                                                    </thead>
+                                                    <tbody>
+                                                        {Array(100)
+                                                            .fill(0)
+                                                            .map((_) => (
+                                                                <tr
+                                                                    key={_}
+                                                                    className="text-sm text-gray-500"
+                                                                >
+                                                                    <td className="whitespace-nowrap px-6 py-4">
+                                                                        USER01
+                                                                    </td>
+                                                                    <td className="whitespace-nowrap px-6 py-4">
+                                                                        <p className="">
+                                                                            10000VND
+                                                                        </p>
+                                                                    </td>
+                                                                </tr>
+                                                            ))}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                )}
             </div>
-            {/* {userList && <UserDonatedList />} */}
         </div>
     );
 };
@@ -234,8 +249,8 @@ const DonationAmount: React.FC<{
 
     return (
         <div className="relative md:basis-5/12">
-            <div className="absolute inset-0 -top-[10%] ">
-                <div className="flex flex-col rounded-b-2xl bg-gray-50 p-4 shadow-md md:min-h-[120%] md:rounded-2xl">
+            <div className="absolute left-0 right-0 md:-top-[50px]">
+                <div className="flex w-full flex-col rounded-b-2xl bg-gray-50 p-4 shadow-md md:min-h-[600px]  md:rounded-2xl">
                     <div className="flex flex-col items-center py-4 text-center">
                         <CreditCard size={48} />
                         <h3 className="font-bold tracking-wide">Thanh toán</h3>
