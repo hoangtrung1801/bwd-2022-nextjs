@@ -18,8 +18,6 @@ type ProductCardProps = {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
     const addItem = useCartStore((state) => state.addItem);
-    const setModalIsOpen = useModalStore((state) => state.setIsOpen);
-    const setModalContent = useModalStore((state) => state.setContent);
     const { showModal: show } = useModal();
 
     const addItemIntoCart = () => {
@@ -30,17 +28,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
     return (
         <div
             className={clsxm(
-                "max-w-sm overflow-auto rounded-md bg-white shadow-md dark:border-gray-700 dark:bg-gray-800",
+                "group max-w-sm overflow-auto rounded-md bg-white shadow-md dark:border-gray-700 dark:bg-gray-800",
                 className
             )}
         >
-            <div className="mb-4">
-                <NextImage
-                    alt="image"
-                    src={product.images[0]}
-                    width="100%"
-                    height={100}
-                />
+            <div className="mb-4 overflow-hidden">
+                <Link href={`/product/${product.id}`}>
+                    <NextImage
+                        alt="image"
+                        src={product.images[0]}
+                        width="100%"
+                        height={100}
+                        className="cursor-pointer transition-transform duration-500 group-hover:scale-105"
+                    />
+                </Link>
             </div>
 
             <div className="px-5 pb-5">

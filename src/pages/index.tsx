@@ -6,7 +6,7 @@ import {
     ProductListSkeleton,
     CommonProductSkeleton,
     FeaturedProductSkeleton,
-} from "@/components/SkeletonReact";
+} from "@/components/Skeletons";
 import Link from "next/link";
 import React, { useState } from "react";
 

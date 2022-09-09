@@ -7,7 +7,6 @@ import useModal from "@/lib/hooks/useModal";
 import { addReview } from "@/lib/service";
 import useUserStore from "@/lib/stores/useUserStore";
 import { Product } from "@/lib/types";
-import products from "@/pages/api/products";
 import moment from "moment";
 import { useRouter } from "next/router";
 import { Paperclip, Smiley } from "phosphor-react";
@@ -18,32 +17,10 @@ type ProductReviewsProps = {
 };
 
 const ProductReviews: React.FC<ProductReviewsProps> = ({ product }) => {
-    // const reviews = [
-    //     {
-    //         username: "hoangtrung",
-    //         reivewText:
-    //             "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis reiciendis eum quidem nisi omnis accusamus commodi molestiae alias laudantium, saepe hic rem quaerat! Ex commodi minima nobis obcaecati ratione doloremque!",
-    //         rating: 4,
-    //     },
-    //     {
-    //         username: "hoangtrung",
-    //         reivewText:
-    //             "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis reiciendis eum quidem nisi omnis accusamus commodi molestiae alias laudantium, saepe hic rem quaerat! Ex commodi minima nobis obcaecati ratione doloremque!",
-    //         rating: 4,
-    //     },
-    //     {
-    //         username: "hoangtrung",
-    //         reivewText:
-    //             "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis reiciendis eum quidem nisi omnis accusamus commodi molestiae alias laudantium, saepe hic rem quaerat! Ex commodi minima nobis obcaecati ratione doloremque!",
-    //         rating: 4,
-    //     },
-    // ];
-
     const user = useUserStore((state) => state.user);
     const [reviewUsers, setReviewUsers] = React.useState([]);
     const [reviewText, setReviewText] = React.useState("");
     const { showModal } = useModal();
-    const router = useRouter();
 
     const onSubmitReivew = () => {
         console.log("submit review");

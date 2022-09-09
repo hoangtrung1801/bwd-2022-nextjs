@@ -34,7 +34,7 @@ const ProductList: React.FC<ProductListProps> = ({
                     </div>
 
                     <div className="mt-8 grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
-                        {products.map((product, id) => (
+                        {products.slice(0, 4).map((product, id) => (
                             <div key={id}>
                                 <ProductCard
                                     product={product}

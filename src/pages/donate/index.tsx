@@ -13,7 +13,7 @@ import {
     donate_card_3,
 } from "../../../public/svg/index";
 import useDonations from "@/lib/hooks/useDonations";
-import { ProductListSkeleton } from "@/components/SkeletonReact";
+import { ProductListSkeleton } from "@/components/Skeletons";
 
 const DonatePage = () => {
     const dataBanner = [
