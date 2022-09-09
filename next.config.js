@@ -10,6 +10,10 @@ module.exports = {
 
     // Uncoment to add domain whitelist
     images: {
-        domains: ["res.cloudinary.com", "images.unsplash.com"],
+        domains: [
+            "res.cloudinary.com",
+            "images.unsplash.com",
+            "img.freepik.com",
+        ],
     },
 };

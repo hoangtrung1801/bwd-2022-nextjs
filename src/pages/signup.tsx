@@ -51,7 +51,7 @@ const SignupPage = () => {
     };
 
     return (
-        <Layout className="py-0">
+        <Layout className="md:py-0">
             <section className="min-h-main">
                 <div className="grid h-full grid-cols-1 md:grid-cols-2">
                     <div className="">
@@ -202,12 +202,13 @@ const SignupPage = () => {
                         <div className="relative h-full w-full">
                             <NextImage
                                 alt="login image"
-                                src={
-                                    "https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
-                                }
+                                src="/images/sign-up.png"
+                                // src={
+                                //     "https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
+                                // }
                                 layout="fill"
                                 width={"100%"}
-                                objectFit="cover"
+                                objectFit="contain"
                             />
                         </div>
                     </div>

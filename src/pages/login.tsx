@@ -40,7 +40,7 @@ const LoginPage = () => {
     }, [router, user]);
 
     return (
-        <Layout className="py-0">
+        <Layout className="md:py-0">
             <section className="min-h-main">
                 <div className="grid h-full grid-cols-1 md:grid-cols-2">
                     <div className="">
@@ -212,12 +212,14 @@ const LoginPage = () => {
                         <div className="relative h-full w-full">
                             <NextImage
                                 alt="login image"
-                                src={
-                                    "https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
-                                }
+                                // src={
+                                //     "https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
+                                // }
+                                // src="https://img.freepik.com/free-vector/spring-landscape-scene_52683-56303.jpg?w=996&t=st=1662714717~exp=1662715317~hmac=3486b16f53e0822f368426df7a9dfd341bc64d5753ba7a3ea2a4e29eb4b7bba5"
+                                src="/images/login-background.png"
                                 layout="fill"
                                 width={"100%"}
-                                objectFit="cover"
+                                objectFit="contain"
                             />
                         </div>
                     </div>
