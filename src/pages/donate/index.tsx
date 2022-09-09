@@ -16,6 +16,7 @@ import useDonations from "@/lib/hooks/useDonations";
 import { ProductListSkeleton } from "@/components/Skeletons";
 import { useInView } from "react-intersection-observer";
 import UnderlineLink from "@/components/links/UnderlineLink";
+import NextImage from "@/components/NextImage";
 
 export const inViewFromLeftShow = {
     hidden: {
@@ -195,11 +196,17 @@ const DonateAction = () => {
                             viewport={{ once: true }}
                             className="max-h-[500px] overflow-hidden"
                         >
-                            <img
+                            {/* <img
                                 className="h-auto w-full object-cover"
-                                src="https://bwd2022.vercel.app/assets/donate-action.jpg"
+                            ></img> */}
+                            <NextImage
                                 alt="actionImg"
-                            ></img>
+                                src="/images/donate-action.jpg"
+                                className="w-fulla h-auto"
+                                width="100%"
+                                height={100}
+                                objectFit="cover"
+                            />
                         </motion.figure>
                         <motion.div
                             variants={inViewFromRightShow}
