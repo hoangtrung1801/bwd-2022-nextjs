@@ -5,6 +5,7 @@ import Layout from "@/components/layout/Layout";
 import PrimaryLink from "@/components/links/PrimaryLink";
 import NextImage from "@/components/NextImage";
 import { signupUser } from "@/lib/authorization";
+import useCursorLoading from "@/lib/hooks/useCursorLoading";
 import useModal from "@/lib/hooks/useModal";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -22,7 +23,9 @@ type SignupInputs = {
 const SignupPage = () => {
     const { register, handleSubmit } = useForm();
     const { showModal } = useModal();
+
     const router = useRouter();
+    const { setCursorLoadingOff, setCursorLoadingShow } = useCursorLoading();
 
     const onSubmit: SubmitHandler<SignupInputs> = (data) => {
         const {
@@ -34,13 +37,16 @@ const SignupPage = () => {
             phone,
             password2,
         } = data;
-        console.log(data);
+
+        setCursorLoadingShow();
         signupUser(email, firstName, lastName, password)
             .then((data) => {
+                setCursorLoadingOff();
                 router.push("/");
             })
             .catch((error) => {
-                showModal("Đăng ký thất bại", "Vui lòng thử lại!");
+                setCursorLoadingOff();
+                showModal("Đăng ký thất bại", error.message);
             });
     };
 

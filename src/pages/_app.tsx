@@ -1,10 +1,10 @@
+import CursorLoading from "@/components/CursorLoading";
 import Loading from "@/components/Loading";
 import Modal from "@/components/Modal";
 import fetcher from "@/lib/fetcher";
 import useModalStore from "@/lib/stores/useModalStore";
 import useUserStore from "@/lib/stores/useUserStore";
 import "@/styles/globals.css";
-import { AnimatePresence } from "framer-motion";
 import { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import NextNProgress from "nextjs-progressbar";
@@ -34,6 +34,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 stopDelayMs={500}
             />
             <Loading />
+            <CursorLoading />
             <Modal
                 title={modalTitle}
                 isOpen={modalIsOpen}

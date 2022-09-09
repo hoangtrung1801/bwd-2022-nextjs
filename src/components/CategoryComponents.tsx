@@ -1,6 +1,6 @@
 import Drawer from "@/components/Drawer";
 import Checkbox from "@/components/forms/Checkbox";
-import useCategories from "@/hooks/useCategories";
+import useCategories from "@/lib/hooks/useCategories";
 import clsxm from "@/lib/clsxm";
 import { Category } from "@/lib/types";
 import { Menu, Disclosure, Transition } from "@headlessui/react";

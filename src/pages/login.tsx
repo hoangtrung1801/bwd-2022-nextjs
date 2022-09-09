@@ -6,6 +6,7 @@ import PrimaryLink from "@/components/links/PrimaryLink";
 import UnderlineLink from "@/components/links/UnderlineLink";
 import NextImage from "@/components/NextImage";
 import { loginUser } from "@/lib/authorization";
+import useCursorLoading from "@/lib/hooks/useCursorLoading";
 import useUserStore from "@/lib/stores/useUserStore";
 import { useRouter } from "next/router";
 import React from "react";
@@ -21,9 +22,12 @@ const LoginPage = () => {
     const router = useRouter();
     const user = useUserStore((state) => state.user);
     const fetchUser = useUserStore((state) => state.fetch);
+    const { setCursorLoadingShow, setCursorLoadingOff } = useCursorLoading();
 
     const handleLogin: SubmitHandler<LoginInputs> = (data) => {
+        setCursorLoadingShow();
         loginUser(data.email, data.password).then((success) => {
+            setCursorLoadingOff();
             if (success) {
                 router.push("/");
                 fetchUser();

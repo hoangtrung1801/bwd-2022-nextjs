@@ -14,7 +14,10 @@ const useUserStore = create<UserStoreState>((set, get) => ({
     user: null,
     fetch: async () => {
         const response = await fetcher(`${API_URL}`);
-        if (response.status === "failed") return;
+        if (response.status === "failed") {
+            set({ user: null });
+            return;
+        }
         const { email, firstName, id, lastName, address }: User = response.data;
         set({
             user: {
