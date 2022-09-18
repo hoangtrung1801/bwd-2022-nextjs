@@ -12,3 +12,5 @@
 
 #### 💻 Backend: [https://github.com/hoangtrung1801/bwd-2022-backend](https://github.com/hoangtrung1801/bwd-2022-backend)
 #### 💻 Admin page: [https://github.com/hoangtrung1801/bwd-2022-admin](https://github.com/hoangtrung1801/bwd-2022-admin)
+
+#### 💻 v1.0: [https://github.com/hoangtrung1801/bwd2022](https://github.com/hoangtrung1801/bwd2022)
